@@ -1,17 +1,16 @@
 apiVersion: training.eduk8s.io/v1alpha2
 kind: Workshop
 metadata:
-  name: lab-markdown-sample
+  name: lab-mod-wsgi-metrics
 spec:
-  title: Markdown Sample
-  description: A sample workshop using Markdown
-  vendor: eduk8s.io
+  title: Generating metrics from mod_wsgi
+  description: An introductory workshop on generating metrics from mod_wsgi.
   difficulty: beginner
-  duration: 15m
-  url: https://github.com/eduk8s/lab-markdown-sample
+  duration: 60m
+  url: https://github.com/eduk8s/lab-mod-wsgi-metrics
   content:
-    #image: quay.io/eduk8s/lab-markdown-sample:master
-    files: github.com/eduk8s/lab-markdown-sample
+    image: quay.io/eduk8s/base-environment:develop
+    files: github.com/GrahamDumpleton/lab-mod-wsgi-metrics
   session:
     namespaces:
       budget: small
@@ -19,7 +18,45 @@ spec:
       terminal:
         enabled: true
         layout: split
-      console:
-        enabled: true
-      editor:
-        enabled: true
+    patches:
+      containers:
+      - name: influxdb
+        image: docker.io/influxdb:1.8.1
+        env:
+        - name: INFLUXDB_DB
+          value: wsgi
+        - name: INFLUXDB_USER
+          value: wsgi
+        - name: INFLUXDB_USER_PASSWORD
+          value: wsgi
+        securityContext:
+          runAsUser: 999
+        volumeMounts:
+        - name: influxdb
+          mountPath: /var/lib/influxdb
+      - name: grafana
+        image: docker.io/grafana/grafana:7.1.3
+      volumes:
+      - name: influxdb
+        persistentVolumeClaim:
+          claimName: $(session_namespace)-influxdb
+    ingresses:
+    - name: grafana
+      port: 3000
+    - name: express
+      port: 8000
+    dashboards:
+    - name: Grafana
+      url: $(ingress_protocol)://$(session_namespace)-grafana.$(ingress_domain)/
+    objects:
+    - apiVersion: v1
+      kind: PersistentVolumeClaim
+      metadata:
+        namespace: $(workshop_namespace)
+        name: $(session_namespace)-influxdb
+      spec:
+        accessModes:
+        - ReadWriteOnce
+        resources:
+          requests:
+            storage: 1Gi

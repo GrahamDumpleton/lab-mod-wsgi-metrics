@@ -1,4 +1,4 @@
-name: Markdown Sample
+name: Generating metrics from mod_wsgi
 
 modules:
     activate:
