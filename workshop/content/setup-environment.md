@@ -16,11 +16,11 @@ name: Grafana
 
 Login to Grafana. The username is `admin`, and the password is also `admin`.
 
-Do not set a new password as later on we will be running scripts which connect to Grafana and they rely on the default credentials being used. So when prompted to provide a new password, click on **Skip**.
+> NOTE: Do not set a new password as later on we will be running scripts which connect to Grafana and they rely on the default credentials being used. So when prompted to provide a new password, click on **Skip**.
 
 Now click on **Configuration->Data Sources** in the Grafana view, or click below.
 
-```dashboard:open-dashboard
+```dashboard:reload-dashboard
 name: Grafana
 url: {{ingress_protocol}}://{{session_namespace}}-grafana.training.getwarped.org/datasources
 ```
