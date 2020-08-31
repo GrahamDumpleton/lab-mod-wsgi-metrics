@@ -41,5 +41,5 @@ command: mod_wsgi-express start-server hello-world/wsgi.py
 
 ```terminal:execute
 command: siege -t 300s -c 10 http://localhost:8000
-session: 1
+session: 2
 ```
