@@ -9,6 +9,8 @@ modules:
         name: Installing mod_wsgi
     exercises/02-testing-mod-wsgi:
         name: Testing mod_wsgi
+    exercises/03-testing-influxdb:
+        name: Testing InfluxDB
     workshop-summary:
         name: Workshop Summary
         exit_sign: Finish Workshop

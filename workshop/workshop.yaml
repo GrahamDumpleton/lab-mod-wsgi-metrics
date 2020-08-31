@@ -6,4 +6,5 @@ modules:
     - setup-environment
     - exercises/01-install-mod-wsgi
     - exercises/02-testing-mod-wsgi
+    - exercises/03-testing-influxdb
     - workshop-summary
