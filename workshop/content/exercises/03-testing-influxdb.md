@@ -5,7 +5,7 @@ command: pip install influxdb
 ```editor:insert-lines-before-line
 file: ~/exercises/hello-world/wsgi.py
 line: 1
-text: |
+text: |+
     import mod_wsgi
 
     from influxdb import InfluxDBClient
@@ -31,9 +31,15 @@ text: |
 ```
 
 ```terminal:execute
+command: |
+    curl -H "Content-Type: application/json" --user admin:admin --data @hello-world/dashboard1.json http://localhost:3000/api/dashboards/db
+```
+
+```terminal:execute
 command: mod_wsgi-express start-server hello-world/wsgi.py
 ```
 
 ```terminal:execute
-command: siege -t 60s -c 10 http://localhost:8000
+command: siege -t 300s -c 10 http://localhost:8000
+session: 1
 ```
