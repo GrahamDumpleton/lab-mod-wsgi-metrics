@@ -44,7 +44,7 @@ command: siege -t 300s -c 10 http://localhost:8000
 session: 2
 ```
 
-```dashboard:open-dashboard
+```dashboard:reload-dashboard
 name: Grafana
 url: {{ingress_protocol}}://{{session_namespace}}-grafana.training.getwarped.org/d/dashboard1/raw-requests?orgId=1&refresh=5s
 ```
