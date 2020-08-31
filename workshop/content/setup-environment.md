@@ -3,7 +3,8 @@ During the workshop we will be using InfluxDB to capture metrics from mod_wsgi a
 Before we start we need to configure Grafana to use InfluxDB as a data source. To do this run the following command by clicking on the action block below.
 
 ```execute
-curl -H "Content-Type: application/json" --user admin:admin --data @grafana/datasource.json http://localhost:3000/api/datasources
+command: |
+    curl -H "Content-Type: application/json" --user admin:admin --data @grafana/datasource.json http://localhost:3000/api/datasources
 ```
 
 The workshop uses these action blocks for various purposes. Anytime you see such a block with an icon on the right hand side, you can click on it and it will perform the listed action for you.
