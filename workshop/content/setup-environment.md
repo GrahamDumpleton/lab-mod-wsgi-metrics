@@ -26,3 +26,15 @@ url: {{ingress_protocol}}://{{session_namespace}}-grafana.training.getwarped.org
 ```
 
 You should have a single data source called **WSGI**, which is associated with InfluxDB.
+
+We will also be using the embedded editor later on as well, open the **Editor** dashboard tab to start it up.
+
+```dashboard:open-dashboard
+name: Editor
+```
+
+Finally, return back to the **Terminal** dashboard tab.
+
+```dashboard:open-dashboard
+name: Terminal
+```

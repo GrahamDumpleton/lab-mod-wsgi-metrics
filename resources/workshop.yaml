@@ -18,6 +18,8 @@ spec:
       terminal:
         enabled: true
         layout: split
+      editor:
+        enabled: true
     patches:
       containers:
       - name: influxdb
