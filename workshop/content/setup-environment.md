@@ -33,8 +33,13 @@ We will also be using the embedded editor later on as well, open the **Editor** 
 name: Editor
 ```
 
-Finally, return back to the **Terminal** dashboard tab.
+Finally, return back to the **Terminal** dashboard tab:
 
 ```dashboard:open-dashboard
 name: Terminal
+```
+
+Clear the terminals so we are ready to go.
+
+```terminal:clear-all
 ```
