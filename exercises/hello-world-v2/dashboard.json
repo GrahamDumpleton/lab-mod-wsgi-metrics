@@ -1,27 +1,4 @@
 {
-  "meta": {
-    "isStarred": true,
-    "type": "db",
-    "canSave": true,
-    "canEdit": true,
-    "canAdmin": true,
-    "canStar": true,
-    "slug": "raw-requests",
-    "url": "/d/hello-world-v2/raw-requests",
-    "expires": "0001-01-01T00:00:00Z",
-    "created": "2020-08-31T09:16:50Z",
-    "updated": "2020-08-31T09:16:50Z",
-    "updatedBy": "admin",
-    "createdBy": "admin",
-    "version": 1,
-    "hasAcl": false,
-    "isFolder": false,
-    "folderId": 0,
-    "folderTitle": "General",
-    "folderUrl": "",
-    "provisioned": false,
-    "provisionedExternalId": ""
-  },
   "dashboard": {
     "annotations": {
       "list": [

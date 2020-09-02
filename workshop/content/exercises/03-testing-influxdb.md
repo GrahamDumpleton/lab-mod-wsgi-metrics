@@ -22,7 +22,7 @@ session: 2
 
 ```dashboard:reload-dashboard
 name: Grafana
-url: {{ingress_protocol}}://{{session_namespace}}-grafana.training.getwarped.org/d/hello-world-v2/raw-requests?orgId=1&refresh=5s
+url: {{ingress_protocol}}://{{session_namespace}}-grafana.training.getwarped.org/d/hello-world-v2?orgId=1&refresh=5s
 ```
 
 ```editor:open-file
@@ -39,11 +39,11 @@ command: mod_wsgi-express start-server hello-world-v3/wsgi.py
 ```
 
 ```terminal:execute
-command: siege -t 300s -c 10 -d 0.1 http://localhost:8000
+command: siege -t 300s -c 10 http://localhost:8000
 session: 2
 ```
 
 ```dashboard:reload-dashboard
 name: Grafana
-url: {{ingress_protocol}}://{{session_namespace}}-grafana.training.getwarped.org/d/hello-world-v3/server-aggregated?orgId=1&refresh=5s
+url: {{ingress_protocol}}://{{session_namespace}}-grafana.training.getwarped.org/d/hello-world-v3?orgId=1&refresh=5s
 ```

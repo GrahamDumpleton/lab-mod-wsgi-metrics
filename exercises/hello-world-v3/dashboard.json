@@ -1,10 +1,4 @@
 {
-  "meta": {
-    "isStarred": true,
-    "type": "db",
-    "slug": "server-aggregated",
-    "url": "/d/hello-world-v2/server-aggregated"
-  },
   "dashboard": {
     "annotations": {
       "list": [
