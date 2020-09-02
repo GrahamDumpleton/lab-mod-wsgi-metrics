@@ -8,7 +8,7 @@ file: ~/exercises/hello-world-v2/wsgi.py
 
 ```terminal:execute
 command: |
-    curl -H "Content-Type: application/json" --user admin:admin --data @hello-world/dashboard.json http://localhost:3000/api/dashboards/db
+    curl -H "Content-Type: application/json" --user admin:admin --data @hello-world-v2/dashboard.json http://localhost:3000/api/dashboards/db
 ```
 
 ```terminal:execute
