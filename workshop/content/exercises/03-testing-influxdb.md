@@ -26,7 +26,7 @@ url: {{ingress_protocol}}://{{session_namespace}}-grafana.training.getwarped.org
 ```
 
 ```editor:open-file
-file: ~/exercises/hello-world-v2/wsgi.py
+file: ~/exercises/hello-world-v3/wsgi.py
 ```
 
 ```terminal:execute
