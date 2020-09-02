@@ -1,13 +1,13 @@
 To test that `mod_wsgi-express` is installed and working we have a simple WSGI hello world application.
 
 ```editor:open-file
-file: ~/exercises/hello-world/wsgi.py
+file: ~/exercises/hello-world-v1/wsgi.py
 ```
 
 To start up Apache/mod_wsgi and host this WSGI application using ``mod_wsgi-express``, from the first terminal run:
 
 ```terminal:execute
-command: mod_wsgi-express start-server hello-world/wsgi.py
+command: mod_wsgi-express start-server hello-world-v1/wsgi.py
 ```
 
 This should result in the output:

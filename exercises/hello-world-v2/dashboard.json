@@ -7,7 +7,7 @@
     "canAdmin": true,
     "canStar": true,
     "slug": "raw-requests",
-    "url": "/d/dashboard1/raw-requests",
+    "url": "/d/hello-world-v2/dashboard",
     "expires": "0001-01-01T00:00:00Z",
     "created": "2020-08-31T09:16:50Z",
     "updated": "2020-08-31T09:16:50Z",
@@ -224,7 +224,7 @@
                 "type": "fill"
               }
             ],
-            "measurement": "application_time",
+            "measurement": "wsgi",
             "orderByTime": "ASC",
             "policy": "default",
             "refId": "A",
@@ -233,7 +233,7 @@
               [
                 {
                   "params": [
-                    "value"
+                    "applicaton_time"
                   ],
                   "type": "field"
                 },
@@ -260,7 +260,7 @@
                 "type": "fill"
               }
             ],
-            "measurement": "application_time",
+            "measurement": "wsgi",
             "orderByTime": "ASC",
             "policy": "default",
             "refId": "B",
@@ -269,7 +269,7 @@
               [
                 {
                   "params": [
-                    "value"
+                    "application_time"
                   ],
                   "type": "field"
                 },
@@ -353,7 +353,7 @@
     },
     "timezone": "",
     "title": "Raw Requests",
-    "uid": "dashboard1",
+    "uid": "hello-world-v2",
     "version": 1
   }
 }
