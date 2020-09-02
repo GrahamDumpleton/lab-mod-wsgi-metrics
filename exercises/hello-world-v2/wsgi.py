@@ -6,18 +6,18 @@ from datetime import datetime
 client = InfluxDBClient('localhost', 8086, 'wsgi', 'wsgi', 'wsgi')
 
 def event_handler(name, **kwargs):
-        if name == 'request_finished':
-            client.write_points([
-                {
-                    "measurement": "wsgi",
-                    "time": datetime.now().isoformat(),
-                    "fields": {
-                        "application_time": kwargs["application_time"]
-                    }
+    if name == 'request_finished':
+        client.write_points([
+            {
+                "measurement": "wsgi",
+                "time": datetime.now().isoformat(),
+                "fields": {
+                    "application_time": kwargs["application_time"]
                 }
-            ])
+            }
+        ])
 
-    mod_wsgi.subscribe_events(event_handler)
+mod_wsgi.subscribe_events(event_handler)
 
 def application(environ, start_response):
     status = '200 OK'
