@@ -79,7 +79,7 @@
                 "type": "fill"
               }
             ],
-            "measurement": "wsgi",
+            "measurement": "wsgi.requests",
             "orderByTime": "ASC",
             "policy": "default",
             "refId": "A",
@@ -201,7 +201,7 @@
                 "type": "fill"
               }
             ],
-            "measurement": "wsgi",
+            "measurement": "wsgi.requests",
             "orderByTime": "ASC",
             "policy": "default",
             "refId": "A",
@@ -237,7 +237,7 @@
                 "type": "fill"
               }
             ],
-            "measurement": "wsgi",
+            "measurement": "wsgi.requests",
             "orderByTime": "ASC",
             "policy": "default",
             "refId": "B",

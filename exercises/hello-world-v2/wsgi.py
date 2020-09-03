@@ -9,7 +9,7 @@ def event_handler(name, **kwargs):
     if name == 'request_finished':
         client.write_points([
             {
-                "measurement": "wsgi",
+                "measurement": "wsgi.requests",
                 "time": datetime.now().isoformat(),
                 "fields": {
                     "application_time": kwargs["application_time"]

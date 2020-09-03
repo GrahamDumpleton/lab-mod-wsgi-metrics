@@ -33,11 +33,13 @@ def collector():
 
         client.write_points([
             {
-                "measurement": "wsgi",
+                "measurement": "wsgi.server",
                 "time": stop_time,
                 "fields": {
-                    "requests_per_sec": metrics["request_rate"],
-                    "capacity_utilization": metrics["utilization"]
+                    "request_rate": metrics["request_rate"],
+                    "utilization": metrics["utilization"],
+                    "server_time": metrics["server_time"],
+                    "application_time": metrics["application_time"]
                 }
             }
         ])
