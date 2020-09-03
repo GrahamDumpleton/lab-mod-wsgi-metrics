@@ -95,7 +95,7 @@
                 "type": "fill"
               }
             ],
-            "measurement": "wsgi",
+            "measurement": "wsgi.server",
             "orderByTime": "ASC",
             "policy": "default",
             "refId": "A",
@@ -132,7 +132,7 @@
                 "type": "fill"
               }
             ],
-            "measurement": "wsgi",
+            "measurement": "wsgi.server",
             "orderByTime": "ASC",
             "policy": "default",
             "refId": "B",
@@ -255,7 +255,7 @@
                 "type": "fill"
               }
             ],
-            "measurement": "wsgi",
+            "measurement": "wsgi.server",
             "orderByTime": "ASC",
             "policy": "default",
             "refId": "A",
@@ -264,7 +264,7 @@
               [
                 {
                   "params": [
-                    "requests_rate"
+                    "request_rate"
                   ],
                   "type": "field"
                 },
@@ -378,7 +378,7 @@
                 "type": "fill"
               }
             ],
-            "measurement": "wsgi",
+            "measurement": "wsgi.server",
             "orderByTime": "ASC",
             "policy": "default",
             "refId": "A",
