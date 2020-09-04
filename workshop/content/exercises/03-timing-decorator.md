@@ -1,5 +1,5 @@
-```editor:open-file
-file: ~/exercises/hello-world-v3/wsgi.py
+```terminal: execute
+command: pip install wrapt influxdb
 ```
 
 ```terminal:execute

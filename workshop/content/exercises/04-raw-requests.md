@@ -3,14 +3,14 @@ command: pip install influxdb
 ```
 
 ```editor:open-file
-file: ~/exercises/hello-world-v2/wsgi.py
+file: ~/exercises/hello-world-v3/wsgi.py
 ```
 
 ```editor:execute-command
 command: workbench.action.findInFiles
 args:
 - query: "def event_handler(.*):"
-  filesToInclude: hello-world-v2/wsgi.py
+  filesToInclude: hello-world-v3/wsgi.py
   isRegex: true
 ```
 
@@ -18,17 +18,17 @@ args:
 command: workbench.action.findInFiles
 args:
 - query: "mod_wsgi.subscribe_events(event_handler)"
-  filesToInclude: hello-world-v2/wsgi.py
+  filesToInclude: hello-world-v3/wsgi.py
   isRegex: false
 ```
 
 ```terminal:execute
 command: |
-    curl -H "Content-Type: application/json" --user admin:admin --data @hello-world-v2/dashboard.json http://localhost:3000/api/dashboards/db
+    curl -H "Content-Type: application/json" --user admin:admin --data @hello-world-v3/dashboard.json http://localhost:3000/api/dashboards/db
 ```
 
 ```terminal:execute
-command: mod_wsgi-express start-server hello-world-v2/wsgi.py --log-to-terminal
+command: mod_wsgi-express start-server hello-world-v3/wsgi.py --log-to-terminal
 ```
 
 ```terminal:execute
@@ -38,7 +38,7 @@ session: 2
 
 ```dashboard:reload-dashboard
 name: Grafana
-url: {{ingress_protocol}}://{{session_namespace}}-grafana.training.getwarped.org/d/hello-world-v2?orgId=1&refresh=5s
+url: {{ingress_protocol}}://{{session_namespace}}-grafana.training.getwarped.org/d/hello-world-v3?orgId=1&refresh=5s
 ```
 
 ```terminal:interrupt-all
