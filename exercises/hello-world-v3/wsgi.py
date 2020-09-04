@@ -39,7 +39,9 @@ def collector():
                     "request_rate": metrics["request_rate"],
                     "utilization": metrics["utilization"],
                     "server_time": metrics["server_time"],
-                    "application_time": metrics["application_time"]
+                    "application_time": metrics["application_time"],
+                    "max_threads": metrics["max_threads"],
+                    "request_threads": metrics["request_threads"]
                 }
             }
         ])
