@@ -12,7 +12,7 @@ command: |
 ```
 
 ```terminal:execute
-command: mod_wsgi-express start-server hello-world-v2/wsgi.py
+command: mod_wsgi-express start-server hello-world-v2/wsgi.py --log-to-terminal
 ```
 
 ```terminal:execute
@@ -25,6 +25,9 @@ name: Grafana
 url: {{ingress_protocol}}://{{session_namespace}}-grafana.training.getwarped.org/d/hello-world-v2?orgId=1&refresh=5s
 ```
 
+```terminal:interrupt-all
+```
+
 ```editor:open-file
 file: ~/exercises/hello-world-v3/wsgi.py
 ```
@@ -35,7 +38,7 @@ command: |
 ```
 
 ```terminal:execute
-command: mod_wsgi-express start-server hello-world-v3/wsgi.py
+command: mod_wsgi-express start-server hello-world-v3/wsgi.py --log-to-terminal
 ```
 
 ```terminal:execute
@@ -46,4 +49,7 @@ session: 2
 ```dashboard:reload-dashboard
 name: Grafana
 url: {{ingress_protocol}}://{{session_namespace}}-grafana.training.getwarped.org/d/hello-world-v3?orgId=1&refresh=5s
+```
+
+```terminal:interrupt-all
 ```
