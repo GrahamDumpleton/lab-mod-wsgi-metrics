@@ -6,6 +6,7 @@ modules:
     - setup-environment
     - exercises/01-install-mod-wsgi
     - exercises/02-testing-mod-wsgi
-    - exercises/03-raw-requests
-    - exercises/04-request-metrics
+    - exercises/03-timing-decorator
+    - exercises/04-raw-requests
+    - exercises/05-request-metrics
     - workshop-summary

@@ -9,9 +9,11 @@ modules:
         name: Installing mod_wsgi
     exercises/02-testing-mod-wsgi:
         name: Testing mod_wsgi
-    exercises/03-raw-requests:
+    exercises/03-timing-decorator:
+        name: Timing Decorator
+    exercises/04-raw-requests:
         name: Raw Requests
-    exercises/04-request-metrics:
+    exercises/05-request-metrics:
         name: Request Metrics
     workshop-summary:
         name: Workshop Summary
