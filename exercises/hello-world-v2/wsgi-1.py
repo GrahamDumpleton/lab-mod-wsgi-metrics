@@ -1,7 +1,5 @@
 import metrics
 
-metrics.enable()
-
 @metrics.application_time
 def application(environ, start_response):
     status = '200 OK'

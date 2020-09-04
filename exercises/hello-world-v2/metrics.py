@@ -1,3 +1,6 @@
+import socket
+import os
+
 import wrapt
 
 from influxdb import InfluxDBClient
