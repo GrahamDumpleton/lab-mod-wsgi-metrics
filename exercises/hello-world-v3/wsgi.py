@@ -40,6 +40,8 @@ def collector():
                     "utilization": metrics["utilization"],
                     "server_time": metrics["server_time"],
                     "application_time": metrics["application_time"],
+                    "cpu_user_time": metrics["cpu_user_time"],
+                    "cpu_system_time": metrics["cpu_system_time"],
                     "max_threads": metrics["max_threads"],
                     "request_threads": metrics["request_threads"]
                 }
