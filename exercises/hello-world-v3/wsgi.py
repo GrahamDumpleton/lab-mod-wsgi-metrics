@@ -1,5 +1,7 @@
 import atexit
 import time
+import socket
+import os
 
 import mod_wsgi
 
@@ -15,39 +17,55 @@ queue = Queue()
 
 interval = 1.0
 
+hostname = socket.gethostname()
+pid = os.getpid()
+
+process = f"{hostname}:{pid}"
+
+def report_metrics():
+    metrics = mod_wsgi.request_metrics()
+
+    stop_time = datetime.fromtimestamp(metrics["stop_time"]).isoformat()
+
+    client.write_points([
+        {
+            "measurement": "wsgi.server",
+            "time": stop_time,
+            "tags": {
+                "hostname": hostname,
+                "process": process
+            },
+            "fields": {
+                "request_rate": metrics["request_rate"],
+                "capacity_utilization": metrics["capacity_utilization"],
+                "server_time": metrics["server_time"],
+                "application_time": metrics["application_time"],
+                "cpu_user_time": metrics["cpu_user_time"],
+                "cpu_system_time": metrics["cpu_system_time"],
+                "threads_maximum": metrics["threads_maximum"],
+                "threads_initialized": metrics["threads_initialized"],
+                "threads_active": metrics["threads_active"]
+            }
+        }
+    ])
+
 def collector():
     mod_wsgi.request_metrics()
     next_time = time.time() + interval
+    
     while True:
         next_time += interval
         now = time.time()
 
         try:
-            return queue.get(timeout=next_time-now)
+            queue.get(timeout=next_time-now)
+            report_metrics()
+            return
+
         except Exception:
             pass
 
-        metrics = mod_wsgi.request_metrics()
-
-        stop_time = datetime.fromtimestamp(metrics["stop_time"]).isoformat()
-
-        client.write_points([
-            {
-                "measurement": "wsgi.server",
-                "time": stop_time,
-                "fields": {
-                    "request_rate": metrics["request_rate"],
-                    "capacity_utilization": metrics["capacity_utilization"],
-                    "server_time": metrics["server_time"],
-                    "application_time": metrics["application_time"],
-                    "cpu_user_time": metrics["cpu_user_time"],
-                    "cpu_system_time": metrics["cpu_system_time"],
-                    "threads_maximum": metrics["threads_maximum"],
-                    "threads_initialized": metrics["threads_initialized"],
-                    "threads_active": metrics["threads_active"]
-                }
-            }
-        ])
+        report_metrics()
 
 thread = Thread(target=collector)
 thread.start()
