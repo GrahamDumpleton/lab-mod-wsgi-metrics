@@ -8,9 +8,18 @@ file: ~/exercises/hello-world-v2/wsgi.py
 
 ```editor:execute-command
 command: workbench.action.findInFiles
-args: 
-- query: event_handler
+args:
+- query: "def event_handler(.*):"
   filesToInclude: hello-world-v2/wsgi.py
+  isRegex: true
+```
+
+```editor:execute-command
+command: workbench.action.findInFiles
+args:
+- query: "mod_wsgi.subscribe_events(event_handler)"
+  filesToInclude: hello-world-v2/wsgi.py
+  isRegex: false
 ```
 
 ```terminal:execute
