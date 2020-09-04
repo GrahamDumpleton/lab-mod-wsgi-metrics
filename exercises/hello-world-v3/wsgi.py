@@ -37,15 +37,14 @@ def collector():
                 "time": stop_time,
                 "fields": {
                     "request_rate": metrics["request_rate"],
-                    "utilization": metrics["utilization"],
+                    "capacity_utilization": metrics["capacity_utilization"],
                     "server_time": metrics["server_time"],
                     "application_time": metrics["application_time"],
                     "cpu_user_time": metrics["cpu_user_time"],
                     "cpu_system_time": metrics["cpu_system_time"],
                     "threads_maximum": metrics["threads_maximum"],
                     "threads_initialized": metrics["threads_initialized"],
-                    "active_threads": metrics["active_threads"],
-                    "active_requests": metrics["active_requests"]
+                    "threads_active": metrics["threads_active"]
                 }
             }
         ])

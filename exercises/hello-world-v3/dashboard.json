@@ -264,7 +264,7 @@
               [
                 {
                   "params": [
-                    "utilization"
+                    "capacity_utilization"
                   ],
                   "type": "field"
                 },
@@ -745,7 +745,7 @@
               [
                 {
                   "params": [
-                    "active_threads"
+                    "threads_active"
                   ],
                   "type": "field"
                 },
