@@ -12,7 +12,6 @@ import wrapt
 import mod_wsgi
 
 from influxdb import InfluxDBClient
-from datetime import datetime
 
 client = InfluxDBClient('localhost', 8086, 'wsgi', 'wsgi', 'wsgi')
 
@@ -26,13 +25,11 @@ process = f"{hostname}:{pid}"
 lock = threading.Lock()
 data_points = []
 
-epoch = datetime.utcfromtimestamp(0)
-
 @wrapt.synchronized(lock)
 def record_metric(stop_time, duration):
     global data_points
 
-    timestamp = int(1000000000*(stop_time-epoch).total_seconds())
+    timestamp = int(1000000000*stop_time-epoch)
 
     data_points.append(
         f"wsgi.requests,hostname={hostname},process={process} application_time={duration} {timestamp}"
@@ -86,21 +83,21 @@ class WSGIApplicationIterable(wrapt.ObjectProxy):
         if hasattr(self.__wrapped__, 'close'):
             self.__wrapped__.close()
 
-        stop_time = datetime.now()
-        duration = (stop_time - self._self_start_time).total_seconds()
+        stop_time = time.time()
+        duration = stop_time - self._self_start_time
 
         record_metric(stop_time, duration)
 
 @wrapt.decorator
 def wsgi_application(wrapped, instance, args, kwargs):
-    start_time = datetime.now()
+    start_time = time.time()
 
     try:
         return WSGIApplicationIterable(wrapped(*args, **kwargs), start_time)
 
     except:
-        stop_time = datetime.now()
-        duration = (stop_time - start_time).total_seconds()
+        stop_time = time.time()
+        duration = stop_time - start_time
 
         record_metric(stop_time, duration)
 

@@ -12,7 +12,6 @@ import wrapt
 import mod_wsgi
 
 from influxdb import InfluxDBClient
-from datetime import datetime
 
 client = InfluxDBClient('localhost', 8086, 'wsgi', 'wsgi', 'wsgi')
 
@@ -26,13 +25,11 @@ process = f"{hostname}:{pid}"
 lock = threading.Lock()
 data_points = []
 
-epoch = datetime.utcfromtimestamp(0)
-
 @wrapt.synchronized(lock)
 def record_metric(stop_time, duration):
     global data_points
 
-    timestamp = int(1000000000*(stop_time-epoch).total_seconds())
+    timestamp = int(1000000000*stop_time)
 
     data_points.append(
         f"wsgi.requests,hostname={hostname},process={process} application_time={duration} {timestamp}"
@@ -78,7 +75,6 @@ def enable_reporting():
 
 def event_handler(name, **kwargs):
     if name == 'request_finished':
-        record_metric(datetime.datetime.fromtimestamp(kwargs["application_finish"]),
-                kwargs["application_time"])
+        record_metric(kwargs["application_finish"], kwargs["application_time"])
 
 mod_wsgi.subscribe_events(event_handler)

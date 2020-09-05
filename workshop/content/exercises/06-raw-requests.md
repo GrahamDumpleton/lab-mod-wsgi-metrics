@@ -19,7 +19,7 @@ args:
 ```
 
 ```terminal:execute
-command: mod_wsgi-express start-server hello-world-v6/wsgi.py --log-to-terminal
+command: mod_wsgi-express start-server hello-world-v6/wsgi.py --log-to-terminal --working-directory hello-world-v6
 ```
 
 ```terminal:execute
