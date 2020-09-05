@@ -2,6 +2,22 @@
 file: ~/exercises/hello-world-v4/wsgi.py
 ```
 
+```editor:execute-command
+command: workbench.action.findInFiles
+args:
+- query: "def event_handler(.*):"
+  filesToInclude: hello-world-v4/wsgi.py
+  isRegex: true
+```
+
+```editor:execute-command
+command: workbench.action.findInFiles
+args:
+- query: "mod_wsgi.subscribe_events(event_handler)"
+  filesToInclude: hello-world-v4/wsgi.py
+  isRegex: false
+```
+
 ```terminal:execute
 command: |
     curl -H "Content-Type: application/json" --user admin:admin --data @hello-world-v4/dashboard.json http://localhost:3000/api/dashboards/db

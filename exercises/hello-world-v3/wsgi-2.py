@@ -2,6 +2,7 @@ import time
 
 import metrics
 
+@metrics.wsgi_application
 def application(environ, start_response):
     status = '200 OK'
     output = b'Hello World!'
@@ -10,6 +11,4 @@ def application(environ, start_response):
                         ('Content-Length', str(len(output)))]
     start_response(status, response_headers)
 
-    time.sleep(0.005)
-
-    yeild output
+    yield output

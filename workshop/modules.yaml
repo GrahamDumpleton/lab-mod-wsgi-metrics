@@ -11,9 +11,11 @@ modules:
         name: Testing mod_wsgi
     exercises/03-timing-decorator:
         name: Timing Decorator
-    exercises/04-raw-requests:
+    exercises/04-wsgi-application:
+        name: WSGI Application
+    exercises/05-raw-requests:
         name: Raw Requests
-    exercises/05-request-metrics:
+    exercises/06-request-metrics:
         name: Request Metrics
     workshop-summary:
         name: Workshop Summary
