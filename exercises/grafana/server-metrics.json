@@ -50,8 +50,8 @@
         "fill": 1,
         "fillGradient": 0,
         "gridPos": {
-          "h": 5,
-          "w": 24,
+          "h": 6,
+          "w": 20,
           "x": 0,
           "y": 0
         },
@@ -196,7 +196,169 @@
         }
       },
       {
-        "aliasColors": {},
+        "datasource": null,
+        "fieldConfig": {
+          "defaults": {
+            "custom": {},
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "yellow",
+                  "value": null
+                }
+              ]
+            }
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 4,
+          "w": 4,
+          "x": 20,
+          "y": 0
+        },
+        "id": 16,
+        "options": {
+          "reduceOptions": {
+            "calcs": [
+              "mean"
+            ],
+            "fields": "",
+            "values": false
+          },
+          "showThresholdLabels": false,
+          "showThresholdMarkers": true
+        },
+        "pluginVersion": "7.1.3",
+        "targets": [
+          {
+            "groupBy": [
+              {
+                "params": [
+                  "$__interval"
+                ],
+                "type": "time"
+              },
+              {
+                "params": [
+                  "null"
+                ],
+                "type": "fill"
+              }
+            ],
+            "measurement": "wsgi.server",
+            "orderByTime": "ASC",
+            "policy": "default",
+            "refId": "A",
+            "resultFormat": "time_series",
+            "select": [
+              [
+                {
+                  "params": [
+                    "application_time"
+                  ],
+                  "type": "field"
+                },
+                {
+                  "params": [],
+                  "type": "mean"
+                }
+              ]
+            ],
+            "tags": []
+          }
+        ],
+        "timeFrom": null,
+        "timeShift": null,
+        "title": "Application Time",
+        "type": "gauge"
+      },
+      {
+        "datasource": null,
+        "fieldConfig": {
+          "defaults": {
+            "custom": {},
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": null
+                }
+              ]
+            }
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 4,
+          "w": 4,
+          "x": 20,
+          "y": 4
+        },
+        "id": 18,
+        "options": {
+          "reduceOptions": {
+            "calcs": [
+              "mean"
+            ],
+            "fields": "",
+            "values": false
+          },
+          "showThresholdLabels": false,
+          "showThresholdMarkers": true
+        },
+        "pluginVersion": "7.1.3",
+        "targets": [
+          {
+            "groupBy": [
+              {
+                "params": [
+                  "$__interval"
+                ],
+                "type": "time"
+              },
+              {
+                "params": [
+                  "null"
+                ],
+                "type": "fill"
+              }
+            ],
+            "measurement": "wsgi.server",
+            "orderByTime": "ASC",
+            "policy": "default",
+            "refId": "A",
+            "resultFormat": "time_series",
+            "select": [
+              [
+                {
+                  "params": [
+                    "server_time"
+                  ],
+                  "type": "field"
+                },
+                {
+                  "params": [],
+                  "type": "mean"
+                }
+              ]
+            ],
+            "tags": []
+          }
+        ],
+        "timeFrom": null,
+        "timeShift": null,
+        "title": "Server Time",
+        "type": "gauge"
+      },
+      {
+        "aliasColors": {
+          "total": "blue"
+        },
         "bars": false,
         "dashLength": 10,
         "dashes": false,
@@ -226,10 +388,10 @@
         "fill": 1,
         "fillGradient": 0,
         "gridPos": {
-          "h": 5,
-          "w": 24,
+          "h": 6,
+          "w": 20,
           "x": 0,
-          "y": 5
+          "y": 6
         },
         "hiddenSeries": false,
         "id": 2,
@@ -335,6 +497,86 @@
         }
       },
       {
+        "datasource": null,
+        "fieldConfig": {
+          "defaults": {
+            "custom": {},
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "blue",
+                  "value": null
+                }
+              ]
+            }
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 4,
+          "w": 4,
+          "x": 20,
+          "y": 8
+        },
+        "id": 14,
+        "options": {
+          "reduceOptions": {
+            "calcs": [
+              "mean"
+            ],
+            "fields": "",
+            "values": false
+          },
+          "showThresholdLabels": false,
+          "showThresholdMarkers": true
+        },
+        "pluginVersion": "7.1.3",
+        "targets": [
+          {
+            "groupBy": [
+              {
+                "params": [
+                  "$__interval"
+                ],
+                "type": "time"
+              },
+              {
+                "params": [
+                  "null"
+                ],
+                "type": "fill"
+              }
+            ],
+            "measurement": "wsgi.server",
+            "orderByTime": "ASC",
+            "policy": "default",
+            "refId": "A",
+            "resultFormat": "time_series",
+            "select": [
+              [
+                {
+                  "params": [
+                    "request_rate"
+                  ],
+                  "type": "field"
+                },
+                {
+                  "params": [],
+                  "type": "mean"
+                }
+              ]
+            ],
+            "tags": []
+          }
+        ],
+        "timeFrom": null,
+        "timeShift": null,
+        "title": "Requests/sec",
+        "type": "gauge"
+      },
+      {
         "aliasColors": {},
         "bars": false,
         "dashLength": 10,
@@ -352,7 +594,7 @@
           "h": 5,
           "w": 8,
           "x": 0,
-          "y": 10
+          "y": 12
         },
         "hiddenSeries": false,
         "id": 4,
@@ -476,7 +718,7 @@
           "h": 5,
           "w": 8,
           "x": 8,
-          "y": 10
+          "y": 12
         },
         "hiddenSeries": false,
         "id": 12,
@@ -673,7 +915,7 @@
           "h": 5,
           "w": 8,
           "x": 16,
-          "y": 10
+          "y": 12
         },
         "hiddenSeries": false,
         "id": 8,
@@ -824,7 +1066,7 @@
       "list": []
     },
     "time": {
-      "from": "now-1m",
+      "from": "now-30s",
       "to": "now"
     },
     "timepicker": {
