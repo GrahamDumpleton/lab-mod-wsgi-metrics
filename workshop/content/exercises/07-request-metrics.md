@@ -1,5 +1,5 @@
 ```editor:open-file
-file: ~/exercises/hello-world-v6/wsgi.py
+file: ~/exercises/hello-world-v7/wsgi.py
 ```
 
 ```terminal:execute
@@ -8,7 +8,7 @@ command: |
 ```
 
 ```terminal:execute
-command: mod_wsgi-express start-server hello-world-v6/wsgi.py --log-to-terminal
+command: mod_wsgi-express start-server hello-world-v7/wsgi.py --log-to-terminal
 ```
 
 ```terminal:execute

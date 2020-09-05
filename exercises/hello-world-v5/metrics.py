@@ -31,17 +31,7 @@ def record_metric(stop_time, duration):
     global data_points
 
     data_points.append(
-        {
-            "measurement": "wsgi.requests",
-            "time": stop_time.isoformat(),
-            "tags": {
-                "hostname": hostname,
-                "process": process
-            },
-            "fields": {
-                "application_time": duration
-            }
-        }
+        f"wsgi.requests,hostname={hostname},process={process} application_time={application_time} {stop_time.isoformat()}"
     )
 
 def report_metrics():
@@ -52,7 +42,7 @@ def report_metrics():
         data_points = []
 
     if pending_data_points:
-        client.write_points(pending_data_points)
+        client.write_points(pending_data_points, batch_size=10000, protocol='line')
 
 def shutdown_handler(name, **kwargs):
     queue.put(None)

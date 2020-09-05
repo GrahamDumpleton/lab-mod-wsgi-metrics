@@ -1,12 +1,12 @@
 ```editor:open-file
-file: ~/exercises/hello-world-v5/wsgi.py
+file: ~/exercises/hello-world-v6/wsgi.py
 ```
 
 ```editor:execute-command
 command: workbench.action.findInFiles
 args:
 - query: "def event_handler(.*):"
-  filesToInclude: hello-world-v5/wsgi.py
+  filesToInclude: hello-world-v6/wsgi.py
   isRegex: true
 ```
 
@@ -14,12 +14,12 @@ args:
 command: workbench.action.findInFiles
 args:
 - query: "mod_wsgi.subscribe_events(event_handler)"
-  filesToInclude: hello-world-v5/wsgi.py
+  filesToInclude: hello-world-v6/wsgi.py
   isRegex: false
 ```
 
 ```terminal:execute
-command: mod_wsgi-express start-server hello-world-v5/wsgi.py --log-to-terminal
+command: mod_wsgi-express start-server hello-world-v6/wsgi.py --log-to-terminal
 ```
 
 ```terminal:execute
