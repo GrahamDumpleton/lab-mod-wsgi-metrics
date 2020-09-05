@@ -26,12 +26,16 @@ process = f"{hostname}:{pid}"
 lock = threading.Lock()
 data_points = []
 
+epoch = datetime.utcfromtimestamp(0)
+
 @wrapt.synchronized(lock)
 def record_metric(stop_time, duration):
     global data_points
 
+    timestamp = int(1000000000*(stop_time-epoch).total_seconds())
+
     data_points.append(
-        f"wsgi.requests,hostname={hostname},process={process} application_time={application_time} {stop_time.isoformat()}"
+        f"wsgi.requests,hostname={hostname},process={process} application_time={duration} {timestamp}"
     )
 
 def report_metrics():

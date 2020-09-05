@@ -16,7 +16,7 @@ url: {{ingress_protocol}}://{{session_namespace}}-grafana.training.getwarped.org
 ```
 
 ```terminal:execute
-command: mod_wsgi-express start-server hello-world-v6/wsgi.py --log-to-terminal --working-directory hello-world-v5
+command: mod_wsgi-express start-server hello-world-v5/wsgi.py --log-to-terminal --working-directory hello-world-v5
 ```
 
 ```terminal:execute
