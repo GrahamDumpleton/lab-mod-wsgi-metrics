@@ -564,7 +564,7 @@
                 },
                 {
                   "params": [],
-                  "type": "mean"
+                  "type": "sum"
                 }
               ]
             ],
@@ -1086,6 +1086,6 @@
     "timezone": "",
     "title": "Server Metrics",
     "uid": "server-metrics",
-    "version": 4
+    "version": 3
   }
 }
