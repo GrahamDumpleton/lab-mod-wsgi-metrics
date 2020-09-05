@@ -14,7 +14,7 @@ pid = os.getpid()
 process = f"{hostname}:{pid}"
 
 @wrapt.decorator
-def application_time(wrapped, instance, args, kwargs):
+def function_call(wrapped, instance, args, kwargs):
     start_time = datetime.now()
 
     try:
