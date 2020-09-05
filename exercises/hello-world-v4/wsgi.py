@@ -2,6 +2,8 @@ import time
 
 import metrics
 
+metrics.enable_reporting()
+
 @metrics.wsgi_application
 def application(environ, start_response):
     status = '200 OK'
