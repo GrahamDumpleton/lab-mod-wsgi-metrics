@@ -1,5 +1,3 @@
-import time
-
 import metrics
 
 metrics.enable_reporting()
