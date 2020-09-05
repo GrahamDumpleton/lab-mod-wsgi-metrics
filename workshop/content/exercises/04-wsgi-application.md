@@ -28,3 +28,6 @@ session: 2
 name: Grafana
 url: {{ingress_protocol}}://{{session_namespace}}-grafana.training.getwarped.org/d/raw-requests?orgId=1&refresh=5s
 ```
+
+```terminal:interrupt-all
+```
