@@ -73,7 +73,7 @@ thread.start()
 def shutdown_handler(name, **kwargs):
     queue.put(None)
 
-mod_wsgi.subscribe_shutdown(event_handler)
+mod_wsgi.subscribe_shutdown(shutdown_handler)
 
 def application(environ, start_response):
     status = '200 OK'

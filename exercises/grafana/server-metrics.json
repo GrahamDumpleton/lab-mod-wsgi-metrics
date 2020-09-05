@@ -842,8 +842,8 @@
       ]
     },
     "timezone": "",
-    "title": "Server",
-    "uid": "hello-world-v4",
+    "title": "Server Metrics",
+    "uid": "server-metrics",
     "version": 4
   }
 }

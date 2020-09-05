@@ -4,7 +4,7 @@ file: ~/exercises/hello-world-v5/wsgi.py
 
 ```terminal:execute
 command: |
-    curl -H "Content-Type: application/json" --user admin:admin --data @hello-world-v5/dashboard.json http://localhost:3000/api/dashboards/db
+    curl -H "Content-Type: application/json" --user admin:admin --data @grafana/server-metrics.json http://localhost:3000/api/dashboards/db
 ```
 
 ```terminal:execute
@@ -18,7 +18,7 @@ session: 2
 
 ```dashboard:reload-dashboard
 name: Grafana
-url: {{ingress_protocol}}://{{session_namespace}}-grafana.training.getwarped.org/d/hello-world-v5?orgId=1&refresh=5s
+url: {{ingress_protocol}}://{{session_namespace}}-grafana.training.getwarped.org/d/server-metrics?orgId=1&refresh=5s
 ```
 
 ```terminal:interrupt-all
