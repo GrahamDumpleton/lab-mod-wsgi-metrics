@@ -70,11 +70,10 @@ def collector():
 thread = Thread(target=collector)
 thread.start()
 
-def event_handler(name, **kwargs):
-    if name == 'process_stopping':
-        queue.put(None)
+def shutdown_handler(name, **kwargs):
+    queue.put(None)
 
-mod_wsgi.subscribe_events(event_handler)
+mod_wsgi.subscribe_shutdown(event_handler)
 
 def application(environ, start_response):
     status = '200 OK'
