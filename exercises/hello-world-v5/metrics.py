@@ -29,7 +29,7 @@ data_points = []
 def record_metric(stop_time, duration):
     global data_points
 
-    timestamp = int(1000000000*stop_time-epoch)
+    timestamp = int(1000000000*stop_time)
 
     data_points.append(
         f"wsgi.requests,hostname={hostname},process={process} application_time={duration} {timestamp}"
