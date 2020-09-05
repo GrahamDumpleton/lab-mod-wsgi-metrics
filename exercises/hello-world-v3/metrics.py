@@ -31,7 +31,7 @@ def report_metric(stop_time, duration):
 class WSGIApplicationIterable(wrapt.ObjectProxy):
 
     def __init__(self, wrapped, start_time):
-        super(self).__init__(wrapped)
+        super().__init__(wrapped)
         self._self_start_time = start_time
 
     def close(self):
@@ -43,7 +43,7 @@ class WSGIApplicationIterable(wrapt.ObjectProxy):
 
         report_metric(stop_time, duration)
 
-@decorator
+@wrapt.decorator
 def wsgi_application(wrapped, instance, args, kwargs):
     start_time = datetime.now()
 

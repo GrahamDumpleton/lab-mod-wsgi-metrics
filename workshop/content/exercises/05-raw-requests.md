@@ -19,11 +19,6 @@ args:
 ```
 
 ```terminal:execute
-command: |
-    curl -H "Content-Type: application/json" --user admin:admin --data @hello-world-v4/dashboard.json http://localhost:3000/api/dashboards/db
-```
-
-```terminal:execute
 command: mod_wsgi-express start-server hello-world-v4/wsgi.py --log-to-terminal
 ```
 
@@ -34,7 +29,7 @@ session: 2
 
 ```dashboard:reload-dashboard
 name: Grafana
-url: {{ingress_protocol}}://{{session_namespace}}-grafana.training.getwarped.org/d/hello-world-v4?orgId=1&refresh=5s
+url: {{ingress_protocol}}://{{session_namespace}}-grafana.training.getwarped.org/d/raw-requests?orgId=1&refresh=5s
 ```
 
 ```terminal:interrupt-all
