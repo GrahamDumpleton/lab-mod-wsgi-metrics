@@ -23,7 +23,7 @@ Now click on **Configuration->Data Sources** in the Grafana view, or click below
 
 ```dashboard:reload-dashboard
 name: Grafana
-url: {{ingress_protocol}}://{{session_namespace}}-grafana.training.getwarped.org/datasources
+url: {{ingress_protocol}}://{{session_namespace}}-grafana.{{ingress_domain}}/datasources
 ```
 
 You should have a single data source called **WSGI**, which is associated with InfluxDB.

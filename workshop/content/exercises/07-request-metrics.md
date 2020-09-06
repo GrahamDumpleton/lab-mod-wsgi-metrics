@@ -18,7 +18,7 @@ session: 2
 
 ```dashboard:reload-dashboard
 name: Grafana
-url: {{ingress_protocol}}://{{session_namespace}}-grafana.training.getwarped.org/d/server-metrics?orgId=1&refresh=5s
+url: {{ingress_protocol}}://{{session_namespace}}-grafana.{{ingress_domain}}/d/server-metrics?orgId=1&refresh=5s
 ```
 
 ```terminal:interrupt-all
