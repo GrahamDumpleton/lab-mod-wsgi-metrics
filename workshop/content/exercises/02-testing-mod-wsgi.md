@@ -7,7 +7,7 @@ file: ~/exercises/hello-world-v1/wsgi.py
 To start up Apache/mod_wsgi and host this WSGI application using ``mod_wsgi-express``, from the first terminal run:
 
 ```terminal:execute
-command: mod_wsgi-express start-server hello-world-v1/wsgi.py
+command: mod_wsgi-express start-server hello-world-v1/wsgi.py --log-to-terminal
 ```
 
 This should result in the output:
