@@ -104,7 +104,7 @@
               [
                 {
                   "params": [
-                    "server_queue_time"
+                    "server_time"
                   ],
                   "type": "field"
                 },
@@ -337,7 +337,7 @@
               [
                 {
                   "params": [
-                    "server_queue_time"
+                    "server_time"
                   ],
                   "type": "field"
                 },
