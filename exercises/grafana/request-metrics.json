@@ -782,7 +782,7 @@
             "tags": []
           },
           {
-            "alias": "initialized",
+            "alias": "started",
             "groupBy": [
               {
                 "params": [
