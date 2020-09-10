@@ -6,7 +6,10 @@ import wrapt
 from influxdb import InfluxDBClient
 from datetime import datetime
 
-client = InfluxDBClient('localhost', 8086, 'wsgi', 'wsgi', 'wsgi')
+session_namespace = os.environ["SESSION_NAMESPACE"]
+influxdb_hostname = f"{session_namespace}-influxdb"
+
+client = InfluxDBClient(influxdb_hostname, 8086, 'wsgi', 'wsgi', 'wsgi')
 
 hostname = socket.gethostname()
 pid = os.getpid()
