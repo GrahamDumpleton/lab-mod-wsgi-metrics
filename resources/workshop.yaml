@@ -37,6 +37,9 @@ spec:
           mountPath: /var/lib/influxdb
       - name: grafana
         image: docker.io/grafana/grafana:7.1.3
+        env:
+        - name: GF_AUTH_ANONYMOUS_ENABLED
+          value: "true"
       volumes:
       - name: influxdb
         persistentVolumeClaim:
