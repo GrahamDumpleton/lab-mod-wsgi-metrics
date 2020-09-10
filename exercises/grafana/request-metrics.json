@@ -104,7 +104,7 @@
               [
                 {
                   "params": [
-                    "server_time"
+                    "server_queue_time"
                   ],
                   "type": "field"
                 },
@@ -141,7 +141,7 @@
               [
                 {
                   "params": [
-                    "application_time"
+                    "response_time"
                   ],
                   "type": "field"
                 },
@@ -257,7 +257,7 @@
               [
                 {
                   "params": [
-                    "application_time"
+                    "response_time"
                   ],
                   "type": "field"
                 },
@@ -272,7 +272,7 @@
         ],
         "timeFrom": null,
         "timeShift": null,
-        "title": "Application Time",
+        "title": "Response Time",
         "type": "gauge"
       },
       {
@@ -337,7 +337,7 @@
               [
                 {
                   "params": [
-                    "server_time"
+                    "server_queue_time"
                   ],
                   "type": "field"
                 },
@@ -352,7 +352,7 @@
         ],
         "timeFrom": null,
         "timeShift": null,
-        "title": "Server Time",
+        "title": "Queue Time",
         "type": "gauge"
       },
       {
@@ -442,7 +442,7 @@
               [
                 {
                   "params": [
-                    "request_rate"
+                    "request_throughput"
                   ],
                   "type": "field"
                 },
@@ -459,7 +459,7 @@
         "timeFrom": null,
         "timeRegions": [],
         "timeShift": null,
-        "title": "Requests/sec",
+        "title": "Throughput",
         "tooltip": {
           "shared": true,
           "sort": 0,
@@ -558,7 +558,7 @@
               [
                 {
                   "params": [
-                    "request_rate"
+                    "request_throughput"
                   ],
                   "type": "field"
                 },
@@ -573,7 +573,7 @@
         ],
         "timeFrom": null,
         "timeShift": null,
-        "title": "Requests/sec",
+        "title": "Throughput",
         "type": "gauge"
       },
       {
@@ -769,7 +769,7 @@
               [
                 {
                   "params": [
-                    "threads_maximum"
+                    "request_threads_maximum"
                   ],
                   "type": "field"
                 },
@@ -806,7 +806,7 @@
               [
                 {
                   "params": [
-                    "threads_initialized"
+                    "request_threads_started"
                   ],
                   "type": "field"
                 },
@@ -843,7 +843,7 @@
               [
                 {
                   "params": [
-                    "threads_active"
+                    "request_threads_active"
                   ],
                   "type": "field"
                 },
@@ -1084,8 +1084,8 @@
       ]
     },
     "timezone": "",
-    "title": "Server Metrics",
-    "uid": "server-metrics",
+    "title": "Request Metrics",
+    "uid": "request-metrics",
     "version": 3
   }
 }

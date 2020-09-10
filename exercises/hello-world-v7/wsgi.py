@@ -39,15 +39,15 @@ def report_metrics():
                 "process": process
             },
             "fields": {
-                "request_rate": metrics["request_rate"],
+                "request_throughput": metrics["request_throughput"],
                 "capacity_utilization": metrics["capacity_utilization"],
-                "server_time": metrics["server_time"],
-                "application_time": metrics["application_time"],
+                "server_queue_time": metrics["server_queue_time"],
+                "response_time": metrics["response_time"],
                 "cpu_user_time": metrics["cpu_user_time"],
                 "cpu_system_time": metrics["cpu_system_time"],
-                "threads_maximum": metrics["threads_maximum"],
-                "threads_initialized": metrics["threads_initialized"],
-                "threads_active": metrics["threads_active"]
+                "request_threads_maximum": metrics["request_threads_maximum"],
+                "request_threads_started": metrics["request_threads_started"],
+                "request_threads_active": metrics["request_threads_active"]
             }
         }
     ])

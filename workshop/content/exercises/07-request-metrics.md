@@ -4,7 +4,7 @@ file: ~/exercises/hello-world-v7/wsgi.py
 
 ```terminal:execute
 command: |
-    curl -H "Content-Type: application/json" --user admin:admin --data @grafana/server-metrics.json http://{{session_namespace}}-grafana:3000/api/dashboards/db
+    curl -H "Content-Type: application/json" --user admin:admin --data @grafana/request-metrics.json http://{{session_namespace}}-grafana:3000/api/dashboards/db
 ```
 
 ```terminal:execute
@@ -18,7 +18,7 @@ session: 2
 
 ```dashboard:reload-dashboard
 name: Grafana
-url: {{ingress_protocol}}://{{session_namespace}}-grafana.{{ingress_domain}}/d/server-metrics?orgId=1&refresh=5s
+url: {{ingress_protocol}}://{{session_namespace}}-grafana.{{ingress_domain}}/d/request-metrics?orgId=1&refresh=5s
 ```
 
 ```terminal:interrupt-all
