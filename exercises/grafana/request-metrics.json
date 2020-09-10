@@ -272,7 +272,7 @@
         ],
         "timeFrom": null,
         "timeShift": null,
-        "title": "Response Time",
+        "title": "Application Time",
         "type": "gauge"
       },
       {
@@ -352,7 +352,7 @@
         ],
         "timeFrom": null,
         "timeShift": null,
-        "title": "Queue Time",
+        "title": "Server Time",
         "type": "gauge"
       },
       {
