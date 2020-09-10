@@ -4,7 +4,7 @@ file: ~/exercises/hello-world-v7/wsgi.py
 
 ```terminal:execute
 command: |
-    curl -H "Content-Type: application/json" --user admin:admin --data @grafana/server-metrics.json http://localhost:3000/api/dashboards/db
+    curl -H "Content-Type: application/json" --user admin:admin --data @grafana/server-metrics.json http://{{session_namespace}}-grafana:3000/api/dashboards/db
 ```
 
 ```terminal:execute

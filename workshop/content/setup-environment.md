@@ -4,7 +4,7 @@ Before we start we need to configure Grafana to use InfluxDB as a data source. T
 
 ```terminal:execute
 command: |
-    curl -H "Content-Type: application/json" --user admin:admin --data @grafana/datasource.json http://localhost:3000/api/datasources
+    curl -H "Content-Type: application/json" --user admin:admin --data @grafana/datasource.json http://{{session_namespace}}-grafana:3000/api/datasources
 ```
 
 The workshop uses these action blocks for various purposes. Anytime you see such a block with an icon on the right hand side, you can click on it and it will perform the listed action for you.
