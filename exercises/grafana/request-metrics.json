@@ -141,7 +141,7 @@
               [
                 {
                   "params": [
-                    "response_time"
+                    "application_time"
                   ],
                   "type": "field"
                 },
@@ -257,7 +257,7 @@
               [
                 {
                   "params": [
-                    "response_time"
+                    "application_time"
                   ],
                   "type": "field"
                 },
