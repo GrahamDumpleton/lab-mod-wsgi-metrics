@@ -66,7 +66,7 @@ def report_metrics():
                 "tags": {
                     "hostname": hostname,
                     "process": process,
-                    "le": str(threshold),
+                    "le": threshold,
                 },
                 "fields": {
                     "server_time_bucket": server_count,
@@ -75,11 +75,14 @@ def report_metrics():
             }
         )
 
-    threshold = 0.005
+    threshold = 0.0
 
     for i in range(15):
         add_bucket(threshold, server_time_buckets[i], application_time_buckets[i])
-        threshold *= 2
+        if not threshold:
+            threshold = 0.005
+        else:
+            threshold *= 2
 
     add_bucket(float("inf"), server_time_buckets[-1], server_time_buckets[-1])
 
@@ -115,7 +118,8 @@ def application(environ, start_response):
     status = '200 OK'
     output = b'Hello World!'
 
-    time.sleep(random.random())
+    if (random.random() > 0.99):
+        time.sleep(0.05*random.random())
 
     response_headers = [('Content-type', 'text/plain'),
                         ('Content-Length', str(len(output)))]
