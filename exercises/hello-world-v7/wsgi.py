@@ -2,6 +2,7 @@ import atexit
 import time
 import socket
 import os
+import random
 
 import mod_wsgi
 
@@ -30,7 +31,9 @@ def report_metrics():
 
     stop_time = datetime.fromtimestamp(metrics["stop_time"]).isoformat()
 
-    client.write_points([
+    data_points = []
+
+    data_points.append(
         {
             "measurement": "wsgi.server",
             "time": stop_time,
@@ -41,7 +44,7 @@ def report_metrics():
             "fields": {
                 "request_throughput": metrics["request_throughput"],
                 "capacity_utilization": metrics["capacity_utilization"],
-                "server_queue_time": metrics["server_queue_time"],
+                "server_time": metrics["server_time"],
                 "application_time": metrics["application_time"],
                 "cpu_user_time": metrics["cpu_user_time"],
                 "cpu_system_time": metrics["cpu_system_time"],
@@ -50,7 +53,37 @@ def report_metrics():
                 "request_threads_active": metrics["request_threads_active"]
             }
         }
-    ])
+    )
+
+    server_time_buckets = metrics["server_time_buckets"]
+    application_time_buckets = metrics["application_time_buckets"]
+
+    def add_bucket(threshold, server_count, application_count):
+        data_points.append(
+            {
+                "measurement": "wsgi.server",
+                "time": stop_time,
+                "tags": {
+                    "hostname": hostname,
+                    "process": process,
+                    "le": str(threshold),
+                },
+                "fields": {
+                    "server_time_bucket": server_count,
+                    "application_time_bucket": application_count
+                }
+            }
+        )
+
+    threshold = 0.005
+
+    for i in range(15):
+        add_bucket(threshold, server_time_buckets[i], application_time_buckets[i])
+        threshold *= 2
+
+    add_bucket(float("inf"), server_time_buckets[-1], server_time_buckets[-1])
+
+    client.write_points(data_points)
 
 def collector():
     mod_wsgi.request_metrics()
@@ -82,8 +115,11 @@ def application(environ, start_response):
     status = '200 OK'
     output = b'Hello World!'
 
+    time.sleep(random.random())
+
     response_headers = [('Content-type', 'text/plain'),
                         ('Content-Length', str(len(output)))]
     start_response(status, response_headers)
 
     return [output]
+
