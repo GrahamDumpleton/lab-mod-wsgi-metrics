@@ -1,9 +1,17 @@
+```editor:open-file
+file: ~/exercises/hello-world-v2/wsgi-1.py
+```
+
 ```editor:execute-command
 command: workbench.action.findInFiles
 args:
 - query: "@metrics.function_call"
-  filesToInclude: hello-world-v2/wsgi.py
+  filesToInclude: hello-world-v2/wsgi-1.py
   isRegex: false
+```
+
+```editor:open-file
+file: ~/exercises/hello-world-v2/metrics.py
 ```
 
 ```editor:execute-command
