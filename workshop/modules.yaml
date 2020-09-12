@@ -11,13 +11,15 @@ modules:
         name: Testing mod_wsgi
     exercises/03-timing-decorator:
         name: Timing Decorator
-    exercises/04-wsgi-application:
+    exercises/04-python-generators.md:
+        name: Python Generators
+    exercises/05-wsgi-application:
         name: WSGI Application
-    exercises/05-request-batching:
+    exercises/06-request-batching:
         name: Request Batching
-    exercises/06-raw-requests:
+    exercises/07-raw-requests:
         name: Raw Requests
-    exercises/07-request-metrics:
+    exercises/08-request-metrics:
         name: Request Metrics
     workshop-summary:
         name: Workshop Summary

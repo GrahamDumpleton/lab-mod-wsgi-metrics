@@ -7,7 +7,7 @@ command: |
 
 The workshop uses these action blocks for various purposes. Anytime you see such a block with an icon on the right hand side, you can click on it and it will perform the listed action for you, you do not need to enter in these commands yourself.
 
-As well as set up the datasource for InfluxDB in Grafana, we will also pre-load some Grafana dashboards that we will be using as we go along. Execute:
+As well as set up the datasource for InfluxDB in Grafana, we will also pre-load some Grafana dashboards that we will be using as we go along. Run:
 
 ```terminal:execute
 command: |
@@ -27,7 +27,7 @@ To verify that Grafana is running okay, open the **Grafana** dashboard tab.
 name: Grafana
 ```
 
-There is no need to login to Grafana as anonymous access is enabled for view Grafana dashboards.
+There is no need to login to Grafana as anonymous access is enabled for viewing Grafana dashboards.
 
 We will also be using the embedded VS Code editor later on as well, open the **Editor** dashboard tab to start it up.
 

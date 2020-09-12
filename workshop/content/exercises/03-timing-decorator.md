@@ -2,7 +2,7 @@ The most basic aim of collecting metrics from a web application is to record the
 
 For Python WSGI applications, all HTTP requests are handled through a single WSGI application callable object, or entrypoint. The most obvious approach for recording details about HTTP requests, is thus to apply a wrapper to that entrypoint to record details of calls.
 
-Open up the code file for our new example WSGI application. This can be found in `~/exercises/hello-world-v2/wsgi-1.py`.
+Open up the code file for our next example WSGI application. This can be found in `~/exercises/hello-world-v2/wsgi-1.py`.
 
 ```editor:open-file
 file: ~/exercises/hello-world-v2/wsgi-1.py
@@ -18,7 +18,7 @@ args:
   isRegex: false
 ```
 
-The implementation of the decorator is in the separate file `~/exercises/hello-world-v2/metrics.py`.
+The addition of the decorator is the only change to the original WSGI application. The implementation of the decorator is in the separate file `~/exercises/hello-world-v2/metrics.py`.
 
 ```editor:open-file
 file: ~/exercises/hello-world-v2/metrics.py
@@ -36,7 +36,7 @@ args:
 
 As you can see, the decorator is implemented using the [wrapt](https://wrapt.readthedocs.io/) Python module, with comments in the code explaining what is happening.
 
-The result is that a metric corresponding to each call is reported into InfluxDB, with the time the call completed, and how long the call took being recorded.
+The result is that a metric corresponding to each call is reported into InfluxDB, with the time the call completed, and how long the call took being recorded. This is done using the `write_points()` method of the InfluxDB client.
 
 ```editor:execute-command
 command: workbench.action.findInFiles
@@ -66,7 +66,7 @@ name: Grafana
 url: {{ingress_protocol}}://{{session_namespace}}-grafana.{{ingress_domain}}/d/raw-requests?orgId=1&refresh=5s
 ```
 
-As the charts fill out, you should see something like following.
+As the charts fill out, you should see something to what is shown by the following screenshot.
 
 ![](hello-world-v2-raw-requests.png)
 
@@ -76,26 +76,9 @@ This is the first trap of performing benchmarking of web applications. The resul
 
 Further, in this case we are running the benchmarking tool on the same host as where the application is running, meaning the benchmarking tool is stealing away CPU cycles that could have been used by the web application, thus affecting its performance.
 
-There are various other mistakes one can make when trying to perform benchmarking. We will touch on some more later, but right now we have an even bigger problem, which is our decorator isn't actually going to always work properly, with it recording the times we would expect.
+There are various other mistakes one can make when trying to perform benchmarking. We will touch on some more later, but right now we have an even bigger problem, which is our decorator will record incorrect results for certain ways that a WSGI application can be implemented.
 
 Stop `bombardier` if it is still running, as well as the WSGI application.
-
-```terminal:interrupt-all
-```
-
-```terminal:execute
-command: mod_wsgi-express start-server hello-world-v2/wsgi-2.py --log-to-terminal --working-directory hello-world-v2
-```
-
-```terminal:execute
-command: bombardier -d 120s -c 1 -r 1 http://localhost:8000
-session: 2
-```
-
-```dashboard:reload-dashboard
-name: Grafana
-url: {{ingress_protocol}}://{{session_namespace}}-grafana.{{ingress_domain}}/d/raw-requests?orgId=1&refresh=5s
-```
 
 ```terminal:interrupt-all
 ```
