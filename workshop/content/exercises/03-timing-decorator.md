@@ -46,6 +46,8 @@ args:
   isRegex: true
 ```
 
+Click on the search result on the left side of the editor to scroll down to the appropriate line if necessary.
+
 To test the WSGI application with the decorator applied for collecting metrics, back in the first terminal run:
 
 ```terminal:execute
@@ -66,7 +68,7 @@ name: Grafana
 url: {{ingress_protocol}}://{{session_namespace}}-grafana.{{ingress_domain}}/d/raw-requests?orgId=1&refresh=5s
 ```
 
-As the charts fill out, you should see something to what is shown by the following screenshot.
+As the charts fill out, you should see something similar to what is shown by the following screenshot.
 
 ![](hello-world-v2-raw-requests.png)
 
