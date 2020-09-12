@@ -84,6 +84,9 @@ def report_metrics():
 
     client.write_points(data_points)
 
+def shutdown_handler(name, **kwargs):
+    queue.put(None)
+
 def collector():
     mod_wsgi.request_metrics()
     next_time = time.time() + interval
