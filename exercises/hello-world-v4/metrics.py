@@ -35,7 +35,7 @@ def record_metric(stop_time, duration):
 
     data_points.append(
         {
-            "measurement": "wsgi.requests",
+            "measurement": "raw-requests",
             "time": stop_time.isoformat(),
             "tags": {
                 "hostname": hostname,

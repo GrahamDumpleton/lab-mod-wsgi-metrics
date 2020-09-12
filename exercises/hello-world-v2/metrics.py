@@ -28,7 +28,7 @@ def function_call(wrapped, instance, args, kwargs):
 
         client.write_points([
             {
-                "measurement": "wsgi.requests",
+                "measurement": "raw-requests",
                 "time": stop_time.isoformat(),
                 "tags": {
                     "hostname": hostname,

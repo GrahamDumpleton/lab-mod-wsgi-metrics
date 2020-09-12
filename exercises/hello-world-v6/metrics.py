@@ -35,7 +35,7 @@ def record_metric(stop_time, duration):
     timestamp = int(1000000000*stop_time)
 
     data_points.append(
-        f"wsgi.requests,hostname={hostname},process={process} application_time={duration} {timestamp}"
+        f"raw-requests,hostname={hostname},process={process} application_time={duration} {timestamp}"
     )
 
 def report_metrics():

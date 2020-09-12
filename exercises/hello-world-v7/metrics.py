@@ -34,7 +34,7 @@ def report_metrics():
 
     data_points.append(
         {
-            "measurement": "wsgi.server",
+            "measurement": "request-metrics",
             "time": stop_time,
             "tags": {
                 "hostname": hostname,
@@ -60,7 +60,7 @@ def report_metrics():
     def add_bucket(threshold, server_count, application_count):
         data_points.append(
             {
-                "measurement": "wsgi.server",
+                "measurement": "request-metrics",
                 "time": stop_time,
                 "tags": {
                     "hostname": hostname,

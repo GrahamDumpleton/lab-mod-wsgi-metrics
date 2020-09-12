@@ -19,7 +19,7 @@ process = f"{hostname}:{pid}"
 def report_metric(stop_time, duration):
     client.write_points([
         {
-            "measurement": "wsgi.requests",
+            "measurement": "raw-requests",
             "time": stop_time.isoformat(),
             "tags": {
                 "hostname": hostname,

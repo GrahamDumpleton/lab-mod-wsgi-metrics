@@ -95,7 +95,7 @@
                 "type": "fill"
               }
             ],
-            "measurement": "wsgi.server",
+            "measurement": "request-metrics",
             "orderByTime": "ASC",
             "policy": "default",
             "refId": "A",
@@ -132,7 +132,7 @@
                 "type": "fill"
               }
             ],
-            "measurement": "wsgi.server",
+            "measurement": "request-metrics",
             "orderByTime": "ASC",
             "policy": "default",
             "refId": "B",
@@ -273,7 +273,7 @@
                 "type": "fill"
               }
             ],
-            "measurement": "wsgi.server",
+            "measurement": "request-metrics",
             "orderByTime": "ASC",
             "policy": "default",
             "refId": "A",
@@ -389,7 +389,7 @@
                 "type": "fill"
               }
             ],
-            "measurement": "wsgi.server",
+            "measurement": "request-metrics",
             "orderByTime": "ASC",
             "policy": "default",
             "refId": "A",
@@ -469,7 +469,7 @@
                 "type": "fill"
               }
             ],
-            "measurement": "wsgi.server",
+            "measurement": "request-metrics",
             "orderByTime": "ASC",
             "policy": "default",
             "refId": "A",
@@ -570,10 +570,10 @@
                 "type": "fill"
               }
             ],
-            "measurement": "wsgi.server",
+            "measurement": "request-metrics",
             "orderByTime": "ASC",
             "policy": "default",
-            "query": "SELECT sum(\"application_time_bucket\") FROM \"wsgi.server\" WHERE $timeFilter GROUP BY time($__interval), \"le\" fill(none)",
+            "query": "SELECT sum(\"application_time_bucket\") FROM \"request-metrics\" WHERE $timeFilter GROUP BY time($__interval), \"le\" fill(none)",
             "rawQuery": false,
             "refId": "A",
             "resultFormat": "time_series",
@@ -694,10 +694,10 @@
                 "type": "fill"
               }
             ],
-            "measurement": "wsgi.server",
+            "measurement": "request-metrics",
             "orderByTime": "ASC",
             "policy": "default",
-            "query": "SELECT sum(\"application_time_bucket\") FROM \"wsgi.server\" WHERE $timeFilter GROUP BY time($__interval), \"le\" fill(none)",
+            "query": "SELECT sum(\"application_time_bucket\") FROM \"request-metrics\" WHERE $timeFilter GROUP BY time($__interval), \"le\" fill(none)",
             "rawQuery": false,
             "refId": "A",
             "resultFormat": "time_series",
@@ -797,7 +797,7 @@
                 "type": "fill"
               }
             ],
-            "measurement": "wsgi.server",
+            "measurement": "request-metrics",
             "orderByTime": "ASC",
             "policy": "default",
             "refId": "A",
@@ -884,7 +884,7 @@
                 "type": "fill"
               }
             ],
-            "measurement": "wsgi.server",
+            "measurement": "request-metrics",
             "orderByTime": "ASC",
             "policy": "default",
             "refId": "A",
@@ -1008,7 +1008,7 @@
                 "type": "fill"
               }
             ],
-            "measurement": "wsgi.server",
+            "measurement": "request-metrics",
             "orderByTime": "ASC",
             "policy": "default",
             "refId": "A",
@@ -1045,7 +1045,7 @@
                 "type": "fill"
               }
             ],
-            "measurement": "wsgi.server",
+            "measurement": "request-metrics",
             "orderByTime": "ASC",
             "policy": "default",
             "refId": "B",
@@ -1082,7 +1082,7 @@
                 "type": "fill"
               }
             ],
-            "measurement": "wsgi.server",
+            "measurement": "request-metrics",
             "orderByTime": "ASC",
             "policy": "default",
             "refId": "C",
@@ -1205,7 +1205,7 @@
                 "type": "fill"
               }
             ],
-            "measurement": "wsgi.server",
+            "measurement": "request-metrics",
             "orderByTime": "ASC",
             "policy": "default",
             "refId": "A",
@@ -1242,7 +1242,7 @@
                 "type": "fill"
               }
             ],
-            "measurement": "wsgi.server",
+            "measurement": "request-metrics",
             "orderByTime": "ASC",
             "policy": "default",
             "refId": "B",

@@ -3,11 +3,6 @@ file: ~/exercises/hello-world-v7/wsgi.py
 ```
 
 ```terminal:execute
-command: |
-    curl -H "Content-Type: application/json" --user admin:admin --data @grafana/request-metrics.json http://{{session_namespace}}-grafana:3000/api/dashboards/db
-```
-
-```terminal:execute
 command: mod_wsgi-express start-server hello-world-v7/wsgi.py --log-to-terminal --working-directory hello-world-v7
 ```
 
