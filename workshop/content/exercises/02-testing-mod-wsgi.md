@@ -1,4 +1,4 @@
-To test that `mod_wsgi-express` is installed and working we have a simple WSGI hello world application.
+To test that `mod_wsgi-express` is installed and working we have a simple WSGI hello world application. This can be found in `~/exercises/hello-world-v1/wsgi.py`.
 
 ```editor:open-file
 file: ~/exercises/hello-world-v1/wsgi.py
