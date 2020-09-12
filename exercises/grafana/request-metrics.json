@@ -549,7 +549,7 @@
         "reverseYBuckets": false,
         "targets": [
           {
-            "alias": "$tag_le",
+            "alias": "$tag_time_bucket",
             "groupBy": [
               {
                 "params": [
@@ -559,7 +559,7 @@
               },
               {
                 "params": [
-                  "le"
+                  "time_bucket"
                 ],
                 "type": "tag"
               },
@@ -673,7 +673,7 @@
         "reverseYBuckets": false,
         "targets": [
           {
-            "alias": "$tag_le",
+            "alias": "$tag_time_bucket",
             "groupBy": [
               {
                 "params": [
@@ -683,7 +683,7 @@
               },
               {
                 "params": [
-                  "le"
+                  "time_bucket"
                 ],
                 "type": "tag"
               },
