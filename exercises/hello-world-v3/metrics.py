@@ -21,19 +21,23 @@ def report_metric(stop_time, duration):
 
     """
 
-    client.write_points([
-        {
-            "measurement": "raw-requests",
-            "time": stop_time.isoformat(),
-            "tags": {
-                "hostname": hostname,
-                "process": process
-            },
-            "fields": {
-                "application_time": duration
+    try:
+        client.write_points([
+            {
+                "measurement": "raw-requests",
+                "time": stop_time.isoformat(),
+                "tags": {
+                    "hostname": hostname,
+                    "process": process
+                },
+                "fields": {
+                    "application_time": duration
+                }
             }
-        }
-    ])
+        ])
+
+    except Exception:
+            traceback.print_exc()
 
 class WSGIApplicationIterable(wrapt.ObjectProxy):
 
