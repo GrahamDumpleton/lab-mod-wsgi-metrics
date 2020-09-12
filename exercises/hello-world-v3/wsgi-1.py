@@ -11,6 +11,6 @@ def application(environ, start_response):
                         ('Content-Length', str(len(output)))]
     start_response(status, response_headers)
 
-    time.sleep(0.005)
+    time.sleep(0.05)
 
     yield output

@@ -20,7 +20,9 @@
         "links": [],
         "panels": [
             {
-                "aliasColors": {},
+                "aliasColors": {
+                    "requests/sec": "blue"
+                },
                 "bars": false,
                 "dashLength": 10,
                 "dashes": false,
@@ -143,7 +145,7 @@
                 }
             },
             {
-                "datasource": null,
+                "datasource": "WSGI",
                 "fieldConfig": {
                     "defaults": {
                         "custom": {},
@@ -152,12 +154,8 @@
                             "mode": "absolute",
                             "steps": [
                                 {
-                                    "color": "green",
+                                    "color": "blue",
                                     "value": null
-                                },
-                                {
-                                    "color": "red",
-                                    "value": 80
                                 }
                             ]
                         }
@@ -282,7 +280,7 @@
                             },
                             {
                                 "params": [
-                                    "null"
+                                    "linear"
                                 ],
                                 "type": "fill"
                             }
@@ -319,7 +317,7 @@
                             },
                             {
                                 "params": [
-                                    "null"
+                                    "linear"
                                 ],
                                 "type": "fill"
                             }

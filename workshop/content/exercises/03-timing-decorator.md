@@ -29,7 +29,7 @@ Search for the implementation of the decorator.
 ```editor:execute-command
 command: workbench.action.findInFiles
 args:
-- query: "def function_call\(.*\):"
+- query: "def function_call\\(.*\\):"
   filesToInclude: hello-world-v2/metrics.py
   isRegex: true
 ```
@@ -41,7 +41,7 @@ The result is that a metric corresponding to each call is reported into InfluxDB
 ```editor:execute-command
 command: workbench.action.findInFiles
 args:
-- query: "client.write_points\(.*"
+- query: "client.write_points\\(.*"
   filesToInclude: hello-world-v2/metrics.py
   isRegex: true
 ```
@@ -66,7 +66,7 @@ name: Grafana
 url: {{ingress_protocol}}://{{session_namespace}}-grafana.{{ingress_domain}}/d/raw-requests?orgId=1&refresh=5s
 ```
 
-As the chart fills out, you should see something like following.
+As the charts fill out, you should see something like following.
 
 ![](hello-world-v2-raw-requests.png)
 
@@ -76,7 +76,7 @@ This is the first trap of performing benchmarking of web applications. The resul
 
 Further, in this case we are running the benchmarking tool on the same host as where the application is running, meaning the benchmarking tool is stealing away CPU cycles that could have been used by the web application, thus affecting its performance.
 
-There are various other mistakes one can make when trying to perform benchmarking. We will touch on some more later, but right now we have an even bigger problem, which is our decorator isn't actually going to always work.
+There are various other mistakes one can make when trying to perform benchmarking. We will touch on some more later, but right now we have an even bigger problem, which is our decorator isn't actually going to always work properly, with it recording the times we would expect.
 
 Stop `bombardier` if it is still running, as well as the WSGI application.
 
