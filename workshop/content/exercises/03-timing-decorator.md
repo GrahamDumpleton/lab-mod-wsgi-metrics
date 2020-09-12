@@ -29,19 +29,19 @@ Search for the implementation of the decorator.
 ```editor:execute-command
 command: workbench.action.findInFiles
 args:
-- query: "def function_call(.*):"
+- query: "def function_call\(.*\):"
   filesToInclude: hello-world-v2/metrics.py
   isRegex: true
 ```
 
 As you can see, the decorator is implemented using the [wrapt](https://wrapt.readthedocs.io/) Python module, with comments in the code explaining what is happening.
 
-The result is a metric corresponding to each call is reported into InfluxDB, with the time the call completed, and how long the call took being recorded.
+The result is that a metric corresponding to each call is reported into InfluxDB, with the time the call completed, and how long the call took being recorded.
 
 ```editor:execute-command
 command: workbench.action.findInFiles
 args:
-- query: "client.write_points(.*"
+- query: "client.write_points\(.*"
   filesToInclude: hello-world-v2/metrics.py
   isRegex: true
 ```
@@ -52,10 +52,10 @@ To test the WSGI application with the decorator applied for collecting metrics, 
 command: mod_wsgi-express start-server hello-world-v2/wsgi-1.py --log-to-terminal --working-directory hello-world-v2
 ```
 
-To simulate a batch of HTTP requests being sent to the WSGI application, the `siege` HTTP benchmarking program can be used. Run in the second terminal:
+To simulate a batch of HTTP requests being sent to the WSGI application, the `bombardier` HTTP benchmarking program can be used. Run in the second terminal:
 
 ```terminal:execute
-command: siege -t 120s -c 5 http://localhost:8000
+command: bombardier -d 120s -c 5 http://localhost:8000
 session: 2
 ```
 
@@ -78,7 +78,7 @@ Further, in this case we are running the benchmarking tool on the same host as w
 
 There are various other mistakes one can make when trying to perform benchmarking. We will touch on some more later, but right now we have an even bigger problem, which is our decorator isn't actually going to always work.
 
-Stop `siege`, if it is still running, as well as our WSGI application.
+Stop `bombardier` if it is still running, as well as the WSGI application.
 
 ```terminal:interrupt-all
 ```
@@ -88,7 +88,7 @@ command: mod_wsgi-express start-server hello-world-v2/wsgi-2.py --log-to-termina
 ```
 
 ```terminal:execute
-command: siege -t 300s -c 10 http://localhost:8000
+command: bombardier -d 120s -c 1 -r 1 http://localhost:8000
 session: 2
 ```
 
