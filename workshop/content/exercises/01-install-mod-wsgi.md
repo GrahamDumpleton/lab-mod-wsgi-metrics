@@ -28,9 +28,9 @@ You can now install mod_wsgi by running:
 command: pip3 install https://github.com/GrahamDumpleton/mod_wsgi/archive/develop.zip
 ```
 
-This command will build and install the Apache module for mod_wsgi into the Python virtual environment. It will also install the `mod_wsgi-express` program.
+This command will build and install the Apache module for `mod_wsgi` into the Python virtual environment. It will also install the `mod_wsgi-express` program.
 
-We also need a number of other Python packages for the examples we will be running, to install these, run:
+We also need a number of other Python packages for the examples we will be running. To install these, run:
 
 ```terminal:execute
 command: pip3 install -r requirements.txt

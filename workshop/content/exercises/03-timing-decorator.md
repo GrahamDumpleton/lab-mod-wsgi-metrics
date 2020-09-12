@@ -1,3 +1,19 @@
+```editor:execute-command
+command: workbench.action.findInFiles
+args:
+- query: "@metrics.function_call"
+  filesToInclude: hello-world-v2/wsgi.py
+  isRegex: false
+```
+
+```editor:execute-command
+command: workbench.action.findInFiles
+args:
+- query: "def function_call(.*):"
+  filesToInclude: hello-world-v2/metrics.py
+  isRegex: true
+```
+
 ```terminal:execute
 command: |
     curl -H "Content-Type: application/json" --user admin:admin --data @grafana/raw-requests.json http://{{session_namespace}}-grafana:3000/api/dashboards/db

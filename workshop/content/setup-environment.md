@@ -13,13 +13,15 @@ To verify that Grafana is running okay, open the **Grafana** dashboard tab.
 name: Grafana
 ```
 
-There is no need to login to Grafana as anonymous access is enabled for view Grafana dashboards.
+There is no need to login to Grafana as anonymous access is enabled for view Grafana dashboards. There are no dashboards set up yet as we will be adding them as we go.
 
-We will also be using the embedded editor later on as well, open the **Editor** dashboard tab to start it up.
+We will also be using the embedded VS Code editor later on as well, open the **Editor** dashboard tab to start it up.
 
 ```dashboard:open-dashboard
 name: Editor
 ```
+
+Dismiss any popups that VS Code displays.
 
 Finally, return back to the **Terminal** dashboard tab:
 

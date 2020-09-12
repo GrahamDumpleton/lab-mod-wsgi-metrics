@@ -27,6 +27,8 @@ Server Backlog     : 500 (connections)
 Locale Setting     : en_US.UTF-8
 ```
 
+It tells you a bit about the configuration that `mod_wsgi-express` has used.
+
 To test the WSGI application is working, in the second terminal run:
 
 ```terminal:execute
