@@ -35,8 +35,6 @@ We will also be using the embedded VS Code editor later on as well, open the **E
 name: Editor
 ```
 
-Dismiss any popups that VS Code displays.
-
 Finally, return back to the **Terminal** dashboard tab:
 
 ```dashboard:open-dashboard

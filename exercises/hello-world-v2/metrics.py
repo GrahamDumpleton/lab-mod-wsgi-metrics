@@ -37,7 +37,7 @@ def function_call(wrapped, instance, args, kwargs):
 
         stop_time = datetime.now()
 
-        # Calulcate how long the function took to run.
+        # Calculate how long the function took to run.
 
         duration = (stop_time - start_time).total_seconds()
 
