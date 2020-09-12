@@ -70,7 +70,7 @@ url: {{ingress_protocol}}://{{session_namespace}}-grafana.{{ingress_domain}}/d/r
 
 As the charts fill out, you should see something similar to what is shown by the following screenshot.
 
-![](hello-world-v2-raw-requests.png)
+![](hello-world-v2-1-raw-requests.png)
 
 The actual numbers you see for throughput and response time may be somewhat different. This is because what you get can depend on the specific computer it is run on, how powerful the CPU is, and what resources are available.
 
