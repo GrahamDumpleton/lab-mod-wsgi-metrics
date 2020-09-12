@@ -17,6 +17,10 @@ pid = os.getpid()
 process = f"{hostname}:{pid}"
 
 def report_metric(stop_time, duration):
+    """Writes a single data point to InfluxDB.
+
+    """
+
     client.write_points([
         {
             "measurement": "raw-requests",
@@ -35,28 +39,87 @@ class WSGIApplicationIterable(wrapt.ObjectProxy):
 
     def __init__(self, wrapped, start_time):
         super().__init__(wrapped)
+
+        # Save away the time the wrapped function was called.
+
         self._self_start_time = start_time
 
     def close(self):
-        if hasattr(self.__wrapped__, 'close'):
-            self.__wrapped__.close()
+        # A close() method on an iterable returned from a WSGI application
+        # is required to be called by the WSGI server at the end of a request,
+        # whether the request was successful, or an exception was raised.
+        # If the original wrapped object returned by the WSGI application
+        # provided a close() method we need to ensure it is in turn called.
 
-        stop_time = datetime.now()
-        duration = (stop_time - self._self_start_time).total_seconds()
+        try:
+            if hasattr(self.__wrapped__, 'close'):
+                self.__wrapped__.close()
 
-        report_metric(stop_time, duration)
+        finally:
+            # Remember the time the close() function was called.
+
+            stop_time = datetime.now()
+
+            # Calculate how long the function took to run.
+
+            duration = (stop_time - self._self_start_time).total_seconds()
+
+            # Write the metrics to InfluxDB for the function call.
+
+            report_metric(stop_time, duration)
 
 @wrapt.decorator
 def wsgi_application(wrapped, instance, args, kwargs):
+    """Reports a metric to InfluxDB for each HTTP request handled
+    by the wrapped WSGI application.
+
+    """
+
+    # Remember time the wrapped function was called.
+
     start_time = datetime.now()
 
     try:
-        return WSGIApplicationIterable(wrapped(*args, **kwargs), start_time)
+        # Call the wrapped function. The result can be any iterable, but may
+        # specifically be a generator. In any case, the WSGI server would
+        # iterate over the result and consume the yielded response. Any code
+        # implementing the WSGI application may not be executed until the WSGI
+        # server starts to consume the response. This is the case for a
+        # generator, but could also be the case for custom iterable responses.
+        # It is only for the simple case of the iterable being a list of
+        # strings where no further code execution to generate the content will
+        # occur after this point.
+
+        result = wrapped(*args, **kwargs)
+
+        # Rather than return the result, we wrap the result in a transparent
+        # object proxy and return that instead. Because a transparent object
+        # proxy is used, any actions to consume the iterable get transferred
+        # through to the result object wrapped by the proxy. As such the
+        # wrapper object doesn't need to implement methods for an iterable and
+        # make the calls to the wrapped object itself. The wrapper object only
+        # provides and intercepts a call to the close() method of any
+        # iterable.
+
+        return WSGIApplicationIterable(result, start_time)
 
     except:
+        # This case handles where the calling of the wrapped function resulted
+        # in an exception. This could occur where the wrapped function is not
+        # a generator. We need to record a metric still even when it fails. So
+        # remember the time the wrapped function returned.
+
         stop_time = datetime.now()
+
+        # Calculate how long the function took to run.
+
         duration = (stop_time - start_time).total_seconds()
 
+        # Write the metrics to InfluxDB for the function call.
+
         report_metric(stop_time, duration)
+
+        # Raise the original exception so that the WSGI server still sees
+        # it and logs the details.
 
         raise

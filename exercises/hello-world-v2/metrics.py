@@ -20,11 +20,11 @@ process = f"{hostname}:{pid}"
 
 @wrapt.decorator
 def function_call(wrapped, instance, args, kwargs):
-    """Records a metric to InfluxDB for each call of the function.
+    """Reports a metric to InfluxDB for each call of the wrapped function.
 
     """
 
-    # Remember time the wrapped function was called.
+    # Remember the time the wrapped function was called.
 
     start_time = datetime.now()
 
@@ -32,8 +32,9 @@ def function_call(wrapped, instance, args, kwargs):
         # Call the wrapped function.
 
         return wrapped(*args, **kwargs)
+
     finally:
-        # Remember time the wrapped function returned.
+        # Remember the time the wrapped function returned.
 
         stop_time = datetime.now()
 

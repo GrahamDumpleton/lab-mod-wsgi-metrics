@@ -54,7 +54,7 @@ What you would think you should see is a response time of about 0.5 seconds, but
 
 The reason this is the case is that when `yield` is used and the function turned into a generator, the time being recorded is that needed to create the generator object and return it. The decorator as written isn't going to record the time taken to execute the body of the function, nor the time taken to consume everything yielded up by the generator.
 
-As a consequence, for WSGI applications you cannot use a normal decorator to time how long it takes to handle HTTP requests. Instead, we need to use a wrapper implementation that is aware that the WSGI application could be implemented as a generator, or any other type of iterable object.
+As a consequence, for WSGI applications you cannot use a normal decorator to time how long it takes to handle HTTP requests. Instead, we need to use a wrapper implementation that is aware that the WSGI application could be implemented as a generator, or any other type of iterable object, and which works with the WSGI application protocol specification for closing out a request.
 
 Stop `bombardier` if it is still running, as well as the WSGI application.
 
