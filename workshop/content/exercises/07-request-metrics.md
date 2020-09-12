@@ -8,7 +8,7 @@ command: |
 ```
 
 ```terminal:execute
-command: mod_wsgi-express start-server hello-world-v7/wsgi.py --log-to-terminal
+command: mod_wsgi-express start-server hello-world-v7/wsgi.py --log-to-terminal --working-directory hello-world-v7
 ```
 
 ```terminal:execute
