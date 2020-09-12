@@ -11,7 +11,7 @@ modules:
         name: Testing mod_wsgi
     exercises/03-timing-decorator:
         name: Timing Decorator
-    exercises/04-python-generators.md:
+    exercises/04-python-generators:
         name: Python Generators
     exercises/05-wsgi-application:
         name: WSGI Application
