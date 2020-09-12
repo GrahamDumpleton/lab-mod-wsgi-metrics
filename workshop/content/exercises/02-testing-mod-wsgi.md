@@ -4,7 +4,7 @@ To test that `mod_wsgi-express` is installed and working we have a simple WSGI h
 file: ~/exercises/hello-world-v1/wsgi.py
 ```
 
-To start up Apache/mod_wsgi and host this WSGI application using ``mod_wsgi-express``, from the first terminal run:
+To start up Apache/mod_wsgi and host this WSGI application using `mod_wsgi-express`, from the first terminal run:
 
 ```terminal:execute
 command: mod_wsgi-express start-server hello-world-v1/wsgi.py --log-to-terminal
@@ -40,7 +40,7 @@ You should see the output:
 Hello World!
 ```
 
-Shutdown the server by entering ``ctrl+c`` into the first terminal.
+Shutdown the server by entering `ctrl+c` into the first terminal.
 
 ```terminal:interrupt
 ```

@@ -1,8 +1,4 @@
 ```terminal:execute
-command: pip install wrapt influxdb
-```
-
-```terminal:execute
 command: |
     curl -H "Content-Type: application/json" --user admin:admin --data @grafana/raw-requests.json http://{{session_namespace}}-grafana:3000/api/dashboards/db
 ```
