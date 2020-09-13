@@ -4,10 +4,24 @@ In the examples we have been using so far, each time a HTTP request occurred we 
 
 The recommended approach to avoid this when working with InfluxDB is to batch up data, and only periodically report it.
 
-For a version of 
-
 ```editor:open-file
-file: ~/exercises/hello-world-v3/metrics.py
+file: ~/exercises/hello-world-v4/metrics.py
+```
+
+```editor:execute-command
+command: workbench.action.findInFiles
+args:
+- query: "def record_metric\\(.*\\):"
+  filesToInclude: hello-world-v4/metrics.py
+  isRegex: true
+```
+
+```editor:execute-command
+command: workbench.action.findInFiles
+args:
+- query: "def recorp_metrics\\(.*\\):"
+  filesToInclude: hello-world-v4/metrics.py
+  isRegex: true
 ```
 
 ```terminal:execute

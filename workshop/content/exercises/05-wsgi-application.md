@@ -1,4 +1,4 @@
-For a WSGI application, we therefore need a more complicated wrapper to be able track HTTP requests. Such a wrapper can be found in `~/exercises/hello-world-v3/metrics.py`.
+For a WSGI application, we therefore need a more complicated wrapper to be able to track HTTP requests. Such a wrapper can be found in `~/exercises/hello-world-v3/metrics.py`.
 
 ```editor:open-file
 file: ~/exercises/hello-world-v3/metrics.py
