@@ -78,7 +78,7 @@ This is the first trap of performing benchmarking of web applications. The resul
 
 Further, in this case we are running the benchmarking tool on the same host as where the application is running, meaning the benchmarking tool is stealing away CPU cycles that could have been used by the web application, thus affecting its performance.
 
-There are various other mistakes one can make when trying to perform benchmarking. We will touch on some more later, but right now we have an even bigger problem, which is our decorator will record incorrect results for certain ways that a WSGI application can be implemented.
+There are various other mistakes one can make when trying to perform benchmarking and instrumenting web applications. We will touch on a range of these as we go along, but right now we have an even bigger problem, which is our decorator will record incorrect results for certain ways that a WSGI application can be implemented.
 
 Stop `bombardier` if it is still running, as well as the WSGI application.
 
