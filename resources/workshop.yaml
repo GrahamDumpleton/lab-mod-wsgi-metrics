@@ -51,7 +51,7 @@ spec:
       port: 8086
     dashboards:
     - name: Grafana
-      url: $(ingress_protocol)://$(session_namespace)-grafana.$(ingress_domain)/
+      url: $(ingress_protocol)://$(session_namespace)-grafana.$(ingress_domain)$(ingress_port_suffix)/
     objects:
     - apiVersion: v1
       kind: PersistentVolumeClaim
