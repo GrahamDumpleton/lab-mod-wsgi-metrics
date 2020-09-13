@@ -41,6 +41,15 @@ def report_metric(stop_time, duration):
 
 class WSGIApplicationIterable(wrapt.ObjectProxy):
 
+    """A wrapper object for the result returned by the WSGI application when
+    called. It uses a transparent object proxy to wrap the original response
+    such that any operations are passed through to the original. The only
+    exception is that the call to the close() method of any iterable by the
+    WSGI server is intercepted and used to close out timing for the request
+    and report a metric to InfluxDB.
+
+    """
+
     def __init__(self, wrapped, start_time):
         super().__init__(wrapped)
 
