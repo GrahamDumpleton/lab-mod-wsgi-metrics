@@ -77,7 +77,7 @@ class WSGIApplicationIterable(wrapt.ObjectProxy):
 
             duration = (stop_time - self._self_start_time).total_seconds()
 
-            # Write the metrics to InfluxDB for the function call.
+            # Write the metric to InfluxDB for the handling of the request.
 
             report_metric(stop_time, duration)
 
@@ -128,7 +128,7 @@ def wsgi_application(wrapped, instance, args, kwargs):
 
         duration = (stop_time - start_time).total_seconds()
 
-        # Write the metrics to InfluxDB for the function call.
+        # Write the metric to InfluxDB for the handling of the request.
 
         report_metric(stop_time, duration)
 

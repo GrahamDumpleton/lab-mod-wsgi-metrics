@@ -101,7 +101,7 @@ This highlights an important consideration when instrumenting web applications t
 
 In order to ensure that any instrumentation doesn't add overheads that outweigh the gains of having visibility into what is occuring in your application and the web server, how they are applied and how they are implemented needs to be considered very carefully.
 
-The increased response time seen with this decorator and wrapper is one example and we will address that later, but perhaps not obvious at all right now is the significant performance degradation which is going on due to how we are reporting the metrics back to InfluxDB.
+The increased response time seen with this decorator and wrapper is one example and we will revisit the issue later, but perhaps not obvious at all right now is the significant performance degradation which is going on due to how we are reporting the metrics back to InfluxDB.
 
 We are done with this test, so stop `bombardier` if it is still running, as well as the WSGI application.
 
