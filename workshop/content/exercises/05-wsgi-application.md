@@ -88,18 +88,18 @@ Check the result in the Grafana dashboard.
 
 ```dashboard:reload-dashboard
 name: Grafana
-url: {{ingress_protocol}}://{{session_namespace}}-grafana.{{ingress_domain}}{ingress_port_suffix}}/d/raw-requests?orgId=1&refresh=5s
+url: {{ingress_protocol}}://{{session_namespace}}-grafana.{{ingress_domain}}{{ingress_port_suffix}}/d/raw-requests?orgId=1&refresh=5s
 ```
 
 We are still getting our results, but although the response time has dropped because of the delay being removed, you may notice that the measured response time isn't a small as when using the original timing decorator.
 
-![](hello-world-v3-1-raw-requests.png)
+![](hello-world-v3-2-raw-requests.png)
 
 The reason for this is that in order to properly capture the response time, as well as deal with any exceptions that may occur, the decorator and wrapper for the result returned by the WSGI application are somewhat more complicated.
 
 This highlights an important consideration when instrumenting web applications to collect metrics. That is that the instrumentation will itself add its own overheads and can affect the response times for your application.
 
-In order to ensure that any instrumentation doesn't add overheads that outweigh the gains of having visibility into what is occuring in your application, and the web server, how they are applied and how they are implemented is needs to be considered very carefully.
+In order to ensure that any instrumentation doesn't add overheads that outweigh the gains of having visibility into what is occuring in your application, and the web server, how they are applied and how they are implemented needs to be considered very carefully.
 
 The increased response time seen with this decorator and wrapper is one example, but perhaps not obvious at all right now is the significant performance degradation which is going on due to how we are reporting the metrics back to InfluxDB.
 
