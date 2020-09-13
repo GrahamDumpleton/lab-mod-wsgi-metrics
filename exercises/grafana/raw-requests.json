@@ -123,11 +123,11 @@
                 },
                 "yaxes": [
                     {
-                        "format": "short",
+                        "format": "reqps",
                         "label": null,
                         "logBase": 1,
                         "max": null,
-                        "min": null,
+                        "min": "0",
                         "show": true
                     },
                     {
@@ -366,11 +366,11 @@
                 },
                 "yaxes": [
                     {
-                        "format": "short",
+                        "format": "s",
                         "label": null,
                         "logBase": 1,
                         "max": null,
-                        "min": null,
+                        "min": "0",
                         "show": true
                     },
                     {
@@ -501,6 +501,6 @@
         "timezone": "",
         "title": "Raw Requests",
         "uid": "raw-requests",
-        "version": 5
+        "version": 3
     }
 }
