@@ -65,7 +65,7 @@ Once running, and HTTP requests are being received by the WSGI application, jump
 
 ```dashboard:reload-dashboard
 name: Grafana
-url: {{ingress_protocol}}://{{session_namespace}}-grafana.{{ingress_domain}}/d/raw-requests?orgId=1&refresh=5s
+url: {{ingress_protocol}}://{{session_namespace}}-grafana.{{ingress_domain}}{{ingress_port_suffix}}/d/raw-requests?orgId=1&refresh=5s
 ```
 
 As the charts fill out, you should see something similar to what is shown by the following screenshot.

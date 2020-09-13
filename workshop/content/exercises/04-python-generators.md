@@ -47,7 +47,7 @@ Jump over to the **Raw Requests** dashboard in Grafana again.
 
 ```dashboard:reload-dashboard
 name: Grafana
-url: {{ingress_protocol}}://{{session_namespace}}-grafana.{{ingress_domain}}/d/raw-requests?orgId=1&refresh=5s
+url: {{ingress_protocol}}://{{session_namespace}}-grafana.{{ingress_domain}}{{ingress_port_suffix}}/d/raw-requests?orgId=1&refresh=5s
 ```
 
 What you would think you should see is a response time of about 0.5 seconds, but in fact the response time is being shown as much less, in the order of nano seconds.
