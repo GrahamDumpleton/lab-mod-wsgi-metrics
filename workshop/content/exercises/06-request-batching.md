@@ -19,7 +19,7 @@ args:
 ```editor:execute-command
 command: workbench.action.findInFiles
 args:
-- query: "def recorp_metrics\\(.*\\):"
+- query: "def report_metrics\\(.*\\):"
   filesToInclude: hello-world-v4/metrics.py
   isRegex: true
 ```
