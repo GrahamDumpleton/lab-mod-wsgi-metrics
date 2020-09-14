@@ -47,6 +47,8 @@ def report_metrics():
                 "application_time": metrics["application_time"],
                 "cpu_user_time": metrics["cpu_user_time"],
                 "cpu_system_time": metrics["cpu_system_time"],
+                "memory_max_rss": metrics["memory_max_rss"],
+                "memory_rss": metrics["memory_rss"],
                 "request_threads_maximum": metrics["request_threads_maximum"],
                 "request_threads_started": metrics["request_threads_started"],
                 "request_threads_active": metrics["request_threads_active"]
