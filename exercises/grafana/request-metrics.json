@@ -174,7 +174,7 @@
         },
         "yaxes": [
           {
-            "format": "short",
+            "format": "s",
             "label": null,
             "logBase": 1,
             "max": null,
@@ -315,7 +315,7 @@
         },
         "yaxes": [
           {
-            "format": "short",
+            "format": "reqps",
             "label": null,
             "logBase": 1,
             "max": null,
@@ -840,7 +840,7 @@
         "fillGradient": 0,
         "gridPos": {
           "h": 5,
-          "w": 8,
+          "w": 6,
           "x": 0,
           "y": 12
         },
@@ -964,8 +964,8 @@
         "fillGradient": 0,
         "gridPos": {
           "h": 5,
-          "w": 8,
-          "x": 8,
+          "w": 6,
+          "x": 6,
           "y": 12
         },
         "hiddenSeries": false,
@@ -1161,8 +1161,8 @@
         "fillGradient": 0,
         "gridPos": {
           "h": 5,
-          "w": 8,
-          "x": 16,
+          "w": 6,
+          "x": 12,
           "y": 12
         },
         "hiddenSeries": false,
@@ -1289,6 +1289,129 @@
             "logBase": 1,
             "max": null,
             "min": "0.0",
+            "show": true
+          },
+          {
+            "format": "short",
+            "label": null,
+            "logBase": 1,
+            "max": null,
+            "min": null,
+            "show": true
+          }
+        ],
+        "yaxis": {
+          "align": false,
+          "alignLevel": null
+        }
+      },
+      {
+        "aliasColors": {},
+        "bars": false,
+        "dashLength": 10,
+        "dashes": false,
+        "datasource": "WSGI",
+        "fieldConfig": {
+          "defaults": {
+            "custom": {}
+          },
+          "overrides": []
+        },
+        "fill": 1,
+        "fillGradient": 0,
+        "gridPos": {
+          "h": 5,
+          "w": 6,
+          "x": 18,
+          "y": 12
+        },
+        "hiddenSeries": false,
+        "id": 23,
+        "legend": {
+          "avg": false,
+          "current": false,
+          "max": false,
+          "min": false,
+          "show": true,
+          "total": false,
+          "values": false
+        },
+        "lines": true,
+        "linewidth": 1,
+        "nullPointMode": "null",
+        "percentage": false,
+        "pluginVersion": "7.1.3",
+        "pointradius": 2,
+        "points": false,
+        "renderer": "flot",
+        "seriesOverrides": [],
+        "spaceLength": 10,
+        "stack": false,
+        "steppedLine": false,
+        "targets": [
+          {
+            "alias": "wsgi",
+            "groupBy": [
+              {
+                "params": [
+                  "$__interval"
+                ],
+                "type": "time"
+              },
+              {
+                "params": [
+                  "linear"
+                ],
+                "type": "fill"
+              }
+            ],
+            "measurement": "request-metrics",
+            "orderByTime": "ASC",
+            "policy": "default",
+            "refId": "A",
+            "resultFormat": "time_series",
+            "select": [
+              [
+                {
+                  "params": [
+                    "memory_rss"
+                  ],
+                  "type": "field"
+                },
+                {
+                  "params": [],
+                  "type": "mean"
+                }
+              ]
+            ],
+            "tags": []
+          }
+        ],
+        "thresholds": [],
+        "timeFrom": null,
+        "timeRegions": [],
+        "timeShift": null,
+        "title": "Memory Usage",
+        "tooltip": {
+          "shared": true,
+          "sort": 0,
+          "value_type": "individual"
+        },
+        "type": "graph",
+        "xaxis": {
+          "buckets": null,
+          "mode": "time",
+          "name": null,
+          "show": true,
+          "values": []
+        },
+        "yaxes": [
+          {
+            "format": "bytes",
+            "label": null,
+            "logBase": 1,
+            "max": null,
+            "min": "0",
             "show": true
           },
           {
