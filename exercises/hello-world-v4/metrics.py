@@ -39,7 +39,9 @@ def record_metric(stop_time, duration):
 
     global data_points
 
-    # Metric is added as a Python dictionary.
+    # Metric is added as a Python dictionary to the list of data points
+    # with the list of dictionaries later being passed to the InfluxDB
+    # client to report.
 
     data_points.append(
         {
@@ -113,7 +115,7 @@ def enable_reporting():
     # Subscribe to shutdown of the application so we can report the last
     # batch of metrics and notify the collector thread to shutdown.
 
-    if hasattr(module, "subscribe_shutdown"):
+    if hasattr(mod_wsgi, "subscribe_shutdown"):
         mod_wsgi.subscribe_shutdown(shutdown_handler)
     else:
         atexit.register(shutdown_handler)

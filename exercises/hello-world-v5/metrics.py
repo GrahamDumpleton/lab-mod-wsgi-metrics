@@ -106,7 +106,7 @@ def enable_reporting():
     # Subscribe to shutdown of the application so we can report the last
     # batch of metrics and notify the collector thread to shutdown.
 
-    if hasattr(module, "subscribe_shutdown"):
+    if hasattr(mod_wsgi, "subscribe_shutdown"):
         mod_wsgi.subscribe_shutdown(shutdown_handler)
     else:
         atexit.register(shutdown_handler)
