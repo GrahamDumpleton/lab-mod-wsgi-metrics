@@ -23,7 +23,7 @@ If interested in the details, read through the source code. Comments are include
 Now open up our modified WSGI application code file.
 
 ```editor:open-file
-file: ~/exercises/hello-world-v3/wsgi-1.py
+file: ~/exercises/hello-world-v3/wsgi_1.py
 ```
 
 You will see that all we have done is swap out the prior operator with the `@metrics.wsgi_application` decorator.
@@ -32,14 +32,14 @@ You will see that all we have done is swap out the prior operator with the `@met
 command: workbench.action.findInFiles
 args:
 - query: "@metrics.wsgi_application"
-  filesToInclude: hello-world-v3/wsgi-1.py
+  filesToInclude: hello-world-v3/wsgi_1.py
   isRegex: false
 ```
 
 To test the decorator does what is required, start up the WSGI application:
 
 ```terminal:execute
-command: mod_wsgi-express start-server hello-world-v3/wsgi-1.py --log-to-terminal --working-directory hello-world-v3
+command: mod_wsgi-express start-server hello-world-v3/wsgi_1.py --log-to-terminal --working-directory hello-world-v3
 ```
 
 and send through a stream of requests.
@@ -68,13 +68,13 @@ Stop `bombardier` if it is still running, as well as the WSGI application.
 Before we continue, let's go back and test this new decorator and wrapper without the time delay.
 
 ```editor:open-file
-file: ~/exercises/hello-world-v3/wsgi-2.py
+file: ~/exercises/hello-world-v3/wsgi_2.py
 ```
 
 Start up the WSGI application:
 
 ```terminal:execute
-command: mod_wsgi-express start-server hello-world-v3/wsgi-2.py --log-to-terminal --working-directory hello-world-v3
+command: mod_wsgi-express start-server hello-world-v3/wsgi_2.py --log-to-terminal --working-directory hello-world-v3
 ```
 
 and send through a much higher request load once more.

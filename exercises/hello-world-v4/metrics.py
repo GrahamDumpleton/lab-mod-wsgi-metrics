@@ -2,6 +2,7 @@ import socket
 import threading
 import queue
 import time
+import atexit
 import os
 
 from threading import Thread
@@ -37,6 +38,8 @@ def record_metric(stop_time, duration):
     """
 
     global data_points
+
+    # Metric is added as a Python dictionary.
 
     data_points.append(
         {
@@ -103,14 +106,17 @@ def collector():
 queue = Queue()
 thread = Thread(target=collector)
 
-def shutdown_handler(name, **kwargs):
+def shutdown_handler(*args, **kwargs):
     queue.put(None)
 
 def enable_reporting():
     # Subscribe to shutdown of the application so we can report the last
     # batch of metrics and notify the collector thread to shutdown.
 
-    mod_wsgi.subscribe_shutdown(shutdown_handler)
+    if hasattr(module, "subscribe_shutdown"):
+        mod_wsgi.subscribe_shutdown(shutdown_handler)
+    else:
+        atexit.register(shutdown_handler)
 
     # Start collector thread for periodically reporting accumlated metrics.
 

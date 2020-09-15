@@ -2,10 +2,10 @@ The most basic aim of collecting metrics from a web application is to record the
 
 For Python WSGI applications, all HTTP requests are handled through a single WSGI application callable object, or entrypoint. The most obvious approach for recording details about HTTP requests, is thus to apply a wrapper to that entrypoint to record details of calls.
 
-Open up the code file for our next example WSGI application. This can be found in `~/exercises/hello-world-v2/wsgi-1.py`.
+Open up the code file for our next example WSGI application. This can be found in `~/exercises/hello-world-v2/wsgi_1.py`.
 
 ```editor:open-file
-file: ~/exercises/hello-world-v2/wsgi-1.py
+file: ~/exercises/hello-world-v2/wsgi_1.py
 ```
 
 Look for the `@metrics.function_call` decorator.
@@ -14,7 +14,7 @@ Look for the `@metrics.function_call` decorator.
 command: workbench.action.findInFiles
 args:
 - query: "@metrics.function_call"
-  filesToInclude: hello-world-v2/wsgi-1.py
+  filesToInclude: hello-world-v2/wsgi_1.py
   isRegex: false
 ```
 
@@ -51,7 +51,7 @@ Click on the search result on the left side of the editor to scroll down to the 
 To test the WSGI application with the decorator applied for collecting metrics, back in the first terminal run:
 
 ```terminal:execute
-command: mod_wsgi-express start-server hello-world-v2/wsgi-1.py --log-to-terminal --working-directory hello-world-v2
+command: mod_wsgi-express start-server hello-world-v2/wsgi_1.py --log-to-terminal --working-directory hello-world-v2
 ```
 
 To simulate a batch of HTTP requests being sent to the WSGI application, the `bombardier` HTTP benchmarking program can be used. Run in the second terminal:
