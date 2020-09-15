@@ -45,7 +45,7 @@ Now to illustrate how important the configuration is, let's re-run `mod_wsgi-exp
 command: mod_wsgi-express start-server hello-world-v5/wsgi.py --log-to-terminal --working-directory hello-world-v5 --processes=1 --threads=1 --server-mpm=prefork --keep-alive-timeout=2
 ```
 
-Strictly speaking keep alive connections aren't going to be used in this case, but since `gunicorn` has that as a default, lets enable it as well.
+Strictly speaking keep alive connections aren't going to be used in this case, but since `gunicorn` has that as a default, we enable it as well.
 
 Start up `bombardier` to generate the requests:
 
@@ -75,7 +75,7 @@ As such, using benchmarks to try and evaluate which Python WSGI server you use i
 
 So ignore Python benchmarks, including the one used to demonstrate the point above. You would usually never run a Python WSGI server with only one process and one thread, thus it is hardly going to be relevant either.
 
-In order to handle concurrent requests at the same time on the same machine, you are going to have to scale up either the number of processes or threads, but which way you scale things will depend on the balance your application has between being CPU bound and I/O bound.
+In order to handle concurrent requests at the same time on the same machine, you are going to have to scale up either the number of processes or threads, but which way you scale things will depend on the balance your application has between being CPU bound and I/O bound. Beyond a certain point you will have no choice but to start scaling across multiple hosts and it will not be possible to do everything with a single host.
 
 Even then it isn't that simple though, as your web application isn't going to respond to the one specific HTTP request all the time. The profile of different HTTP requests you handle can vary quite significantly, and trying to handle them all in the one Python WSGI server can be detrimental to the overall server performance. Often it is better to use multiple distinct instances of the Python WGSI server, each configured differently, and proxy HTTP requests with a specific runtime profile to a WSGI server with matching configuration.
 
