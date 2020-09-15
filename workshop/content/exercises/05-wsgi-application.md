@@ -49,7 +49,7 @@ command: bombardier -d 120s -c 1 -r 1 http://localhost:8000
 session: 2
 ```
 
-Jump over to the **Raw Requests** dashboard in Grafana
+Jump over to the **Raw Requests** dashboard in Grafana.
 
 ```dashboard:reload-dashboard
 name: Grafana
