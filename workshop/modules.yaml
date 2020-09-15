@@ -19,8 +19,8 @@ modules:
         name: Request Batching
     exercises/07-bogus-benchmarks:
         name: Bogus Benchmarks
-    exercises/08-raw-requests:
-        name: Raw Requests
+    exercises/08-request-events:
+        name: Request Events
     exercises/09-request-metrics:
         name: Request Metrics
     workshop-summary:

@@ -11,6 +11,6 @@ modules:
     - exercises/05-wsgi-application
     - exercises/06-request-batching
     - exercises/07-bogus-benchmarks
-    - exercises/08-raw-requests
+    - exercises/08-request-events
     - exercises/09-request-metrics
     - workshop-summary
