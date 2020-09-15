@@ -13,6 +13,7 @@ import wrapt
 import mod_wsgi
 
 from influxdb import InfluxDBClient
+from datetime import datetime
 
 session_namespace = os.environ["SESSION_NAMESPACE"]
 influxdb_hostname = f"{session_namespace}-influxdb"
