@@ -50,6 +50,7 @@ def report_metrics():
 
 def shutdown_handler(name, **kwargs):
     queue.put(None)
+    thread.join(timeout=3.0)
 
 def collector():
     mod_wsgi.request_metrics()
@@ -70,7 +71,7 @@ def collector():
         report_metrics()
 
 queue = Queue()
-thread = Thread(target=collector)
+thread = Thread(target=collector, daemon=True)
 
 def enable_reporting():
     mod_wsgi.subscribe_shutdown(shutdown_handler)

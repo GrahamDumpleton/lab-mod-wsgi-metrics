@@ -106,10 +106,11 @@ def collector():
         report_metrics()
 
 queue = Queue()
-thread = Thread(target=collector)
+thread = Thread(target=collector, daemon=True)
 
 def shutdown_handler(*args, **kwargs):
     queue.put(None)
+    thread.join(timeout=3.0)
 
 def enable_reporting():
     # Subscribe to shutdown of the application so we can report the last
