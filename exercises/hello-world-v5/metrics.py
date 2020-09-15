@@ -30,6 +30,8 @@ process = f"{hostname}:{pid}"
 lock = threading.Lock()
 data_points = []
 
+epoch = datetime.utcfromtimestamp(0)
+
 @wrapt.synchronized(lock)
 def record_metric(stop_time, duration):
     """Records a single metric, adding it to a list to later be sent
@@ -39,7 +41,7 @@ def record_metric(stop_time, duration):
 
     global data_points
 
-    timestamp = int(1000000000*stop_time)
+    timestamp = int((stop_time - epoch).total_seconds() * 1000000000)
 
     # Metric is added as a formatted string record to the list of data
     # points with the list of string later being passed to the InfluxDB
