@@ -44,7 +44,7 @@ def record_metric(stop_time, duration):
     timestamp = int((stop_time - epoch).total_seconds() * 1000000000)
 
     # Metric is added as a formatted string record to the list of data
-    # points with the list of string later being passed to the InfluxDB
+    # points with the list of strings later being passed to the InfluxDB
     # client to report.
 
     data_points.append(

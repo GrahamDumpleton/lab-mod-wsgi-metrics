@@ -63,11 +63,11 @@ Before we continue, kill `bombardier` if it is still running, as well as the WSG
 ```terminal:interrupt-all
 ```
 
-When using the Python InfluxDB you can provide metrics in two forms. The first is a list of dictionaries, where each dictionary records one data point.
+When using the Python InfluxDB client you can provide metrics in two forms. The first is a list of dictionaries, where each dictionary records one data point.
 
-It turns out that when the Python client goes on to process a list in this form, it is very inefficient at doing it. This is because when presented data in this form, it will convert the whole list to a JSON string and then send it.
+It turns out that when the Python client goes on to process a list in this form, it is very inefficient at doing it. This is because when presented data in this form it will convert the whole list to a JSON string and then send it.
 
-The [solution to this](https://www.influxdata.com/blog/writing-data-to-influxdb-with-python/) as recommended by InfluxDB is to use the second form for passing metrics to the Python InfluxDB client. This is called the InfluxDB line protocol.
+The way to avoid this overhead as [recommended by InfluxDB](https://www.influxdata.com/blog/writing-data-to-influxdb-with-python/) is to use the second form for passing metrics to the Python InfluxDB client. This is called the InfluxDB line protocol.
 
 Rather than accumulating metrics as a list of dictionaries, a list of strings is used, where each string in the list is a formatted version of a single metric.
 
@@ -106,6 +106,14 @@ and load up the **Raw Requests** dashboard in Grafana.
 name: Grafana
 url: {{ingress_protocol}}://{{session_namespace}}-grafana.{{ingress_domain}}{{ingress_port_suffix}}/d/raw-requests?orgId=1&refresh=5s
 ```
+
+You will see that throughput has increased again, and the response time is also better, without the periodic spikes in response time when the batched metric data was being reported.
+
+![](hello-world-v5-raw-requests.png)
+
+We therefore appear to now have suitable code for instrumenting our WSGI application.
+
+Stop `bombardier` if it is still running, as well as the WSGI application.
 
 ```terminal:interrupt-all
 ```
