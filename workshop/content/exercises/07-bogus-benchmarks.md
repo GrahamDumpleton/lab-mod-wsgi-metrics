@@ -22,6 +22,8 @@ url: {{ingress_protocol}}://{{session_namespace}}-grafana.{{ingress_domain}}{{in
 
 As before with `mod_wsgi`, you will see details of the requests as received.
 
+> NOTE: If you find the results for `gunicorn` are really poor, kill `bomardier` and run it again with the same command. For reasons unknown it seems `gunicorn` can fail in some strange way when hit with a high amount of traffic immediately after it is started.
+
 ![](hello-world-v5-2-raw-requests.png)
 
 Compare the results against what we got for `mod_wsgi` and you may at this point be thinking why I am bothering even considering using `mod_wsgi`, as `gunicorn` is obviously better.
@@ -32,7 +34,12 @@ The problem with running benchmarks comparing Python WSGI servers is ensuring th
 
 In the case of `gunicorn`, it defaults to a single process, where that single process is only capable of handling one request at a time. This may be fine for a CPU bound application with very small response times, and will get you quite far, even with only a single process, but it isn't a realistic configuration for what you would need for a typical production web site using Python.
 
-To illustrate this, let's re-run `mod_wsgi-express` but with a similar configuration to `gunicorn`, which targets the same sort of application profile.
+Kill off `bombardier` if it is still running, as well as the WSGI application.
+
+```terminal:interrupt-all
+```
+
+Now to illustrate how important the configuration is, let's re-run `mod_wsgi-express` but with a similar configuration to `gunicorn`, which targets the same sort of application profile.
 
 ```terminal:execute
 command: mod_wsgi-express start-server hello-world-v5/wsgi.py --log-to-terminal --working-directory hello-world-v5 --processes=1 --threads=1 --server-mpm=prefork --keep-alive-timeout=2
@@ -66,4 +73,10 @@ The default out of the box configurations for `mod_wsgi` and `gunicorn` aren't t
 
 As such, using benchmarks to try and evaluate which Python WSGI server you use is mostly a waste of time. Your choice of Python WSGI server should be based on the features of the server, and the flexibility it has for being deployed with different configurations, so that you can then tune it to suit the specific requirements of your Python WSGI application.
 
-So ignore Python benchmarks, including the one used to demonstrate the point above. In this case you would usually never run a Python WSGI server with only one process and one thread. In order to handle concurrent requests at the same time on the same machine, you are going to have scale up either the number of processes or threads, but which way you scale things will depend on the balance your application has between being CPU bound and I/O bound. Even then it isn't that simple though, as your web application isn't going to respond to the one specific HTTP request all the time. The profile of different HTTP requests you handle can vary quite significantly, and trying to handle them all in the one Python WSGI server can be detrimental to the overall server performance. Often it is better to use multiple distinct instances of the Python WGSI server, each configured differently, and proxy HTTP requests with a specific runtime profile to a WSGI server with matching configuration.
+So ignore Python benchmarks, including the one used to demonstrate the point above. You would usually never run a Python WSGI server with only one process and one thread, thus it is hardly going to be relevant either.
+
+In order to handle concurrent requests at the same time on the same machine, you are going to have to scale up either the number of processes or threads, but which way you scale things will depend on the balance your application has between being CPU bound and I/O bound.
+
+Even then it isn't that simple though, as your web application isn't going to respond to the one specific HTTP request all the time. The profile of different HTTP requests you handle can vary quite significantly, and trying to handle them all in the one Python WSGI server can be detrimental to the overall server performance. Often it is better to use multiple distinct instances of the Python WGSI server, each configured differently, and proxy HTTP requests with a specific runtime profile to a WSGI server with matching configuration.
+
+Understanding all this is where instrumenting your WSGI application and extracting metrics is so important. So definitely use metrics to evaluate the performance of your real Python web application, but don't waste your time using them with a hello world application in order to evaluate different Python WSGI servers as it is usually not going to yield anything useful later on for when you deploy your actual application.

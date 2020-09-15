@@ -77,7 +77,7 @@ For this version see `~/exercises/hello-world-v5/metrics.py`.
 file: ~/exercises/hello-world-v5/metrics.py
 ```
 
-The only difference is in the `record_metric()` function.
+The only difference is in the `record_metric()` function, with it formatting each metric into a string before adding it to the list.
 
 ```editor:execute-command
 command: workbench.action.findInFiles
