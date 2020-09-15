@@ -13,7 +13,7 @@ import wrapt
 import mod_wsgi
 
 from influxdb import InfluxDBClient
-from datetime import datetime
+from datetime import timedelta
 
 session_namespace = os.environ["SESSION_NAMESPACE"]
 influxdb_hostname = f"{session_namespace}-influxdb"
@@ -30,8 +30,6 @@ process = f"{hostname}:{pid}"
 lock = threading.Lock()
 data_points = []
 
-epoch = datetime.utcfromtimestamp(0)
-
 @wrapt.synchronized(lock)
 def record_metric(stop_time, duration):
     """Records a single metric, adding it to a list to later be sent
@@ -41,7 +39,7 @@ def record_metric(stop_time, duration):
 
     global data_points
 
-    timestamp = int((stop_time - epoch).total_seconds() * 1000000000)
+    timestamp = int(stop_time.total_seconds() * 1000000000)
 
     # Metric is added as a formatted string record to the list of data
     # points with the list of strings later being passed to the InfluxDB
@@ -124,6 +122,9 @@ def event_handler(name, **kwargs):
     # up and periodically sent to InfluxDB.
 
     if name == 'request_finished':
-        record_metric(kwargs["application_finish"], kwargs["application_time"])
+        stop_time = timedelta(seconds=kwargs["application_finish"])
+        duration = kwargs["application_time"]
+
+        record_metric(stop_time, duration)
 
 mod_wsgi.subscribe_events(event_handler)

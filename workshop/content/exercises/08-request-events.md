@@ -2,6 +2,10 @@
 file: ~/exercises/hello-world-v6/wsgi.py
 ```
 
+```editor:open-file
+file: ~/exercises/hello-world-v6/metrics.py
+```
+
 ```editor:execute-command
 command: workbench.action.findInFiles
 args:
