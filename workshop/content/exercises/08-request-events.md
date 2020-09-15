@@ -6,7 +6,7 @@ file: ~/exercises/hello-world-v6/wsgi.py
 command: workbench.action.findInFiles
 args:
 - query: "def event_handler(.*):"
-  filesToInclude: hello-world-v6/wsgi.py
+  filesToInclude: hello-world-v6/metrics.py
   isRegex: true
 ```
 
@@ -14,7 +14,7 @@ args:
 command: workbench.action.findInFiles
 args:
 - query: "mod_wsgi.subscribe_events(event_handler)"
-  filesToInclude: hello-world-v6/wsgi.py
+  filesToInclude: hello-world-v6/metrics.py
   isRegex: false
 ```
 
