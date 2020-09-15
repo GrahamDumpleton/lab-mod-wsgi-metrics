@@ -109,7 +109,7 @@ url: {{ingress_protocol}}://{{session_namespace}}-grafana.{{ingress_domain}}{{in
 
 You will see that throughput has increased again, and the response time is also better, without the periodic spikes in response time when the batched metric data was being reported.
 
-![](hello-world-v5-raw-requests.png)
+![](hello-world-v5-1-raw-requests.png)
 
 We therefore appear to now have suitable code for instrumenting our WSGI application.
 

@@ -17,9 +17,11 @@ modules:
         name: WSGI Application
     exercises/06-request-batching:
         name: Request Batching
-    exercises/07-raw-requests:
+    exercises/07-bogus-benchmarks:
+        name: Bogus Benchmarks
+    exercises/08-raw-requests:
         name: Raw Requests
-    exercises/08-request-metrics:
+    exercises/09-request-metrics:
         name: Request Metrics
     workshop-summary:
         name: Workshop Summary

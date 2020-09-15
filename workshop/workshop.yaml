@@ -10,6 +10,7 @@ modules:
     - exercises/04-python-generators
     - exercises/05-wsgi-application
     - exercises/06-request-batching
-    - exercises/07-raw-requests
-    - exercises/08-request-metrics
+    - exercises/07-bogus-benchmarks
+    - exercises/08-raw-requests
+    - exercises/09-request-metrics
     - workshop-summary
