@@ -7,7 +7,7 @@ command: mod_wsgi-express start-server hello-world-v7/wsgi.py --log-to-terminal 
 ```
 
 ```terminal:execute
-command: siege -t 300s -c 10 http://localhost:8000
+command: bombardier -d 120s -c 5 http://localhost:8000
 session: 2
 ```
 

@@ -1,9 +1,9 @@
 To illustrate the problem, let's change our WSGI application source code slightly.
 
-Open up the modified code in `~/exercises/hello-world-v2/wsgi-2.py`.
+Open up the modified code in `~/exercises/hello-world-v2/wsgi_2.py`.
 
 ```editor:open-file
-file: ~/exercises/hello-world-v2/wsgi-2.py
+file: ~/exercises/hello-world-v2/wsgi_2.py
 ```
 
 The change we have made is to replace the `return` statement in the WSGI application which previously returned the content for the response, with a `yield` statement.
@@ -12,7 +12,7 @@ The change we have made is to replace the `return` statement in the WSGI applica
 command: workbench.action.findInFiles
 args:
 - query: "yield output"
-  filesToInclude: hello-world-v2/wsgi-2.py
+  filesToInclude: hello-world-v2/wsgi_2.py
   isRegex: false
 ```
 
@@ -24,7 +24,7 @@ To show why this is a problem, we have also added a delay into the exection of t
 command: workbench.action.findInFiles
 args:
 - query: "time.sleep(0.05)"
-  filesToInclude: hello-world-v2/wsgi-2.py
+  filesToInclude: hello-world-v2/wsgi_2.py
   isRegex: false
 ```
 
@@ -33,7 +33,7 @@ With the delay added, we would expect the response time for the WSGI application
 Start up the WSGI application:
 
 ```terminal:execute
-command: mod_wsgi-express start-server hello-world-v2/wsgi-2.py --log-to-terminal --working-directory hello-world-v2
+command: mod_wsgi-express start-server hello-world-v2/wsgi_2.py --log-to-terminal --working-directory hello-world-v2
 ```
 
 To make things clearer, this time we will send HTTP requests at a rate of only 1 request/sec, rather than trying to send as many requests as we can.
