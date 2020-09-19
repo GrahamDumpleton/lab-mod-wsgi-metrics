@@ -10,12 +10,9 @@ file: ~/exercises/hello-world-v2/wsgi_1.py
 
 Look for the `@metrics.function_call` decorator.
 
-```editor:execute-command
-command: workbench.action.findInFiles
-args:
-- query: "@metrics.function_call"
-  filesToInclude: hello-world-v2/wsgi_1.py
-  isRegex: false
+```editor:select-lines-in-file
+text: "@metrics.function_call"
+file: ~/exercises/hello-world-v2/wsgi_1.py
 ```
 
 The addition of the decorator is the only change to the original WSGI application. The implementation of the decorator is in the separate file `~/exercises/hello-world-v2/metrics.py`.
@@ -26,24 +23,23 @@ file: ~/exercises/hello-world-v2/metrics.py
 
 Search for the implementation of the decorator.
 
-```editor:execute-command
-command: workbench.action.findInFiles
-args:
-- query: "def function_call\\(.*\\):"
-  filesToInclude: hello-world-v2/metrics.py
-  isRegex: true
+```editor:select-lines-in-file
+text: "def function_call\\(.*\\):"
+file: ~/exercises/hello-world-v2/metrics.py
+isRegex: true
+before: 1
+after: 4
 ```
 
 As you can see, the decorator is implemented using the [wrapt](https://wrapt.readthedocs.io/) Python module, with comments in the code explaining what is happening.
 
 The result is that a metric corresponding to each call is reported into InfluxDB, with the time the call completed, and how long the call took being recorded. This is done using the `write_points()` method of the InfluxDB client.
 
-```editor:execute-command
-command: workbench.action.findInFiles
-args:
-- query: "client.write_points\\(.*"
-  filesToInclude: hello-world-v2/metrics.py
-  isRegex: true
+```editor:select-lines-in-file
+text: "client.write_points\\(.*"
+file: ~/exercises/hello-world-v2/metrics.py
+isRegex: true
+after: 13
 ```
 
 Click on the search result on the left side of the editor to scroll down to the appropriate line if necessary.
