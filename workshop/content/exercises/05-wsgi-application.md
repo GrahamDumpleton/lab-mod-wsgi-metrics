@@ -11,7 +11,6 @@ text: "def wsgi_application\\(.*\\):"
 file: ~/exercises/hello-world-v3/metrics.py
 isRegex: true
 before: 1
-after: 5
 ```
 
 Click on the search result on the left side of the editor to scroll down to the appropriate line if necessary.

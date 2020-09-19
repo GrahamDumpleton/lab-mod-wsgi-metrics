@@ -18,7 +18,6 @@ The callback function in this case has been called `event_handler()`.
 text: "def event_handler(.*):"
 file: ~/exercises/hello-world-v6/metrics.py
 isRegex: true
-after: 5
 ```
 
 and it is registered using the `mod_wsgi.subscribe_events()` function.

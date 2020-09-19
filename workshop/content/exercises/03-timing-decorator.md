@@ -28,7 +28,6 @@ text: "def function_call\\(.*\\):"
 file: ~/exercises/hello-world-v2/metrics.py
 isRegex: true
 before: 1
-after: 4
 ```
 
 As you can see, the decorator is implemented using the [wrapt](https://wrapt.readthedocs.io/) Python module, with comments in the code explaining what is happening.

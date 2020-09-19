@@ -14,7 +14,6 @@ Rather than a `report_metric()` function which immediately sends the metric to I
 text: "def record_metric\\(.*\\):"
 file: ~/exercises/hello-world-v4/metrics.py
 isRegex: true
-after: 5
 ```
 
 We then have a background thread which once a second, will send the list of accumulated metrics to InfluxDB in one go.
@@ -24,7 +23,6 @@ text: "def report_metrics\\(.*\\):"
 file: ~/exercises/hello-world-v4/metrics.py
 isRegex: true
 before: 1
-after: 5
 ```
 
 Start up the WSGI application using this variation of the code:
@@ -82,7 +80,6 @@ The only difference is in the `record_metric()` function, with it formatting eac
 text: "def record_metric\\(.*\\):"
 file: ~/exercises/hello-world-v5/metrics.py
 isRegex: true
-after: 5
 ```
 
 Start up the WSGI application again:
