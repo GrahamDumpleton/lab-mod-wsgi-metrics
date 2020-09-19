@@ -105,8 +105,10 @@ def shutdown_handler(*args, **kwargs):
     thread.join(timeout=3.0)
 
 def enable_reporting():
-    # Subscribe to shutdown of the application so we can report the last
-    # batch of metrics and notify the collector thread to shutdown.
+    """Subscribe to shutdown of the application so we can report the last
+    batch of metrics and notify the collector thread to shutdown.
+
+    """
 
     if hasattr(mod_wsgi, "subscribe_shutdown"):
         mod_wsgi.subscribe_shutdown(shutdown_handler)
@@ -118,8 +120,10 @@ def enable_reporting():
     thread.start()
 
 def event_handler(name, **kwargs):
-    # Record a metric for each request when finished. These will be batched
-    # up and periodically sent to InfluxDB.
+    """Record a metric for each request when finished. These will be batched
+    up and periodically sent to InfluxDB.
+
+    """
 
     if name == 'request_finished':
         stop_time = timedelta(seconds=kwargs["application_finish"])

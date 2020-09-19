@@ -6,12 +6,12 @@ file: ~/exercises/hello-world-v3/metrics.py
 
 Search for the implementation of the wrapper.
 
-```editor:execute-command
-command: workbench.action.findInFiles
-args:
-- query: "def wsgi_application\\(.*\\):"
-  filesToInclude: hello-world-v3/metrics.py
-  isRegex: true
+```editor:select-lines-in-file
+text: "def wsgi_application\\(.*\\):"
+file: ~/exercises/hello-world-v3/metrics.py
+isRegex: true
+before: 1
+after: 5
 ```
 
 Click on the search result on the left side of the editor to scroll down to the appropriate line if necessary.
@@ -28,12 +28,9 @@ file: ~/exercises/hello-world-v3/wsgi_1.py
 
 You will see that all we have done is swap out the prior operator with the `@metrics.wsgi_application` decorator.
 
-```editor:execute-command
-command: workbench.action.findInFiles
-args:
-- query: "@metrics.wsgi_application"
-  filesToInclude: hello-world-v3/wsgi_1.py
-  isRegex: false
+```editor:select-lines-in-file
+text: "@metrics.wsgi_application"
+file: ~/exercises/hello-world-v3/wsgi_1.py
 ```
 
 To test the decorator does what is required, start up the WSGI application:

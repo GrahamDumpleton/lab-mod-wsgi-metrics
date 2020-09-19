@@ -14,31 +14,24 @@ file: ~/exercises/hello-world-v6/metrics.py
 
 The callback function in this case has been called `event_handler()`.
 
-```editor:execute-command
-command: workbench.action.findInFiles
-args:
-- query: "def event_handler(.*):"
-  filesToInclude: hello-world-v6/metrics.py
-  isRegex: true
+```editor:select-lines-in-file
+text: "def event_handler(.*):"
+file: ~/exercises/hello-world-v6/metrics.py
+isRegex: true
+after: 5
 ```
 
 and it is registered using the `mod_wsgi.subscribe_events()` function.
 
-```editor:execute-command
-command: workbench.action.findInFiles
-args:
-- query: "mod_wsgi.subscribe_events(event_handler)"
-  filesToInclude: hello-world-v6/metrics.py
-  isRegex: false
+```editor:select-lines-in-file
+text: "mod_wsgi.subscribe_events(event_handler)"
+file: ~/exercises/hello-world-v6/metrics.py
 ```
 
 As you can see, the complete decorator and wrapper for the result returned by the WSGI application has effectively been replaced by the following code, which greatly simplifies the task of capturing metrics for the requests.
 
 ```
 def event_handler(name, **kwargs):
-    # Record a metric for each request when finished. These will be batched
-    # up and periodically sent to InfluxDB.
-
     if name == 'request_finished':
         stop_time = timedelta(seconds=kwargs["application_finish"])
         duration = kwargs["application_time"]

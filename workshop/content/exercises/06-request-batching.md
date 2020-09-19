@@ -10,22 +10,20 @@ file: ~/exercises/hello-world-v4/metrics.py
 
 Rather than a `report_metric()` function which immediately sends the metric to InfluxDB, we have `record_metric()` which records the details of the metric as a dictionary, and adds it to a list of metrics for the current reporting period.
 
-```editor:execute-command
-command: workbench.action.findInFiles
-args:
-- query: "def record_metric\\(.*\\):"
-  filesToInclude: hello-world-v4/metrics.py
-  isRegex: true
+```editor:select-lines-in-file
+text: "def record_metric\\(.*\\):"
+file: ~/exercises/hello-world-v4/metrics.py
+isRegex: true
 ```
 
 We then have a background thread which once a second, will send the list of accumulated metrics to InfluxDB in one go.
 
-```editor:execute-command
-command: workbench.action.findInFiles
-args:
-- query: "def report_metrics\\(.*\\):"
-  filesToInclude: hello-world-v4/metrics.py
-  isRegex: true
+```editor:select-lines-in-file
+text: "def report_metrics\\(.*\\):"
+file: hello-world-v4/metrics.py
+isRegex: true
+before: 1
+after: 5
 ```
 
 Start up the WSGI application using this variation of the code:
@@ -79,12 +77,11 @@ file: ~/exercises/hello-world-v5/metrics.py
 
 The only difference is in the `record_metric()` function, with it formatting each metric into a string before adding it to the list.
 
-```editor:execute-command
-command: workbench.action.findInFiles
-args:
-- query: "def record_metric\\(.*\\):"
-  filesToInclude: hello-world-v5/metrics.py
-  isRegex: true
+```editor:select-lines-in-file
+text: "def record_metric\\(.*\\):"
+file: ~/exercises/hello-world-v5/metrics.py
+isRegex: true
+after: 4
 ```
 
 Start up the WSGI application again:
