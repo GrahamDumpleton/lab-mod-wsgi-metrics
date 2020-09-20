@@ -10,7 +10,7 @@ file: ~/exercises/hello-world-v2/wsgi_1.py
 
 Look for the `@metrics.function_call` decorator.
 
-```editor:select-lines-in-file
+```editor:select-matching-text
 text: "@metrics.function_call"
 file: ~/exercises/hello-world-v2/wsgi_1.py
 ```
@@ -23,7 +23,7 @@ file: ~/exercises/hello-world-v2/metrics.py
 
 Search for the implementation of the decorator.
 
-```editor:select-lines-in-file
+```editor:select-matching-text
 text: "def function_call\\(.*\\):"
 file: ~/exercises/hello-world-v2/metrics.py
 isRegex: true
@@ -34,7 +34,7 @@ As you can see, the decorator is implemented using the [wrapt](https://wrapt.rea
 
 The result is that a metric corresponding to each call is reported into InfluxDB, with the time the call completed, and how long the call took being recorded. This is done using the `write_points()` method of the InfluxDB client.
 
-```editor:select-lines-in-file
+```editor:select-matching-text
 text: "client.write_points\\(.*"
 file: ~/exercises/hello-world-v2/metrics.py
 isRegex: true

@@ -8,7 +8,7 @@ file: ~/exercises/hello-world-v2/wsgi_2.py
 
 The change we have made is to replace the `return` statement in the WSGI application which previously returned the content for the response, with a `yield` statement.
 
-```editor:select-lines-in-file
+```editor:select-matching-text
 text: "yield output"
 file: ~/exercises/hello-world-v2/wsgi_2.py
 ```
@@ -17,7 +17,7 @@ This change has the effect of turning the function into a generator.
 
 To show why this is a problem, we have also added a delay into the exection of the function. This is done by calling `time.sleep()`.
 
-```editor:select-lines-in-file
+```editor:select-matching-text
 text: "time.sleep(0.05)"
 file: ~/exercises/hello-world-v2/wsgi_2.py
 ```

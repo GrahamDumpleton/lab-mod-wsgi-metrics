@@ -14,7 +14,7 @@ file: ~/exercises/hello-world-v6/metrics.py
 
 The callback function in this case has been called `event_handler()`.
 
-```editor:select-lines-in-file
+```editor:select-matching-text
 text: "def event_handler(.*):"
 file: ~/exercises/hello-world-v6/metrics.py
 isRegex: true
@@ -22,7 +22,7 @@ isRegex: true
 
 and it is registered using the `mod_wsgi.subscribe_events()` function.
 
-```editor:select-lines-in-file
+```editor:select-matching-text
 text: "mod_wsgi.subscribe_events(event_handler)"
 file: ~/exercises/hello-world-v6/metrics.py
 ```

@@ -6,7 +6,7 @@ file: ~/exercises/hello-world-v3/metrics.py
 
 Search for the implementation of the wrapper.
 
-```editor:select-lines-in-file
+```editor:select-matching-text
 text: "def wsgi_application\\(.*\\):"
 file: ~/exercises/hello-world-v3/metrics.py
 isRegex: true
@@ -27,7 +27,7 @@ file: ~/exercises/hello-world-v3/wsgi_1.py
 
 You will see that all we have done is swap out the prior operator with the `@metrics.wsgi_application` decorator.
 
-```editor:select-lines-in-file
+```editor:select-matching-text
 text: "@metrics.wsgi_application"
 file: ~/exercises/hello-world-v3/wsgi_1.py
 ```
