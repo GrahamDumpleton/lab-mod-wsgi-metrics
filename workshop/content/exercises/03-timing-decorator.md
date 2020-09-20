@@ -38,7 +38,7 @@ The result is that a metric corresponding to each call is reported into InfluxDB
 text: "client.write_points\\(.*"
 file: ~/exercises/hello-world-v2/metrics.py
 isRegex: true
-after: 13
+after: 12
 ```
 
 Click on the search result on the left side of the editor to scroll down to the appropriate line if necessary.
