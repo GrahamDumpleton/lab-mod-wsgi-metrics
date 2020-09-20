@@ -4,7 +4,7 @@ For a WSGI application, we therefore need a more complicated wrapper to be able 
 file: ~/exercises/hello-world-v3/metrics.py
 ```
 
-Search for the implementation of the wrapper.
+This time the decorator is called `@wsgi_application`.
 
 ```editor:select-matching-text
 text: "def wsgi_application\\(.*\\):"
@@ -13,9 +13,7 @@ isRegex: true
 before: 1
 ```
 
-Click on the search result on the left side of the editor to scroll down to the appropriate line if necessary.
-
-We still use a decorator to intercept the initial call, but we wrap up the result of the call to the original WSGI application with a transparent proxy object. This proxy object intercepts the `close()` method that WSGI servers are required to call at the completion of any HTTP request. It is in this `close()` method that we can record the metric for how long the request takes.
+In this decorator we still intercept the initial call, but we wrap up the result of the call to the original WSGI application with a transparent proxy object. This proxy object intercepts the `close()` method that WSGI servers are required to call at the completion of any HTTP request. It is in this `close()` method that we can record the metric for how long the request takes.
 
 If interested in the details, read through the source code. Comments are included to try and explain what is occuring, and how certain error conditions are catered for.
 
@@ -25,7 +23,7 @@ Now open up our modified WSGI application code file.
 file: ~/exercises/hello-world-v3/wsgi_1.py
 ```
 
-You will see that all we have done is swap out the prior operator with the `@metrics.wsgi_application` decorator.
+You will see that all we have done is swap out the prior decorator with the new one.
 
 ```editor:select-matching-text
 text: "@metrics.wsgi_application"

@@ -20,6 +20,7 @@ spec:
       editor:
         enabled: true
     patches:
+      automountServiceAccountToken: false
       containers:
       - name: influxdb
         image: docker.io/influxdb:1.8.1

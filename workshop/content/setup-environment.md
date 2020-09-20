@@ -5,7 +5,7 @@ command: |
     curl -H "Content-Type: application/json" --user admin:admin --data @grafana/datasource.json http://{{session_namespace}}-grafana:3000/api/datasources
 ```
 
-The workshop uses these action blocks for various purposes. Anytime you see such a block with an icon on the right hand side, you can click on it and it will perform the listed action for you, you do not need to enter in these commands yourself.
+The workshop uses these action blocks for various purposes. Anytime you see such a block with an icon on the right hand side, you can click on it and it will perform the listed action for you, you do not need to enter in the commands yourself.
 
 As well as set up the datasource for InfluxDB in Grafana, we will also pre-load some Grafana dashboards that we will be using as we go along. Run:
 
@@ -29,7 +29,7 @@ name: Grafana
 
 There is no need to login to Grafana as anonymous access is enabled for viewing Grafana dashboards.
 
-We will also be using the embedded VS Code editor later on as well, open the **Editor** dashboard tab to start it up.
+We will also be using the embedded VS Code editor later on as well, open the **Editor** dashboard tab to warm it up.
 
 ```dashboard:open-dashboard
 name: Editor
