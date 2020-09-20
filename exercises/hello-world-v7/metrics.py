@@ -26,11 +26,19 @@ pid = os.getpid()
 process = f"{hostname}:{pid}"
 
 def report_metrics():
+    """Report aggregated metrics to InfluxDB.
+
+    """
+
+    # Grab the set of metrics for the current reporting period.
+
     metrics = mod_wsgi.request_metrics()
 
     stop_time = datetime.fromtimestamp(metrics["stop_time"]).isoformat()
 
     data_points = []
+
+    # Create a record for InfluxDB of the primary metrics.
 
     data_points.append(
         {
@@ -56,6 +64,13 @@ def report_metrics():
         }
     )
 
+    # Now record special bucketed metrics corresponding to the spread
+    # of response times. The first bucket is for 0 to 0.005 seconds.
+    # The next will be 0.005 to 0.010. For each subsequent bucket, the
+    # end of the time bucket is doubled, except for the last bucket,
+    # which is opened ended and covers up to infinity. There should be
+    # a total of 16 buckets.
+
     server_time_buckets = metrics["server_time_buckets"]
     application_time_buckets = metrics["application_time_buckets"]
 
@@ -78,38 +93,64 @@ def report_metrics():
 
     threshold = 0.0
 
-    for i in range(15):
+    for i in range(len(server_time_buckets)-1):
         add_bucket(threshold, server_time_buckets[i], application_time_buckets[i])
         threshold = (threshold * 2) or 0.005
 
-    add_bucket(float("inf"), server_time_buckets[-1], server_time_buckets[-1])
+    add_bucket(float("inf"), server_time_buckets[-1], application_time_buckets[-1])
+
+    # Write the metrics to InfluxDB.
 
     client.write_points(data_points)
 
-def shutdown_handler(name, **kwargs):
-    queue.put(None)
-
 def collector():
-    mod_wsgi.request_metrics()
-    next_time = time.time() + interval
+    # Activate aggregated metrics and set baseline for initial period.
+    # Since this is the first time it is being called we ignore result.
 
+    mod_wsgi.request_metrics()
+
+    next_time = time.time() + interval
+    
     while True:
         next_time += interval
         now = time.time()
 
         try:
+            # Waiting for next schedule time to report metrics.
+
             queue.get(timeout=next_time-now)
+
+            # If we get to here it means the process is being shutdown
+            # so we report any metrics that haven't been sent.
+
             report_metrics()
+
             return
 
         except Exception:
+            # Timeout occurred on waiting on queue, which means the next
+            # reporting time has arrived.
+
             pass
+
+        # Report the current batch of metrics.
 
         report_metrics()
 
 queue = Queue()
 thread = Thread(target=collector)
 
+def shutdown_handler(name, **kwargs):
+    queue.put(None)
+
 def enable_reporting():
+    """Subscribe to shutdown of the application so we can report the last
+    batch of metrics and notify the collector thread to shutdown.
+
+    """
+
     mod_wsgi.subscribe_shutdown(shutdown_handler)
+
+    # Start collector thread for periodically reporting accumlated metrics.
+
     thread.start()
