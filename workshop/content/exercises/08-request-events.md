@@ -48,7 +48,7 @@ To verify that this version still produces the same results, run the WSGI applic
 command: mod_wsgi-express start-server hello-world-v6/wsgi.py --log-to-terminal --working-directory hello-world-v6
 ```
 
-Once more start sending the requests through to the WSGI application.
+Once more start sending the requests through to the WSGI application:
 
 ```terminal:execute
 command: bombardier -d 120s -c 5 http://localhost:8000

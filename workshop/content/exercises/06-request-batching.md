@@ -22,7 +22,6 @@ We then have a background thread which once a second, will send the list of accu
 text: "def report_metrics\\(.*\\):"
 file: ~/exercises/hello-world-v4/metrics.py
 isRegex: true
-before: 1
 ```
 
 Start up the WSGI application using this variation of the code:
