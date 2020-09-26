@@ -3,6 +3,7 @@ import threading
 import queue
 import time
 import atexit
+import traceback
 import os
 
 from threading import Thread
@@ -74,7 +75,10 @@ def report_metrics():
     # Report the complete batch of metrics to InfluxDB in one go.
 
     if pending_data_points:
-        client.write_points(pending_data_points)
+        try:
+            client.write_points(pending_data_points)
+        except Exception:
+            traceback.print_exc()
 
 def collector():
     next_time = time.time() + interval

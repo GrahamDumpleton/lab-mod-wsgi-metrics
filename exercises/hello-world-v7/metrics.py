@@ -1,6 +1,7 @@
 import atexit
 import time
 import socket
+import traceback
 import os
 
 import mod_wsgi
@@ -101,7 +102,11 @@ def report_metrics():
 
     # Write the metrics to InfluxDB.
 
-    client.write_points(data_points)
+    try:
+        client.write_points(data_points)
+
+    except Exception:
+        traceback.print_exc()
 
 def collector():
     # Activate aggregated metrics and set baseline for initial period.
