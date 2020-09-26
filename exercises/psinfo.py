@@ -31,6 +31,8 @@ def process_type(process):
         return "httpd"
     elif process.cmdline()[0].startswith("(wsgi:"):
         return "wsgi"
+    elif process.cmdline()[:2][-1].endswith("gunicorn"):
+        return "gunicorn"
     elif process.name() in ["bombardier"]:
         return process.name()
     else:
