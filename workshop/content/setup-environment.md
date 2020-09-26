@@ -21,6 +21,13 @@ command: |
     curl -H "Content-Type: application/json" --user admin:admin --data @grafana/request-metrics.json http://{{session_namespace}}-grafana:3000/api/dashboards/db
 ```
 
+and:
+
+```terminal:execute
+command: |
+    curl -H "Content-Type: application/json" --user admin:admin --data @grafana/process-info.json http://{{session_namespace}}-grafana:3000/api/dashboards/db
+```
+
 To verify that Grafana is running okay, open the **Grafana** dashboard tab.
 
 ```dashboard:open-dashboard
