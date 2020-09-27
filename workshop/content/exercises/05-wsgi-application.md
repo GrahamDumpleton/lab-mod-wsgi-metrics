@@ -85,7 +85,7 @@ name: Grafana
 url: {{ingress_protocol}}://{{session_namespace}}-grafana.{{ingress_domain}}{{ingress_port_suffix}}/d/raw-requests?orgId=1&refresh=5s
 ```
 
-The metrics are still coming through, but although the response time has dropped because of the delay being removed, you may notice that the measured response time isn't a small as when using the original timing decorator.
+The metrics are still coming through, but although the response time has dropped because of the delay being removed, you may notice that the measured response time isn't as small as when using the original timing decorator.
 
 ![](hello-world-v3-2-raw-requests.png)
 
@@ -93,11 +93,44 @@ The reason for this is that in order to properly capture the response time, as w
 
 This highlights an important consideration when instrumenting web applications to collect metrics. That is that the instrumentation will itself add its own overheads and can affect the response times for your application where they are very small to begin with.
 
+Overheads can come from a couple of sources. The first is the additional CPU load from collecting the metrics. You can check out the CPU load in this case using the **Process Info** dashboard in Grafana.
+
+```dashboard:reload-dashboard
+name: Grafana
+url: {{ingress_protocol}}://{{session_namespace}}-grafana.{{ingress_domain}}{{ingress_port_suffix}}/d/process-info?orgId=1&refresh=5s
+```
+
+This isn't going to be too much different to the last time we checked this out, and isn't particularly helpful as we lack a base line to compare it against.
+
+![](hello-world-v3-2-process-info.png)
+
+What we can do though is run our test against the original WSGI application with no instrumentation.
+
+Stop `bombardier` if it is still running, as well as the WSGI application:
+
+```terminal:interrupt-all
+```
+
+and run instead:
+
+```terminal:execute
+command: mod_wsgi-express start-server hello-world-v1/wsgi.py --log-to-terminal --working-directory hello-world-v1
+```
+
+View the **Process Info** dashboard in Grafana:
+
+```dashboard:reload-dashboard
+name: Grafana
+url: {{ingress_protocol}}://{{session_namespace}}-grafana.{{ingress_domain}}{{ingress_port_suffix}}/d/process-info?orgId=1&refresh=5s
+```
+
+and it should be pretty obvious that without any instrumentation the CPU used by the WSGI is much less.
+
+![](hello-world-v1-process-info.png)
+
 In order to ensure that any instrumentation doesn't add overheads that outweigh the gains of having visibility into what is occuring in your application and the web server, how they are applied and how they are implemented needs to be considered very carefully.
 
-Probably not obvious at all right now is how significant the performance degradation is due to the way we are currently reporting the metrics back to InfluxDB.
-
-We are done with this test, so stop `bombardier` if it is still running, as well as the WSGI application.
+We are done with this series of tests, so again stop `bombardier` if it is still running, as well as the WSGI application.
 
 ```terminal:interrupt-all
 ```
