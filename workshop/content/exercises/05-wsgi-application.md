@@ -117,14 +117,21 @@ and run instead:
 command: mod_wsgi-express start-server hello-world-v1/wsgi.py --log-to-terminal --working-directory hello-world-v1
 ```
 
-View the **Process Info** dashboard in Grafana:
+Start up `bombardier` again:
+
+```terminal:execute
+command: bombardier -d 120s -c 3 -r 250 http://localhost:8000
+session: 2
+```
+
+and view the **Process Info** dashboard in Grafana:
 
 ```dashboard:reload-dashboard
 name: Grafana
 url: {{ingress_protocol}}://{{session_namespace}}-grafana.{{ingress_domain}}{{ingress_port_suffix}}/d/process-info?orgId=1&refresh=5s
 ```
 
-and it should be pretty obvious that without any instrumentation the CPU used by the WSGI is much less.
+and it should be pretty obvious that without any instrumentation the amount of CPU resources consumed by the WSGI application is much less.
 
 ![](hello-world-v1-process-info.png)
 
