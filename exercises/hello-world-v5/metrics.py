@@ -84,7 +84,7 @@ def collector():
         try:
             # Waiting for next schedule time to report metrics.
 
-            queue.get(timeout=next_time-now)
+            queue.get(timeout=max(0, next_time-now))
 
             # If we get to here it means the process is being shutdown
             # so we report any metrics that haven't been sent.
