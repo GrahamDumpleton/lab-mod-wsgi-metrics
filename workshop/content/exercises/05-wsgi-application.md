@@ -100,7 +100,7 @@ name: Grafana
 url: {{ingress_protocol}}://{{session_namespace}}-grafana.{{ingress_domain}}{{ingress_port_suffix}}/d/process-info?orgId=1&refresh=5s
 ```
 
-This isn't going to be too much different to the last time we checked this out, and isn't particularly helpful as we lack a base line to compare it against.
+This isn't going to be too much different to the last time we checked this out, and isn't particularly helpful as we lack a baseline to compare it against.
 
 ![](hello-world-v3-2-process-info.png)
 
@@ -131,7 +131,7 @@ name: Grafana
 url: {{ingress_protocol}}://{{session_namespace}}-grafana.{{ingress_domain}}{{ingress_port_suffix}}/d/process-info?orgId=1&refresh=5s
 ```
 
-and it should be pretty obvious that without any instrumentation the amount of CPU resources consumed by the WSGI application is much less.
+Tt should be pretty obvious from this that without any instrumentation the amount of CPU resources consumed by the WSGI application was much less.
 
 ![](hello-world-v1-process-info.png)
 
