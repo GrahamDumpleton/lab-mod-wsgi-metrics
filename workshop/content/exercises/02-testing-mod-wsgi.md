@@ -16,7 +16,8 @@ This should result in the output:
 Server URL         : http://localhost:8000/
 Server Root        : /tmp/mod_wsgi-localhost:8000:1001
 Server Conf        : /tmp/mod_wsgi-localhost:8000:1001/httpd.conf
-Error Log File     : /tmp/mod_wsgi-localhost:8000:1001/error_log (warn)
+Error Log File     : /dev/stderr (warn)
+Operating Mode     : daemon
 Request Capacity   : 5 (1 process * 5 threads)
 Request Timeout    : 60 (seconds)
 Startup Timeout    : 15 (seconds)
