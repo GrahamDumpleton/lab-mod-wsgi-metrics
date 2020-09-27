@@ -33,7 +33,7 @@ command: mod_wsgi-express start-server hello-world-v4/wsgi.py --log-to-terminal 
 and run `bomardier` to generate the requests against it.
 
 ```terminal:execute
-command: bombardier -d 120s -c 5 http://localhost:8000
+command: bombardier -d 120s -c 3 -r 250 http://localhost:8000
 session: 2
 ```
 
@@ -90,7 +90,7 @@ command: mod_wsgi-express start-server hello-world-v5/wsgi.py --log-to-terminal 
 Send through the requests:
 
 ```terminal:execute
-command: bombardier -d 120s -c 5 http://localhost:8000
+command: bombardier -d 120s -c 3 -r 250 http://localhost:8000
 session: 2
 ```
 
