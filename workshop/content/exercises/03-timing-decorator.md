@@ -48,7 +48,7 @@ command: mod_wsgi-express start-server hello-world-v2/wsgi_1.py --log-to-termina
 To simulate a batch of HTTP requests being sent to the WSGI application, the `bombardier` HTTP benchmarking program can be used. Run in the second terminal:
 
 ```terminal:execute
-command: bombardier -d 120s -c 3 -r 500 http://localhost:8000
+command: bombardier -d 120s -c 3 -r 250 http://localhost:8000
 session: 2
 ```
 
