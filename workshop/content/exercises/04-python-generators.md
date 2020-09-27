@@ -30,7 +30,7 @@ Start up the WSGI application:
 command: mod_wsgi-express start-server hello-world-v2/wsgi_2.py --log-to-terminal --working-directory hello-world-v2
 ```
 
-To make things clearer, this time we will send HTTP requests at a rate of only 1 request/sec, rather than trying to send as many requests as we can.
+To make things clearer, this time we will send HTTP requests at a rate of only 1 request/sec.
 
 ```terminal:execute
 command: bombardier -d 120s -c 1 -r 1 http://localhost:8000
@@ -50,7 +50,7 @@ What you would think you should see is a response time of about 0.05 seconds, bu
 
 The reason this is the case is that when `yield` is used and the function turned into a generator, the time being recorded is that needed to create the generator object and return it. The decorator as written isn't going to record the time taken to execute the body of the function, nor the time taken to consume everything yielded up by the generator.
 
-As a consequence, for WSGI applications you cannot use a normal decorator to time how long it takes to handle HTTP requests. Instead, we need to use a wrapper implementation that handles the fact that the WSGI application could be implemented as a generator, or any other type of iterable object, and which works with the WSGI application protocol specification for closing out a request.
+As a consequence, for WSGI applications you cannot use a normal decorator to time how long it takes to handle HTTP requests. Instead, we need to use a wrapper implementation that handles the fact that the WSGI application could be implemented as a generator, or any other type of iterable object, and which makes use of the mechanism defined by the WSGI application protocol specification to indicate when a request is complete.
 
 Stop `bombardier` if it is still running, as well as the WSGI application.
 

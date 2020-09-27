@@ -36,7 +36,7 @@ To test the decorator does what is required, start up the WSGI application:
 command: mod_wsgi-express start-server hello-world-v3/wsgi_1.py --log-to-terminal --working-directory hello-world-v3
 ```
 
-and send through a stream of requests.
+and send through a stream of requests at the rate of 1 request/sec again.
 
 ```terminal:execute
 command: bombardier -d 120s -c 1 -r 1 http://localhost:8000
@@ -71,10 +71,10 @@ Start up the WSGI application:
 command: mod_wsgi-express start-server hello-world-v3/wsgi_2.py --log-to-terminal --working-directory hello-world-v3
 ```
 
-and send through a much higher request load once more.
+and send through the original request load once more.
 
 ```terminal:execute
-command: bombardier -d 120s -c 5 http://localhost:8000
+command: bombardier -d 120s -c 3 -r 250 http://localhost:8000
 session: 2
 ```
 
@@ -85,17 +85,17 @@ name: Grafana
 url: {{ingress_protocol}}://{{session_namespace}}-grafana.{{ingress_domain}}{{ingress_port_suffix}}/d/raw-requests?orgId=1&refresh=5s
 ```
 
-We are still getting our results, but although the response time has dropped because of the delay being removed, you may notice that the measured response time isn't a small as when using the original timing decorator.
+The metrics are still coming through, but although the response time has dropped because of the delay being removed, you may notice that the measured response time isn't a small as when using the original timing decorator.
 
 ![](hello-world-v3-2-raw-requests.png)
 
 The reason for this is that in order to properly capture the response time, as well as deal with any exceptions that may occur, the decorator and wrapper for the result returned by the WSGI application are somewhat more complicated.
 
-This highlights an important consideration when instrumenting web applications to collect metrics. That is that the instrumentation will itself add its own overheads and can affect the response times for your application.
+This highlights an important consideration when instrumenting web applications to collect metrics. That is that the instrumentation will itself add its own overheads and can affect the response times for your application where they are very small to begin with.
 
 In order to ensure that any instrumentation doesn't add overheads that outweigh the gains of having visibility into what is occuring in your application and the web server, how they are applied and how they are implemented needs to be considered very carefully.
 
-The increased response time seen with this decorator and wrapper is one example and we will revisit the issue later, but perhaps not obvious at all right now is the significant performance degradation which is going on due to how we are reporting the metrics back to InfluxDB.
+Probably not obvious at all right now is how significant the performance degradation is due to the way we are currently reporting the metrics back to InfluxDB.
 
 We are done with this test, so stop `bombardier` if it is still running, as well as the WSGI application.
 
