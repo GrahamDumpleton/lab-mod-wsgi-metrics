@@ -4,7 +4,7 @@ modules:
     activate:
     - workshop-overview
     - setup-environment
-    - exercises/01-install-mod-wsgi
+    - exercises/01-installing-mod-wsgi
     - exercises/02-testing-mod-wsgi
     - exercises/03-timing-decorator
     - exercises/04-python-generators

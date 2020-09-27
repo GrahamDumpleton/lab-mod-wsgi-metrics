@@ -35,3 +35,9 @@ We also need a number of other Python packages for the examples we will be runni
 ```terminal:execute
 command: pip3 install -r requirements.txt
 ```
+
+Although we will mainly be reporting metrics information directly from the WSGI applications, to get an overall idea of how much memory and CPU processes are using when we are running tests, we are also going to run a background task to report metrics for these. To start this, run:
+
+```terminal:execute
+command: supervisorctl start metrics
+```

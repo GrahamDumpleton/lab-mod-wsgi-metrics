@@ -1,0 +1,3 @@
+#!/bin/bash
+
+exec python $HOME/exercises/grafana/process-info.py
