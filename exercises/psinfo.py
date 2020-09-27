@@ -111,7 +111,7 @@ def collector():
 
         # Waiting for next schedule time to report metrics.
 
-        time.sleep(next_time - now)
+        time.sleep(max(0, next_time - now))
 
         # If we get to here it means the process is being shutdown
         # so we report any metrics that haven't been sent.
