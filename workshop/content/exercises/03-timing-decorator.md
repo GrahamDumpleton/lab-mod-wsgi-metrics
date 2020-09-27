@@ -63,7 +63,7 @@ As the charts fill out, you should see something similar to what is shown by the
 
 ![](hello-world-v2-1-raw-requests.png)
 
-The actual numbers you see for throughput and response time may be somewhat different. This is because what you get can depend on the specific computer it is run on, how powerful the CPU is, and what resources are available.
+The actual numbers you see for throughput and response time may be somewhat different. This is because what you get can depend on the specific computer it is run on, how powerful the CPU is, and what resources are available. Keep this in mind as you go through the workshop. You will need to compare your own results for each test relative to each other rather than expect them to be the same as what is shown here in the workshop instructions.
 
 This is the first trap of performing benchmarking of web applications. The results you get on one system doesn't mean that is how it will perform on another.
 
