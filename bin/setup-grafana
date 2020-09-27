@@ -2,10 +2,10 @@
 
 set -x
 
-curl -H "Content-Type: application/json" --user admin:admin --data @grafana/datasource.json http://{{session_namespace}}-grafana:3000/api/datasources
+curl -H "Content-Type: application/json" --user admin:admin --data @grafana/datasource.json http://$SESSION_NAMESPACE-grafana:3000/api/datasources
 
-curl -H "Content-Type: application/json" --user admin:admin --data @grafana/raw-requests.json http://{{session_namespace}}-grafana:3000/api/dashboards/db
+curl -H "Content-Type: application/json" --user admin:admin --data @grafana/raw-requests.json http://$SESSION_NAMESPACE-grafana:3000/api/dashboards/db
 
-curl -H "Content-Type: application/json" --user admin:admin --data @grafana/request-metrics.json http://{{session_namespace}}-grafana:3000/api/dashboards/db
+curl -H "Content-Type: application/json" --user admin:admin --data @grafana/request-metrics.json http://$SESSION_NAMESPACE-grafana:3000/api/dashboards/db
 
-curl -H "Content-Type: application/json" --user admin:admin --data @grafana/process-info.json http://{{session_namespace}}-grafana:3000/api/dashboards/db
+curl -H "Content-Type: application/json" --user admin:admin --data @grafana/process-info.json http://$SESSION_NAMESPACE-grafana:3000/api/dashboards/db
