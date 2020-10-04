@@ -53,6 +53,7 @@ def report_metrics():
                 "request_throughput": metrics["request_throughput"],
                 "capacity_utilization": metrics["capacity_utilization"],
                 "server_time": metrics["server_time"],
+                "queue_time": metrics["queue_time"],
                 "application_time": metrics["application_time"],
                 "cpu_user_time": metrics["cpu_user_time"],
                 "cpu_system_time": metrics["cpu_system_time"],
@@ -73,9 +74,10 @@ def report_metrics():
     # a total of 16 buckets.
 
     server_time_buckets = metrics["server_time_buckets"]
+    queue_time_buckets = metrics["queue_time_buckets"]
     application_time_buckets = metrics["application_time_buckets"]
 
-    def add_bucket(threshold, server_count, application_count):
+    def add_bucket_1(threshold, server_count, queue_count, application_count):
         data_points.append(
             {
                 "measurement": "request-metrics",
@@ -87,6 +89,7 @@ def report_metrics():
                 },
                 "fields": {
                     "server_time_bucket": server_count,
+                    "queue_time_bucket": queue_count,
                     "application_time_bucket": application_count
                 }
             }
@@ -95,10 +98,31 @@ def report_metrics():
     threshold = 0.0
 
     for i in range(len(server_time_buckets)-1):
-        add_bucket(threshold, server_time_buckets[i], application_time_buckets[i])
+        add_bucket_1(threshold, server_time_buckets[i], queue_time_buckets[i], application_time_buckets[i])
         threshold = (threshold * 2) or 0.005
 
-    add_bucket(float("inf"), server_time_buckets[-1], application_time_buckets[-1])
+    add_bucket_1(float("inf"), server_time_buckets[-1], queue_time_buckets[-1], application_time_buckets[-1])
+
+    request_threads_buckets = metrics["request_threads_buckets"]
+
+    def add_bucket_2(thread_id, request_count):
+        data_points.append(
+            {
+                "measurement": "request-metrics",
+                "time": stop_time,
+                "tags": {
+                    "hostname": hostname,
+                    "process": process,
+                    "thread_id": thread_id,
+                },
+                "fields": {
+                    "request_threads_bucket": request_count
+                }
+            }
+        )
+
+    for i, value in enumerate(sorted(request_threads_buckets, reverse=True)):
+        add_bucket_2(i+1, value)
 
     # Write the metrics to InfluxDB.
 
