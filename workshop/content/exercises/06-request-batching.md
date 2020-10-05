@@ -33,9 +33,11 @@ command: mod_wsgi-express start-server hello-world-v4/wsgi.py --log-to-terminal 
 and run `bomardier` to generate the requests against it.
 
 ```terminal:execute
-command: bombardier -d 120s -c 3 -r 250 http://localhost:8000
+command: bombardier -d 120s -c 3 http://localhost:8000
 session: 2
 ```
+
+Note that we have removed the cap on the maximum rate at which requests can be sent for this test.
 
 Head back to the **Raw Requests** dashboard in Grafana.
 
@@ -44,11 +46,11 @@ name: Grafana
 url: {{ingress_protocol}}://{{session_namespace}}-grafana.{{ingress_domain}}{{ingress_port_suffix}}/d/raw-requests?orgId=1&refresh=5s
 ```
 
-This time you should see that the throughput achieved is significantly more. This is because of the reduction in overhead by batching up metrics and only sending them periodically.
+You should see that the throughput achieved is more. Although we did remove the cap on the maximum rate at which requests could be sent this isn't the reason. The increase is due to the reduction in overhead by batching up metrics and only sending them periodically.
 
 ![](hello-world-v4-raw-requests.png)
 
-You will also see that the response time is improved, however, it isn't all good news.
+The response time in this test is also improved, however, it isn't all good news.
 
 The problem now is that due to the larger number of requests, we get a big spike in the response time coinciding with when the metrics are being reported to InfluxDB.
 
@@ -61,7 +63,7 @@ Before we continue, kill `bombardier` if it is still running, as well as the WSG
 
 When using the Python InfluxDB client you can provide metrics in two forms. The first is a list of dictionaries, where each dictionary records one data point.
 
-It turns out that when the Python client goes on to process a list in this form, it is very inefficient at doing it. This is because when presented data in this form it will convert the whole list to a JSON string and then send it.
+It turns out that when the Python InfluxDB client goes on to process a list in this form, it is very inefficient at doing it. This is because when presented data in this form it will convert the whole list to a JSON string and then send it.
 
 The way to avoid this overhead as [recommended by InfluxDB](https://www.influxdata.com/blog/writing-data-to-influxdb-with-python/) is to use the second form for passing metrics to the Python InfluxDB client. This is called the InfluxDB line protocol.
 
@@ -90,7 +92,7 @@ command: mod_wsgi-express start-server hello-world-v5/wsgi.py --log-to-terminal 
 Send through the requests:
 
 ```terminal:execute
-command: bombardier -d 120s -c 3 -r 250 http://localhost:8000
+command: bombardier -d 120s -c 3 http://localhost:8000
 session: 2
 ```
 

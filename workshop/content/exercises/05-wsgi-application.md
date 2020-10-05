@@ -74,7 +74,7 @@ command: mod_wsgi-express start-server hello-world-v3/wsgi_2.py --log-to-termina
 and send through the original request load once more.
 
 ```terminal:execute
-command: bombardier -d 120s -c 3 -r 250 http://localhost:8000
+command: bombardier -d 120s -c 3 -r 500 http://localhost:8000
 session: 2
 ```
 
@@ -120,7 +120,7 @@ command: mod_wsgi-express start-server hello-world-v1/wsgi.py --log-to-terminal 
 Start up `bombardier` again:
 
 ```terminal:execute
-command: bombardier -d 120s -c 3 -r 250 http://localhost:8000
+command: bombardier -d 120s -c 3 -r 500 http://localhost:8000
 session: 2
 ```
 
@@ -131,7 +131,7 @@ name: Grafana
 url: {{ingress_protocol}}://{{session_namespace}}-grafana.{{ingress_domain}}{{ingress_port_suffix}}/d/process-info?orgId=1&refresh=5s
 ```
 
-Tt should be pretty obvious from this that without any instrumentation the amount of CPU resources consumed by the WSGI application was much less.
+It should be pretty obvious from this that without any instrumentation the amount of CPU resources consumed by the WSGI application was much less.
 
 ![](hello-world-v1-process-info.png)
 
