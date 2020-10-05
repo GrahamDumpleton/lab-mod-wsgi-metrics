@@ -33,7 +33,7 @@ command: mod_wsgi-express start-server hello-world-v4/wsgi.py --log-to-terminal 
 and run `bomardier` to generate the requests against it.
 
 ```terminal:execute
-command: bombardier -d 120s -c 3 http://localhost:8000
+command: bombardier -d 180s -c 3 http://localhost:8000
 session: 2
 ```
 
@@ -49,8 +49,6 @@ url: {{ingress_protocol}}://{{session_namespace}}-grafana.{{ingress_domain}}{{in
 You should see that the throughput achieved is more. Although we did remove the cap on the maximum rate at which requests could be sent this isn't the reason. The increase is due to the reduction in overhead by batching up metrics and only sending them periodically.
 
 ![](hello-world-v4-raw-requests.png)
-
-The response time in this test is also improved, however, it isn't all good news.
 
 The problem now is that due to the larger number of requests, we get a big spike in the response time coinciding with when the metrics are being reported to InfluxDB.
 
@@ -92,7 +90,7 @@ command: mod_wsgi-express start-server hello-world-v5/wsgi.py --log-to-terminal 
 Send through the requests:
 
 ```terminal:execute
-command: bombardier -d 120s -c 3 http://localhost:8000
+command: bombardier -d 180s -c 3 http://localhost:8000
 session: 2
 ```
 

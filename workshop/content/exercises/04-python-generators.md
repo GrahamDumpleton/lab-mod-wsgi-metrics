@@ -33,7 +33,7 @@ command: mod_wsgi-express start-server hello-world-v2/wsgi_2.py --log-to-termina
 To make things clearer, this time we will send HTTP requests at a rate of only 1 request/sec.
 
 ```terminal:execute
-command: bombardier -d 120s -c 1 -r 1 http://localhost:8000
+command: bombardier -d 180s -c 1 -r 1 http://localhost:8000
 session: 2
 ```
 

@@ -39,7 +39,7 @@ command: mod_wsgi-express start-server hello-world-v3/wsgi_1.py --log-to-termina
 and send through a stream of requests at the rate of 1 request/sec again.
 
 ```terminal:execute
-command: bombardier -d 120s -c 1 -r 1 http://localhost:8000
+command: bombardier -d 180s -c 1 -r 1 http://localhost:8000
 session: 2
 ```
 
@@ -74,7 +74,7 @@ command: mod_wsgi-express start-server hello-world-v3/wsgi_2.py --log-to-termina
 and send through the original request load once more.
 
 ```terminal:execute
-command: bombardier -d 120s -c 3 -r 500 http://localhost:8000
+command: bombardier -d 180s -c 3 -r 500 http://localhost:8000
 session: 2
 ```
 
@@ -91,7 +91,7 @@ The metrics are still coming through, but although the response time has dropped
 
 The reason for this is that in order to properly capture the response time, as well as deal with any exceptions that may occur, the decorator and wrapper for the result returned by the WSGI application are somewhat more complicated.
 
-This highlights an important consideration when instrumenting web applications to collect metrics. That is that the instrumentation will itself add its own overheads and can affect the response times for your application where they are very small to begin with.
+This highlights an important consideration when instrumenting web applications to collect metrics. That is that the instrumentation will itself add its own overheads, and can affect the response times for your application when they are very small to begin with.
 
 Overheads can come from a couple of sources. The first is the additional CPU load from collecting the metrics. You can check out the CPU load in this case using the **Process Info** dashboard in Grafana.
 
@@ -120,7 +120,7 @@ command: mod_wsgi-express start-server hello-world-v1/wsgi.py --log-to-terminal 
 Start up `bombardier` again:
 
 ```terminal:execute
-command: bombardier -d 120s -c 3 -r 500 http://localhost:8000
+command: bombardier -d 180s -c 3 -r 500 http://localhost:8000
 session: 2
 ```
 

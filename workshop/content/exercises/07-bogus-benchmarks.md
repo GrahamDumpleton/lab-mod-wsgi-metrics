@@ -9,7 +9,7 @@ command: gunicorn --pythonpath hello-world-v5 wsgi
 Generate the HTTP traffic using `bombardier`:
 
 ```terminal:execute
-command: bombardier -d 120s -c 3 http://localhost:8000
+command: bombardier -d 180s -c 3 http://localhost:8000
 session: 2
 ```
 
@@ -26,9 +26,9 @@ As before with `mod_wsgi`, you will see the metrics for the requests being recei
 
 ![](hello-world-v5-2-raw-requests.png)
 
-Compare the results against what we got for `mod_wsgi` and you may at this point be thinking why I am bothering even considering using `mod_wsgi`, as `gunicorn` is showing better performance.
+Compare the results against what we got for `mod_wsgi` and you may at this point be thinking why you would consider using `mod_wsgi`, as `gunicorn` is likely showing slightly better performance.
 
-Before you abandon working your way through this workshop, this is where you need to realise that pretty well all benchmarks you might find comparing Python WSGI servers are bogus for one reason or another.
+Before you abandon this workshop and `mod_wsgi`, this is where you need to realise that pretty well all benchmarks you might find comparing Python WSGI servers are bogus for one reason or another.
 
 The problem with running benchmarks comparing Python WSGI servers is ensuring that you are doing a like for like comparison, and where you use the default options a WSGI server uses, that isn't going to happen.
 
@@ -48,7 +48,7 @@ command: mod_wsgi-express start-server hello-world-v5/wsgi.py --log-to-terminal 
 Start up `bombardier` to generate the requests:
 
 ```terminal:execute
-command: bombardier -d 120s -c 3 http://localhost:8000
+command: bombardier -d 180s -c 3 http://localhost:8000
 session: 2
 ```
 
@@ -83,7 +83,7 @@ command: mod_wsgi-express start-server hello-world-v5/wsgi.py --log-to-terminal 
 Start up `bombardier` to generate the requests:
 
 ```terminal:execute
-command: bombardier -d 120s -c 3 http://localhost:8000
+command: bombardier -d 180s -c 3 http://localhost:8000
 session: 2
 ```
 
@@ -94,9 +94,11 @@ name: Grafana
 url: {{ingress_protocol}}://{{session_namespace}}-grafana.{{ingress_domain}}{{ingress_port_suffix}}/d/raw-requests?orgId=1&refresh=5s
 ```
 
-The performance from `mod_wsgi` with this configuration is quite a bit better than `gunicorn`.
+The performance from `mod_wsgi` with this configuration is quite a bit better than `gunicorn`. Do keep in mind though that when using `gunicorn` it is actually recommended you place it behind an `nginx` proxy. This extra layer will mean that overall `gunicorn` performance could be worse than what we got here. For `mod_wsgi` you don't need an additional proxy in front, as Apache already provides the isolation required that `nginx` is recommended for when using `gunicorn`.
 
-Although this mode provides much better performance, you should only use it when you have a need for it, as you do loose various builtin protections that daemon mode provides. You also still need to ensure you tune the configuration correctly for your WSGI application else you could end up with worse performance.
+![](hello-world-v5-4-raw-requests.png)
+
+Now, although embedded mode provides much better performance, you should only use it when you have a need for it, as you do loose various builtin protections that daemon mode provides. You also still need to ensure you tune the configuration correctly for your WSGI application else you could end up with worse performance.
 
 Overall the aim of the defaults for `mod_wsgi-express` and daemon mode is to provide an out of the box configuration more suitable to a typical Python web application implemented using one of the many high level Python web frameworks, talking to a backend database for site data storage. It defaults to using multithreading to handle concurrent requests, rather than processes, thus keeping memory usage down.
 
@@ -108,7 +110,7 @@ So ignore Python benchmarks, including the one used to demonstrate the point abo
 
 In order to handle concurrent requests at the same time on the same machine, you are going to have to scale up either the number of processes or threads, but which way you scale things will depend on the balance your application has between being CPU bound and I/O bound, and how much CPU and memory resources you have. Beyond a certain point you will have no choice but to start scaling across multiple hosts and it will not be possible to do everything with a single host.
 
-Even then it isn't that simple though, as your web application isn't going to respond to the one specific HTTP request all the time. The profile of different HTTP requests you handle can vary quite significantly, and trying to handle them all in the one Python WSGI server can be detrimental to the overall server performance. Often it is better to use multiple distinct instances of the Python WGSI server, each configured differently, and proxy HTTP requests with a specific runtime profile to a WSGI server with matching configuration.
+Even then it isn't that simple though, as your web application isn't going to respond to the one specific HTTP request all the time. The profile of different HTTP requests you handle can vary quite significantly, and trying to handle them all in the one Python WSGI server can be detrimental to the overall server performance. Often it is better to use multiple distinct instances of the Python WSGI server, each configured differently, and proxy HTTP requests with a specific runtime profile to a WSGI server with matching configuration.
 
 Understanding all this is where instrumenting your WSGI application and extracting metrics is so important. So definitely use metrics to evaluate the performance of your real Python web application, but don't waste your time using them with a hello world application in order to evaluate different Python WSGI servers as it is usually not going to yield anything useful later on for when you deploy your actual application.
 

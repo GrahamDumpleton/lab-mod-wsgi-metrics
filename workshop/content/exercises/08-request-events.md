@@ -51,7 +51,7 @@ command: mod_wsgi-express start-server hello-world-v6/wsgi.py --log-to-terminal 
 Once more start sending the requests through to the WSGI application:
 
 ```terminal:execute
-command: bombardier -d 120s -c 5 http://localhost:8000
+command: bombardier -d 180s -c 3 http://localhost:8000
 session: 2
 ```
 
@@ -62,7 +62,7 @@ name: Grafana
 url: {{ingress_protocol}}://{{session_namespace}}-grafana.{{ingress_domain}}{{ingress_port_suffix}}/d/raw-requests?orgId=1&refresh=5s
 ```
 
-What you see for throughput should be more or less the same as what we got when using the decorator. You may see a bit of an increase in the response time, which is because of the extra work being done to execute the event callback for the range of events generated for a request. This extra overhead is still going to be insignifcant in the context of a real web application, being in the order of tens of microseconds, albeit that does depend on what you may do with the events. In this case the only event we did anything with was that indicating the request had finished.
+What you see for throughput should be more or less the same as what we got when using the WSGI application decorator.
 
 Later on in the workshop we will delve more into what can be done with the events generated for requests and the extra information available included with them about each request. Before we get to that though, we are going to look at a completely different way of generating the request metrics from `mod_wsgi`.
 
