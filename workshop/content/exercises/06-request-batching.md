@@ -105,6 +105,17 @@ You will see that throughput has increased again, and the response time is also 
 
 ![](hello-world-v5-1-raw-requests.png)
 
+If you view the **Process Info** dashboard in Grafana:
+
+```dashboard:reload-dashboard
+name: Grafana
+url: {{ingress_protocol}}://{{session_namespace}}-grafana.{{ingress_domain}}{{ingress_port_suffix}}/d/process-info?orgId=1&refresh=5s
+```
+
+you will also see that the amount of CPU take by the WSGI application has dropped. This is because of the lower overhead of collecting the metrics.
+
+![](hello-world-v5-1-process-info.png)
+
 We therefore appear to now have suitable code for instrumenting our WSGI application.
 
 Stop `bombardier` if it is still running, as well as the WSGI application.

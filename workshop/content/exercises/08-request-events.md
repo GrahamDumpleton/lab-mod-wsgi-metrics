@@ -27,19 +27,6 @@ text: "mod_wsgi.subscribe_events(event_handler)"
 file: ~/exercises/hello-world-v6/metrics.py
 ```
 
-As you can see, the complete decorator and wrapper for the result returned by the WSGI application has effectively been replaced by the following code, which greatly simplifies the task of capturing metrics for the requests.
-
-```
-def event_handler(name, **kwargs):
-    if name == 'request_finished':
-        stop_time = timedelta(seconds=kwargs["application_finish"])
-        duration = kwargs["application_time"]
-
-        record_metric(stop_time, duration)
-
-mod_wsgi.subscribe_events(event_handler)
-```
-
 As we still need to report the metrics, we still have the background task which periodically sends the accumulated metrics to InfluxDB.
 
 To verify that this version still produces the same results, run the WSGI application. We will return to using the original default configuration.
