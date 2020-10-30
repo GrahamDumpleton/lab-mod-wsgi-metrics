@@ -22,7 +22,7 @@ url: {{ingress_protocol}}://{{session_namespace}}-grafana.{{ingress_domain}}{{in
 
 As before with `mod_wsgi`, you will see the metrics for the requests being received.
 
-> NOTE: If you find the results for `gunicorn` are really poor or inconsistent, kill `bomardier` and run it again with the same command. For reasons unknown it seems `gunicorn` can become starved of CPU when run in a container with another CPU hogging process. They don't just equally share the CPU, instead `gunicorn` will enter a state where it just doesn't get to run as much. This can go on for some time, but then `gunicorn` will wake up and run okay for a while, but eventually seems to drop off again. Thus request throughput can be very inconsistent and isn't able to achieve its best throughput all the time. Explanations as to why this occurs are most welcome.
+> NOTE: You may find results for `gunicorn` are really poor or inconsistent. For reasons unknown it seems `gunicorn` can become starved of CPU when run in a container with another CPU hogging process. They don't just equally share the CPU, instead `gunicorn` will enter a state where it just doesn't get to run as much. This can go on for some time, but then `gunicorn` will wake up and run okay for a while, but eventually seems to drop off again. Thus request throughput can be very inconsistent and isn't able to achieve its best throughput all the time. Explanations as to why this occurs are most welcome. The issue does highlight though how running your benchmarking tool within the same host as the application you are testing is generally never a good idea. When you overload your application, and the CPU of the host, many strange things can happen.
 
 ![](hello-world-v5-2-raw-requests.png)
 
