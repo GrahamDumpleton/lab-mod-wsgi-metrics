@@ -11,7 +11,7 @@ command: mod_wsgi-express start-server hello-world-v7/wsgi.py --log-to-terminal 
 ```
 
 ```terminal:execute
-command: bombardier -d 300s -c 5 http://localhost:8000
+command: bombardier -d 300s -c 3 http://localhost:8000
 session: 2
 ```
 
@@ -28,7 +28,7 @@ command: mod_wsgi-express start-server hello-world-v7/wsgi.py --log-to-terminal 
 ```
 
 ```terminal:execute
-command: bombardier -d 300s -c 5 http://localhost:8000
+command: bombardier -d 300s -3 5 http://localhost:8000
 session: 2
 ```
 
