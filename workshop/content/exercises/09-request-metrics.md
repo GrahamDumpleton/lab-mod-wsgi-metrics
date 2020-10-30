@@ -2,12 +2,16 @@
 file: ~/exercises/hello-world-v7/wsgi.py
 ```
 
+```editor:open-file
+file: ~/exercises/hello-world-v7/metrics.py
+```
+
 ```terminal:execute
 command: mod_wsgi-express start-server hello-world-v7/wsgi.py --log-to-terminal --working-directory hello-world-v7
 ```
 
 ```terminal:execute
-command: bombardier -d 120s -c 5 http://localhost:8000
+command: bombardier -d 300s -c 5 http://localhost:8000
 session: 2
 ```
 
