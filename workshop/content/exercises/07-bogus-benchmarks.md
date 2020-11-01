@@ -42,7 +42,7 @@ Kill off `bombardier` if it is still running, as well as the WSGI application.
 To illustrate how important the configuration is, let's re-run `mod_wsgi-express` but with a similar configuration to `gunicorn`, which targets the same sort of application profile.
 
 ```terminal:execute
-command: mod_wsgi-express start-server hello-world-v5/wsgi.py --log-to-terminal --working-directory hello-world-v5 --processes=1 --threads=1
+command: mod_wsgi-express start-server hello-world-v5/wsgi.py --log-to-terminal --working-directory hello-world-v5 --processes=1 --threads=1 --disable-reloading --queue-timeout=0
 ```
 
 Start up `bombardier` to generate the requests:
