@@ -41,31 +41,36 @@ def report_metrics():
 
     # Create a record for InfluxDB of the primary metrics.
 
-    data_points.append(
-        {
-            "measurement": "request-metrics",
-            "time": stop_time,
-            "tags": {
-                "hostname": hostname,
-                "process": process
-            },
-            "fields": {
-                "request_throughput": metrics["request_throughput"],
-                "capacity_utilization": metrics["capacity_utilization"],
-                "server_time": metrics["server_time"],
-                "queue_time": metrics["queue_time"],
-                "daemon_time": metrics["daemon_time"],
-                "application_time": metrics["application_time"],
-                "cpu_user_time": metrics["cpu_user_time"],
-                "cpu_system_time": metrics["cpu_system_time"],
-                "memory_max_rss": metrics["memory_max_rss"],
-                "memory_rss": metrics["memory_rss"],
-                "request_threads_maximum": metrics["request_threads_maximum"],
-                "request_threads_started": metrics["request_threads_started"],
-                "request_threads_active": metrics["request_threads_active"]
-            }
+    measurement = {
+        "measurement": "request-metrics",
+        "time": stop_time,
+        "tags": {
+            "hostname": hostname,
+            "process": process
+        },
+        "fields": {
+            "request_throughput": metrics["request_throughput"],
+            "capacity_utilization": metrics["capacity_utilization"],
+            "server_time": metrics["server_time"],
+
+            "application_time": metrics["application_time"],
+            "cpu_user_time": metrics["cpu_user_time"],
+            "cpu_system_time": metrics["cpu_system_time"],
+            "memory_max_rss": metrics["memory_max_rss"],
+            "memory_rss": metrics["memory_rss"],
+            "request_threads_maximum": metrics["request_threads_maximum"],
+            "request_threads_started": metrics["request_threads_started"],
+            "request_threads_active": metrics["request_threads_active"]
         }
-    )
+    }
+
+    if metrics["queue_time"] is not None:
+        measurement["fields"]["queue_time"] = metrics["queue_time"]
+
+    if metrics["daemon_time"] is not None:
+        measurement["fields"]["daemon_time"] = metrics["daemon_time"]
+
+    data_points.append(measurement)
 
     # Now record special bucketed metrics corresponding to the spread
     # of response times. The first bucket is for 0 to 0.005 seconds.
