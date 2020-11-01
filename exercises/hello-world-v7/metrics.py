@@ -52,7 +52,6 @@ def report_metrics():
             "request_throughput": metrics["request_throughput"],
             "capacity_utilization": metrics["capacity_utilization"],
             "server_time": metrics["server_time"],
-
             "application_time": metrics["application_time"],
             "cpu_user_time": metrics["cpu_user_time"],
             "cpu_system_time": metrics["cpu_system_time"],
