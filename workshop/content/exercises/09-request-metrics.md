@@ -41,11 +41,11 @@ url: {{ingress_protocol}}://{{session_namespace}}-grafana.{{ingress_domain}}{{in
 ```
 
 ```terminal:execute
-command: mod_wsgi-express start-server hello-world-v7/wsgi.py --log-to-terminal --working-directory hello-world-v7 --processes=2 --threads=2 --embedded-mode
+command: mod_wsgi-express start-server hello-world-v7/wsgi.py --log-to-terminal --working-directory hello-world-v7 --processes=1 --threads=1 --embedded-mode
 ```
 
 ```terminal:execute
-command: bombardier -d 300s -c 5 http://localhost:8000
+command: bombardier -d 300s -c 3 http://localhost:8000
 session: 2
 ```
 
