@@ -24,7 +24,7 @@ url: {{ingress_protocol}}://{{session_namespace}}-grafana.{{ingress_domain}}{{in
 ```
 
 ```terminal:execute
-command: mod_wsgi-express start-server hello-world-v7/wsgi.py --log-to-terminal --working-directory hello-world-v7 --processes=2 --threads=1 --embedded-mode
+command: mod_wsgi-express start-server hello-world-v7/wsgi.py --log-to-terminal --working-directory hello-world-v7 --processes=2 --threads=2 --embedded-mode
 ```
 
 ```terminal:execute
