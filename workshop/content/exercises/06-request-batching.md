@@ -116,8 +116,6 @@ you will also see that the amount of CPU taken by the WSGI application has dropp
 
 ![](hello-world-v5-1-process-info.png)
 
-We therefore appear to now have suitable code for instrumenting our WSGI application.
-
 Stop `bombardier` if it is still running, as well as the WSGI application.
 
 ```terminal:interrupt-all

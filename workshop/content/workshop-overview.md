@@ -1,4 +1,4 @@
-This workshop explores generating metrics from mod_wsgi and how you might use metrics as input to decisions around tuning Apache and mod_wsgi.
+This workshop explores collecting metrics from mod_wsgi and how you might use metrics as input to decisions around tuning Apache and mod_wsgi.
 
 As a whole, the workshop is still very much a work in progress and there are many more topics which will eventually be covered. Completion of the workshop may take some time. If you have any feedback about the workshop then you can direct them to [@GrahamDumpleton](https://twitter.com/GrahamDumpleton) on Twitter.
 

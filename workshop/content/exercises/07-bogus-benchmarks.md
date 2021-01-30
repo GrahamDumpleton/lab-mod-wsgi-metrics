@@ -1,45 +1,36 @@
-To illustrate that the approach to instrumenting a WSGI application isn't only suitable for `mod_wsgi`, let's try it with `gunicorn` instead.
+The code used here to instrument the WSGI application should work with any compliant WSGI server, including in production deployments.
 
-Start up the WSGI application, but this time using `gunicorn` instead of `mod_wsgi-express`.
+In addition to using it to monitor your production applications, it can be used to help evaluate the suitability of different WSGI servers, or particular WSGI server configurations.
+
+On this latter point a word of warning. If you are going to try and compare the performance of different WSGI servers, it is not enough to blindly run each with their default configurations and a simple WSGI hello world application as the default configurations of the mainstream WSGI servers are set up with quite different goals in mind. A consequence of using the default configurations is that you can get misleading results which are completely bogus as far as helping to evaluate the suitability of the WSGI server for your specific WSGI application.
+
+To illustrate this, let's try a number of custom configurations for `mod_wsgi-express`, rather than using its default.
+
+First up, rather than using the default configuration of a single process with 5 threads for handling requests that ``mod_wsgi-express`` uses, wind back the number of threads to just 1. This brings `mod_wsgi-express` closer to what other WSGI servers such as `gunicorn` and `uWSGI` use as their default.
 
 ```terminal:execute
-command: gunicorn --pythonpath hello-world-v5 wsgi
+command: mod_wsgi-express start-server hello-world-v5/wsgi.py --log-to-terminal --working-directory hello-world-v5 --processes=1 --threads=1
 ```
 
-Generate the HTTP traffic using `bombardier`:
+Start up `bombardier` to generate the requests:
 
 ```terminal:execute
 command: bombardier -d 180s -c 3 http://localhost:8000
 session: 2
 ```
 
-and switch to the **Raw Requests** dashboard in Grafana.
+Bring up the **Raw Requests** dashboard in Grafana.
 
 ```dashboard:reload-dashboard
 name: Grafana
 url: {{ingress_protocol}}://{{session_namespace}}-grafana.{{ingress_domain}}{{ingress_port_suffix}}/d/raw-requests?orgId=1&refresh=5s
 ```
 
-As before with `mod_wsgi`, you will see the metrics for the requests being received.
-
-> NOTE: You may find results for `gunicorn` are really poor or inconsistent. For reasons unknown it seems `gunicorn` can become starved of CPU when run in a container with another CPU hogging process. They don't just equally share the CPU, instead `gunicorn` will enter a state where it just doesn't get to run as much. This can go on for some time, but then `gunicorn` will wake up and run okay for a while, but eventually seems to drop off again. Thus request throughput can be very inconsistent and isn't able to achieve its best throughput all the time. Explanations as to why this occurs are most welcome. The issue does highlight though how running your benchmarking tool within the same host as the application you are testing is generally never a good idea. When you overload your application, and the CPU of the host, many strange things can happen.
+You should see that the results for `mod_wsgi-express` express have improved. This is because the high CPU requirement of a WSGI hello world application means that a single thread process will perform better than if it is multithreaded. This is a consequence of how the global interpeter lock (GIL) in Python affects multithreaded applications. The nature of the impacts is such that performance better even though the notional capacity of the WSGI server was reduced.
 
 ![](hello-world-v5-2-raw-requests.png)
 
-Compare the results against what we got for `mod_wsgi` and you may at this point be thinking why you would consider using `mod_wsgi`, as `gunicorn` is likely showing slightly better performance.
-
-Before you abandon this workshop and `mod_wsgi`, this is where you need to realise that pretty well all benchmarks you might find comparing Python WSGI servers are bogus for one reason or another.
-
-The problem with running benchmarks comparing Python WSGI servers is ensuring that you are doing a like for like comparison, and where you use the default options a WSGI server uses, that isn't going to happen.
-
-In the case of `gunicorn`, it defaults to a single process, where that single process is only capable of handling one request at a time. This may be fine for a CPU bound application with very small response times, and will get you quite far even with only a single process, but it isn't a realistic configuration for what you would need for a typical production web site using Python.
-
-Kill off `bombardier` if it is still running, as well as the WSGI application.
-
-```terminal:interrupt-all
-```
-
-To illustrate how important the configuration is, let's re-run `mod_wsgi-express` but with a similar configuration to `gunicorn`, which targets the same sort of application profile.
+Next we can start tweaking the configuration by disabling some features, which although they make the WSGI server more durable to application issues, can affect performance. The first feature to disable is automatic process reloading when the WSGI application script file is modified, and the second is disabling the queue timeout used to fail requests when they have been waiting too long to be handled. The latter feature is enabled by default as a way to try and help a WSGI server recover automatically when it is temporarily overloaded, instead of request getting backed up for an extended time, or a full server restart being required.
 
 ```terminal:execute
 command: mod_wsgi-express start-server hello-world-v5/wsgi.py --log-to-terminal --working-directory hello-world-v5 --processes=1 --threads=1 --disable-reloading --queue-timeout=0
@@ -59,11 +50,9 @@ name: Grafana
 url: {{ingress_protocol}}://{{session_namespace}}-grafana.{{ingress_domain}}{{ingress_port_suffix}}/d/raw-requests?orgId=1&refresh=5s
 ```
 
-This time you will see that the results are in the favour of `mod_wsgi` over `gunicorn`.
+A minor performance improvement should again be evident.
 
 ![](hello-world-v5-3-raw-requests.png)
-
-The reason for the difference is that the default configuration used by `mod_wsgi-express` favours a WSGI application which has a bias to being I/O bound rather than CPU bound. As such, the default configuration for `mod_wsgi-express` is a single process with five threads for handling requests.
 
 We aren't done yet though, as `mod_wsgi-express` will use daemon mode of `mod_wsgi` by default. In this mode the WSGI application runs in separate processes to the Apache worker processes and requests have to be proxied from the Apache worker processes through to the WSGI application processes.
 
