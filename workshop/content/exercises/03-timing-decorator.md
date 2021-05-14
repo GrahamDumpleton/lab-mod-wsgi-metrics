@@ -43,6 +43,7 @@ To test the WSGI application with the decorator applied for collecting metrics, 
 
 ```terminal:execute
 command: mod_wsgi-express start-server hello-world-v2/wsgi_1.py --log-to-terminal --working-directory hello-world-v2
+clear: true
 ```
 
 To simulate a batch of HTTP requests being sent to the WSGI application, the `bombardier` HTTP benchmarking program can be used. Run in the second terminal:

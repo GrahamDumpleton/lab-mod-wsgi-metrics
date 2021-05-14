@@ -33,6 +33,7 @@ To verify that this version still produces the same results, run the WSGI applic
 
 ```terminal:execute
 command: mod_wsgi-express start-server hello-world-v6/wsgi.py --log-to-terminal --working-directory hello-world-v6
+clear: true
 ```
 
 Once more start sending the requests through to the WSGI application:

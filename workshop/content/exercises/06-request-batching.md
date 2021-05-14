@@ -28,6 +28,7 @@ Start up the WSGI application using this variation of the code:
 
 ```terminal:execute
 command: mod_wsgi-express start-server hello-world-v4/wsgi.py --log-to-terminal --working-directory hello-world-v4
+clear: true
 ```
 
 and run `bomardier` to generate the requests against it.

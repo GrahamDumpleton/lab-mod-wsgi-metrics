@@ -34,6 +34,7 @@ To test the decorator does what is required, start up the WSGI application:
 
 ```terminal:execute
 command: mod_wsgi-express start-server hello-world-v3/wsgi_1.py --log-to-terminal --working-directory hello-world-v3
+clear: true
 ```
 
 and send through a stream of requests at the rate of 1 request/sec again.

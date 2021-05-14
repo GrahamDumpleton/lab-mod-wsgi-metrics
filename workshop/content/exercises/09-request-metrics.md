@@ -8,6 +8,7 @@ file: ~/exercises/hello-world-v7/metrics.py
 
 ```terminal:execute
 command: mod_wsgi-express start-server hello-world-v7/wsgi.py --log-to-terminal --working-directory hello-world-v7
+clear: true
 ```
 
 ```terminal:execute

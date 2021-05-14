@@ -32,8 +32,3 @@ Finally, return back to the **Terminal** dashboard tab:
 ```dashboard:open-dashboard
 name: Terminal
 ```
-
-Clear the terminals so we are ready to go.
-
-```terminal:clear-all
-```

@@ -10,6 +10,7 @@ First up, rather than use the default configuration of a single process with 5 t
 
 ```terminal:execute
 command: mod_wsgi-express start-server hello-world-v5/wsgi.py --log-to-terminal --working-directory hello-world-v5 --processes=1 --threads=1
+clear: true
 ```
 
 Start up `bombardier` to generate the requests:

@@ -6,6 +6,7 @@ To create the Python virtual environment, run:
 
 ```terminal:execute
 command: python3 -m venv $HOME/venv
+clear: true
 ```
 
 To use this Python virtual environment, you then need to activate it. Do this in all the terminals by running:

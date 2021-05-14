@@ -28,6 +28,7 @@ Start up the WSGI application:
 
 ```terminal:execute
 command: mod_wsgi-express start-server hello-world-v2/wsgi_2.py --log-to-terminal --working-directory hello-world-v2
+clear: true
 ```
 
 To make things clearer, this time we will send HTTP requests at a rate of only 1 request/sec.

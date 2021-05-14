@@ -8,6 +8,7 @@ To start up Apache/mod_wsgi and host this WSGI application using `mod_wsgi-expre
 
 ```terminal:execute
 command: mod_wsgi-express start-server hello-world-v1/wsgi.py --log-to-terminal
+clear: true
 ```
 
 This should result in the output:
