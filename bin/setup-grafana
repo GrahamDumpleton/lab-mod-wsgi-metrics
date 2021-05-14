@@ -9,5 +9,3 @@ curl -H "Content-Type: application/json" --user admin:admin --data @grafana/raw-
 curl -H "Content-Type: application/json" --user admin:admin --data @grafana/request-metrics.json http://$SESSION_NAMESPACE-grafana:3000/api/dashboards/db
 
 curl -H "Content-Type: application/json" --user admin:admin --data @grafana/process-info.json http://$SESSION_NAMESPACE-grafana:3000/api/dashboards/db
-
-echo
