@@ -1,0 +1,11 @@
+{
+  "name": "WSGI",
+  "type": "influxdb",
+  "access": "proxy",
+  "url": "http://influxdb-workshop:8086",
+  "database": "wsgi",
+  "user": "wsgi",
+  "password": "wsgi",
+  "basicAuth": false,
+  "isDefault": true
+}

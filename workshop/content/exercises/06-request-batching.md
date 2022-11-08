@@ -44,7 +44,7 @@ Head back to the **Raw Requests** dashboard in Grafana.
 
 ```dashboard:reload-dashboard
 name: Grafana
-url: {{ingress_protocol}}://{{session_namespace}}-grafana.{{ingress_domain}}{{ingress_port_suffix}}/d/raw-requests?orgId=1&refresh=5s
+url: {{ingress_protocol}}://grafana-{{session_namespace}}.{{ingress_domain}}{{ingress_port_suffix}}/d/raw-requests?orgId=1&refresh=5s
 ```
 
 You should see that the throughput achieved is more. Although we did remove the cap on the maximum rate at which requests could be sent this isn't the reason. The increase is due to the reduction in overhead by batching up metrics and only sending them periodically.
@@ -99,7 +99,7 @@ and load up the **Raw Requests** dashboard in Grafana.
 
 ```dashboard:reload-dashboard
 name: Grafana
-url: {{ingress_protocol}}://{{session_namespace}}-grafana.{{ingress_domain}}{{ingress_port_suffix}}/d/raw-requests?orgId=1&refresh=5s
+url: {{ingress_protocol}}://grafana-{{session_namespace}}.{{ingress_domain}}{{ingress_port_suffix}}/d/raw-requests?orgId=1&refresh=5s
 ```
 
 You will see that throughput has increased again, and the response time is also better, without the periodic spikes in response time when the batched metric data was being reported.
@@ -110,7 +110,7 @@ If you view the **Process Info** dashboard in Grafana:
 
 ```dashboard:reload-dashboard
 name: Grafana
-url: {{ingress_protocol}}://{{session_namespace}}-grafana.{{ingress_domain}}{{ingress_port_suffix}}/d/process-info?orgId=1&refresh=5s
+url: {{ingress_protocol}}://grafana-{{session_namespace}}.{{ingress_domain}}{{ingress_port_suffix}}/d/process-info?orgId=1&refresh=5s
 ```
 
 you will also see that the amount of CPU taken by the WSGI application has dropped. This is because of the lower overhead of collecting the metrics.

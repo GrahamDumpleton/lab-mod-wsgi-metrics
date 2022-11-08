@@ -18,7 +18,7 @@ Check that the dashboards have been loaded by selecting on **Dashboards->Manage*
 
 ```dashboard:reload-dashboard
 name: Grafana
-url: {{ingress_protocol}}://{{session_namespace}}-grafana.{{ingress_domain}}{{ingress_port_suffix}}/dashboards
+url: {{ingress_protocol}}://grafana-{{session_namespace}}.{{ingress_domain}}{{ingress_port_suffix}}/dashboards
 ```
 
 We will also be using the embedded VS Code editor later on as well, open the **Editor** dashboard tab to warm it up.

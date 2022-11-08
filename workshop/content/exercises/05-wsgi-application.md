@@ -48,7 +48,7 @@ Jump over to the **Raw Requests** dashboard in Grafana.
 
 ```dashboard:reload-dashboard
 name: Grafana
-url: {{ingress_protocol}}://{{session_namespace}}-grafana.{{ingress_domain}}{{ingress_port_suffix}}/d/raw-requests?orgId=1&refresh=5s
+url: {{ingress_protocol}}://grafana-{{session_namespace}}.{{ingress_domain}}{{ingress_port_suffix}}/d/raw-requests?orgId=1&refresh=5s
 ```
 
 The result this time should be the 0.05 second response time we expect.
@@ -83,7 +83,7 @@ Check the result in the Grafana dashboard.
 
 ```dashboard:reload-dashboard
 name: Grafana
-url: {{ingress_protocol}}://{{session_namespace}}-grafana.{{ingress_domain}}{{ingress_port_suffix}}/d/raw-requests?orgId=1&refresh=5s
+url: {{ingress_protocol}}://grafana-{{session_namespace}}.{{ingress_domain}}{{ingress_port_suffix}}/d/raw-requests?orgId=1&refresh=5s
 ```
 
 The metrics are still coming through, but although the response time has dropped because of the delay being removed, you may notice that the measured response time isn't as small as when using the original timing decorator.
@@ -98,7 +98,7 @@ Overheads can come from a couple of sources. The first is the additional CPU loa
 
 ```dashboard:reload-dashboard
 name: Grafana
-url: {{ingress_protocol}}://{{session_namespace}}-grafana.{{ingress_domain}}{{ingress_port_suffix}}/d/process-info?orgId=1&refresh=5s
+url: {{ingress_protocol}}://grafana-{{session_namespace}}.{{ingress_domain}}{{ingress_port_suffix}}/d/process-info?orgId=1&refresh=5s
 ```
 
 This isn't going to be too much different to the last time we checked this out, and isn't particularly helpful as we lack a baseline to compare it against.
@@ -129,7 +129,7 @@ and view the **Process Info** dashboard in Grafana:
 
 ```dashboard:reload-dashboard
 name: Grafana
-url: {{ingress_protocol}}://{{session_namespace}}-grafana.{{ingress_domain}}{{ingress_port_suffix}}/d/process-info?orgId=1&refresh=5s
+url: {{ingress_protocol}}://grafana-{{session_namespace}}.{{ingress_domain}}{{ingress_port_suffix}}/d/process-info?orgId=1&refresh=5s
 ```
 
 It should be pretty obvious from this that without any instrumentation the amount of CPU resources consumed by the WSGI application was much less.

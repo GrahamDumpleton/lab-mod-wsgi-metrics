@@ -7,8 +7,6 @@
 .lesshst
 .local
 .ssh
-.theia
 .webdav
-.yarn
 *.swp
 examples/grafana/datasource.json

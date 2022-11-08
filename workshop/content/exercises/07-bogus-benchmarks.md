@@ -24,7 +24,7 @@ Bring up the **Raw Requests** dashboard in Grafana.
 
 ```dashboard:reload-dashboard
 name: Grafana
-url: {{ingress_protocol}}://{{session_namespace}}-grafana.{{ingress_domain}}{{ingress_port_suffix}}/d/raw-requests?orgId=1&refresh=5s
+url: {{ingress_protocol}}://grafana-{{session_namespace}}.{{ingress_domain}}{{ingress_port_suffix}}/d/raw-requests?orgId=1&refresh=5s
 ```
 
 You should see that the results for `mod_wsgi` have improved. This is because the high CPU requirement of a WSGI hello world application means that a single threaded process will perform better than if a multithreaded process is used. This is a consequence of how the global interpeter lock (GIL) in Python affects multithreaded applications. The nature of the impacts is such that performance is better even though the notional capacity of the WSGI server was reduced.
@@ -57,7 +57,7 @@ and yet again jump back to the **Raw Requests** dashboard in Grafana.
 
 ```dashboard:reload-dashboard
 name: Grafana
-url: {{ingress_protocol}}://{{session_namespace}}-grafana.{{ingress_domain}}{{ingress_port_suffix}}/d/raw-requests?orgId=1&refresh=5s
+url: {{ingress_protocol}}://grafana-{{session_namespace}}.{{ingress_domain}}{{ingress_port_suffix}}/d/raw-requests?orgId=1&refresh=5s
 ```
 
 A performance improvement should again be evident.
@@ -90,7 +90,7 @@ and head back to the **Raw Requests** dashboard in Grafana.
 
 ```dashboard:reload-dashboard
 name: Grafana
-url: {{ingress_protocol}}://{{session_namespace}}-grafana.{{ingress_domain}}{{ingress_port_suffix}}/d/raw-requests?orgId=1&refresh=5s
+url: {{ingress_protocol}}://grafana-{{session_namespace}}.{{ingress_domain}}{{ingress_port_suffix}}/d/raw-requests?orgId=1&refresh=5s
 ```
 
 The performance from `mod_wsgi` with this configuration is once again quite a bit better.

@@ -26,7 +26,7 @@ command: pip3 install -U pip
 You can now install mod_wsgi by running:
 
 ```terminal:execute
-command: pip3 install mod_wsgi==4.8.0
+command: pip3 install mod_wsgi==4.9.4
 ```
 
 This command will build and install the Apache module for `mod_wsgi` into the Python virtual environment. It will also install the `mod_wsgi-express` program.

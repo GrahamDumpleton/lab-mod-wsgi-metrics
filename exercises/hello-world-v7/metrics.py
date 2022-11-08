@@ -13,7 +13,7 @@ from influxdb import InfluxDBClient
 from datetime import datetime
 
 session_namespace = os.environ["SESSION_NAMESPACE"]
-influxdb_hostname = f"{session_namespace}-influxdb"
+influxdb_hostname = f"influxdb-{session_namespace}"
 
 client = InfluxDBClient(influxdb_hostname, 8086, 'wsgi', 'wsgi', 'wsgi')
 

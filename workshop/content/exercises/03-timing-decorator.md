@@ -57,7 +57,7 @@ Once running, and HTTP requests are being received by the WSGI application, jump
 
 ```dashboard:reload-dashboard
 name: Grafana
-url: {{ingress_protocol}}://{{session_namespace}}-grafana.{{ingress_domain}}{{ingress_port_suffix}}/d/raw-requests?orgId=1&refresh=5s
+url: {{ingress_protocol}}://grafana-{{session_namespace}}.{{ingress_domain}}{{ingress_port_suffix}}/d/raw-requests?orgId=1&refresh=5s
 ```
 
 As the charts fill out, you should see something similar to what is shown by the following screenshot.
@@ -74,7 +74,7 @@ You can see how CPU and memory resources are being divided up between the variou
 
 ```dashboard:reload-dashboard
 name: Grafana
-url: {{ingress_protocol}}://{{session_namespace}}-grafana.{{ingress_domain}}{{ingress_port_suffix}}/d/process-info?orgId=1&refresh=5s
+url: {{ingress_protocol}}://grafana-{{session_namespace}}.{{ingress_domain}}{{ingress_port_suffix}}/d/process-info?orgId=1&refresh=5s
 ```
 
 Right now `bombardier` isn't consuming that much CPU relative to the WSGI application, but there is a reason for that we will get to later.
