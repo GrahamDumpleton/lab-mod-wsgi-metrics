@@ -6,7 +6,7 @@ services:
     ports:
     - "127.0.0.1:10081:10081"
     volumes:
-    - .:/opt/assets/files:ro
+    - .:/opt/assets/files:rw
     depends_on:
     - grafana-workshop
     - influxdb-workshop
